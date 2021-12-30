@@ -1,0 +1,204 @@
+﻿@model braingainspa.Models.PreSubscriptionViewModel
+@{
+    ViewBag.Title = "Subscriptions";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+
+
+}
+
+@*<h1 style="text-align:left;color:rebeccapurple;">Subscriptions</h1>*@
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-8">
+            <fieldset>
+                <legend>Subscriptions</legend>
+                <br />
+                @using (Html.BeginForm("Subscriptions", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @if (@Html.ViewBag.Msg != null)
+                        {
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                @Html.ViewBag.Msg
+                            </div>
+                        }
+                        @if (@Html.ViewBag.Err != null)
+                        {
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                @Html.ViewBag.Err
+                            </div>
+                        }
+
+                        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.SubscriptionID)*@
+                        <table class="table table-hover table-responsive">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <h5 style="color:blue;text-align:left;">Skill Practice</h5>
+                                    </td>
+                                    <td>
+
+                                        @if (Session["ActiveQuiz"].ToString() == " ")
+                                        {
+                                            @Html.DropDownList("QuizPricingID", new SelectList(ViewBag.QuizPriceList, "PriceID", "Price"), "--Select Skill Practice--", htmlAttributes: new { @class = "form-control", data_val = "false", @placeholder = "Price List", @style = "height:40px"@*, @onchange = "this.form.submit();"*@})
+                                        }
+                                        else
+                                        {
+                                            <h6 style="color:purple;text-align:left;font-style:italic;">@Session["ActiveQuiz"]</h6>
+                                            @Html.DropDownList("QuizPricingID", new SelectList(ViewBag.QuizPriceList, "PriceID", "Price"), "-- Select Skill Practice --", htmlAttributes: new { @class = "form-control", data_val = "false", @disabled = "disabled", @placeholder = "Price List", @style = "height:40px"@*, @onchange = "this.form.submit();"*@})
+                                        }
+
+                                        @*@Html.ValidationMessageFor(model => model.QuizPricingID, "", new { @class = "text-danger" })*@
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5 style="color:blue;text-align:left;">Past Questions</h5>
+                                    </td>
+                                    <td>
+                                        @if (Session["ActivePQ"].ToString() == " ")
+                                        {
+                                            @Html.DropDownList("PastQuestionPricingID", new SelectList(ViewBag.PastQuestionPriceList, "PriceID", "Price"), "-- Select Past Question --", htmlAttributes: new { @class = "form-control", data_val = "false", @placeholder = "Price List", @style = "height:40px"@*, @onchange = "this.form.submit();"*@})
+                                        }
+                                        else
+                                        {
+                                            <h6 style="color:purple;text-align:left;font-style:italic;">@Session["ActivePQ"]</h6>
+                                            @Html.DropDownList("PastQuestionPricingID", new SelectList(ViewBag.PastQuestionPriceList, "PriceID", "Price"), "-- Select Past Question --", htmlAttributes: new { @class = "form-control", data_val = "false", @disabled = "disabled", @placeholder = "Price List", @style = "height:40px"@*, @onchange = "this.form.submit();"*@})
+                                        }
+
+                                        @*@Html.ValidationMessageFor(model => model.PastQuestionPricingID, "", new { @class = "text-danger" })*@
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5 style="color:blue;text-align:left;">E-Library</h5>
+                                    </td>
+                                    <td>
+                                        @if (Session["ActiveLib"].ToString() == " ")
+                                        {
+                                            @Html.DropDownList("LibraryPricingID", new SelectList(ViewBag.LibraryPriceList, "PriceID", "Price"), "-- Select E-Library --", htmlAttributes: new { @class = "form-control", data_val = "false", @placeholder = "Price List", @style = "height:40px"@*, @onchange = "this.form.submit();"*@})
+                                        }
+                                        else
+                                        {
+                                            <h6 style="color:purple;text-align:left;font-style:italic;">@Session["ActiveLib"]</h6>
+                                            @Html.DropDownList("LibraryPricingID", new SelectList(ViewBag.LibraryPriceList, "PriceID", "Price"), "-- Select E-Library --", htmlAttributes: new { @class = "form-control", data_val = "false", @disabled = "disabled", @placeholder = "Price List", @style = "height:40px"@*, @onchange = "this.form.submit();"*@})
+                                        }
+
+                                        @*@Html.ValidationMessageFor(model => model.LibraryPricingID, "", new { @class = "text-danger" })*@
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                @*<tr>
+                                        <td></td>
+                                        <td><h3>Total</h3></td>
+                                        <td class="text-left"><h3><strong> @_totalAmount.ToString("#,##.00")</strong></h3></td>
+                                    </tr>*@
+                            </tbody>
+                        </table>
+                        @*<h3 style="color:blue;text-align:left;">Past Questions</h3>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.QuizPricingID, "Class", htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("QuizPricingID", new SelectList(ViewBag.QuizPriceList, "PriceID", "Price"), "-- Select Item --", htmlAttributes: new { @class = "form-control", @placeholder = "Price List", @onchange = "this.form.submit();" })
+                                    @Html.ValidationMessageFor(model => model.QuizPricingID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <h3 style="color:blue;text-align:left;">Past Questions</h3>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PastQuestionPricingID, "Class", htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("PastQuestionPricingID", new SelectList(ViewBag.PastQuestionPriceList, "PriceID", "Price"), "-- Select Item --", htmlAttributes: new { @class = "form-control", @placeholder = "Price List", @onchange = "this.form.submit();" })
+                                    @Html.ValidationMessageFor(model => model.PastQuestionPricingID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <h3 style="color:blue;text-align:left;">E-Library</h3>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.LibraryPricingID, "Class", htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("LibraryPricingID", new SelectList(ViewBag.LibraryPriceList, "PriceID", "Price"), "-- Select Item --", htmlAttributes: new { @class = "form-control", @placeholder = "Price List", @onchange = "this.form.submit();" })
+                                    @Html.ValidationMessageFor(model => model.LibraryPricingID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.Period, "Period", htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8" style="text-align:left; font-weight:bolder;">
+                                    @Html.DisplayFor(model => model.Period, "Not Set", new { htmlAttributes = new { @class = "form-control", @placeholder = "Period" } })
+                                    @Html.ValidationMessageFor(model => model.Period, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StartDate, "Start Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8" style="text-align:left; font-weight:bolder;">
+                                    @Html.DisplayFor(model => model.StartDate, "Not Set", new { htmlAttributes = new { @class = "form-control", @placeholder = "Start Date" } })
+                                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EndDate, "End Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8" style="text-align:left; font-weight:bolder;">
+                                    @Html.DisplayFor(model => model.EndDate, "Not Set", new { htmlAttributes = new { @class = "form-control", @placeholder = "End Date" } })
+                                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })*
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Amount, "Amount", htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8" style="text-align:left; font-weight:bolder;">
+                                    @Html.DisplayFor(model => model.Amount, "0.00", new { htmlAttributes = new { @class = "form-control", @placeholder = "Amount" } })
+                                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })*
+                                </div>
+                            </div>*@
+
+                        <div class="form-group">
+                            @*<div class="col-md-6">
+        <a href="@Url.Action("NewPricing", "Account")" class="btn btn-primary btn-md" data-toggle="tooltip" title="Reset"><i class="glyphicon glyphicon-plus"></i>&nbsp;New&nbsp;</a>
+                        </div>*@
+                            <div class="col-md-12">
+                                <button value="Submit" class="btn btn-primary btn-lg" style="float:right;" title="Preview">
+                                    <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Preview&nbsp;&nbsp;
+                                </button>
+                            </div>
+                        </div>
+                        @*}*@
+                    </div>
+                }
+            </fieldset>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        @*</div>*@
+
+        @*<div class="row">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-10">
+                @Html.Partial("~/Views/Account/_Pricings.cshtml")
+            </div>
+            <div class="col-md-1">
+
+            </div>*@
+    </div>
+
+
+</div>
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+

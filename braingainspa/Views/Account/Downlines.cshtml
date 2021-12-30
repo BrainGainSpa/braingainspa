@@ -1,0 +1,158 @@
+﻿@model List<braingainspa.Models.Downline>
+
+@{
+                /**/
+
+                ViewBag.Title = "Downline Tree";
+                Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+<style>
+    /*Here we will add css for style for our treeview*/
+    .collapse {
+        width: 10px;
+        /*background-image: url('../../Content/images/ui-icons-454545_256x240.png');*/
+        background-image: url('../Content/images/arrow3.png');
+        background-repeat: no-repeat;
+        background-position: -36px -17px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .expand {
+        width: 10px;
+        /*background-image: url('../../Content/images/ui-icons-454545_256x240.png');*/
+        background-image: url('../Content/images/arrow3.png');
+        /*icon: url('../../Content/images/arrow3.png');*/
+        background-repeat: no-repeat;
+        background-position: -50px -17px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .treeview ul {
+        font: 14px arial, Sans-Serif;
+        margin: 0px;
+        padding-left: 20px;
+        list-style: none;
+    }
+
+    .treeview > li > a {
+        font-weight: bold;
+    }
+
+    .treeview li {
+    }
+
+        .treeview li a {
+            padding: 4px;
+            font-size: 12px;
+            display: inline-block;
+            text-decoration: none;
+            width: auto;
+        }
+</style>
+@* Here we read some Jquery code make this treeview collapsible *@
+<script>
+    $(document).ready(function () {
+        $(".treeview li>ul").css('display', 'none'); // Hide all 2-level ul
+        $(".collapsible").click(function (e) {
+            e.preventDefault();
+            $(this).toggleClass("collapse expand");
+            $(this).closest('li').children('ul').slideToggle();
+        })
+    })
+</script>
+<div class="row">
+    <div class="col-md-8">
+        <fieldset>
+            <legend>
+                <strong>@Session["LN"].ToString() @Session["FN"].ToString()</strong> Referral Tree
+            </legend>
+            <h5><span style="color:blueviolet">Total Referrals:</span>&nbsp;<span style="color:orange">@ViewBag.TotalDownlines</span></h5>
+            <div class="treeview">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    <ul>
+                        @Treeview.GetTreeView(Model, Model.FirstOrDefault().Pid ?? 0)
+                    </ul>
+                }
+            </div>
+        </fieldset>
+        @*<div style="border:solid 1px black; padding:18px; background-color:aliceblue; text-align:left;">
+            <h4 style="color:forestgreen">Downline Tree &nbsp;[<span style="color:deeppink">Network Genealogy</span>]</h4>
+            <hr />
+            
+
+        </div>*@
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>
+
+
+
+
+
+
+
+@*@model IEnumerable<braingainspa.Models.Downlines>
+    @using System.Web.UI.WebControls
+    @using braingainspa.Models;
+
+    @{
+        ViewBag.Title = "Downlines";
+        Layout = "~/Views/Shared/_LayoutSigned.cshtml";
+    }
+
+    <h2>Downlines</h2>
+
+    <link href="~/Content/jsTree/themes/default/style.min.css" rel="stylesheet" />
+    <div class="form-body">
+        <div id="jstree">
+
+            @(Html.TreeView(Model)
+                                              .EmptyContent("root")
+                                              .Children(m => m.Childs)
+                                              .HtmlAttributes(new { id = "tree" })
+                                          .ChildrenHtmlAttributes(new { @class = "subItem" })
+                                              .ItemText(m => m.Name)
+                                              .ItemTemplate(
+                            @<text>
+                                <a href="@item.Description" desc="@item.Description">@item.Name</a>
+                            </text>)
+            )
+        </div>
+    </div>
+    @section scripts
+    {
+        <script src="~/Scripts/jsTree3/jstree.min.js"></script>
+        <script>
+
+            $(function () {
+                var selectedData;
+                $('#jstree').jstree({
+                    "core": {
+                        "multiple": true,
+                        "check_callback": false,
+                        'themes': {
+                            "responsive": true,
+                            'variant': 'larg',
+                            'stripes': false,
+                            'dots': false
+                        }
+                    },
+                    "types": {
+                        "default": {
+                            "icon": "fa fa-folder icon-state-warning icon-lg"
+                        },
+                        "file": {
+                            "icon": "fa fa-file icon-state-warning icon-lg"
+                        }
+                    },
+                    "plugins": ["dnd", "state", "types", "sort", "checkbox"]
+                });
+            });
+        </script>
+    }*@
+

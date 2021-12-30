@@ -1,0 +1,194 @@
+﻿@using braingainspa.Models
+@model braingainspa.Models.QuestionViewModels
+@{
+    ViewBag.Title = "QUIZ";
+    Layout = "~/Views/Shared/_LayoutSigned.cshtml";
+}
+
+@{
+    IEnumerable<ClientAnswerViewModel> ClientAnswers = Session["ClientAnswers"] as IEnumerable<ClientAnswerViewModel>;
+
+    int qno = 0;
+    //var totalQuestion = Model.ReaminTime;
+    //var endTime = DateTime.UtcNow.AddSeconds(65);
+    //var timeRemaining = TimeSpan.FromTicks(endTime.Ticks - DateTime.UtcNow.Ticks).TotalSeconds;
+
+    //var endTime = DateTime.UtcNow.AddSeconds(65);
+    //var timeRemaining = TimeSpan.FromTicks(endTime.Ticks - DateTime.UtcNow.Ticks).TotalSeconds;
+}
+@*<h2>ClientQuiz</h2>*@
+
+<div class="row">
+    @Html.Partial("_SuccessDarkModal")
+    <table>
+        <tr>
+            <td><a href="javascript(0):void(0);" class="btn btn-primary" onclick="saveBackward(this);">|<< Save & Previous</a></td>
+            <td><a href="@Url.Action("ClientQuiz", "Quiz", new { @token = Session["TOKEN"], @tid = Session["QUIZID"], @qno = (Model.QuestionID) })" class="btn btn-primary"> |<< Previous</a></td>
+            @for (int i = 0; i < Model.Number.Count(); i++)
+            {
+                <td>
+                    <a href="@Url.Action("ClientQuiz", "Quiz", new { @token = Session["TOKEN"], @tid = Session["QUIZID"], @qno = (i + 1) })" class="btn btn-primary">@(i + 1)</a>
+                </td>
+            }
+            <td><a href="@Url.Action("ClientQuiz", "Quiz", new { @token = Session["TOKEN"], @tid = Session["QUIZID"], @qno = (Model.QuestionID) })" class="btn btn-primary"> Next >>|</a></td>
+            <td><a href="javascript(0):void(0);" class="btn btn-primary" onclick="saveBackward(this);"> Save & Next >>|</a></td>
+        </tr>
+    </table>
+
+</div>
+@using (Html.BeginForm("ClientQuiz", "Quiz", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Questions</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.QuestionID)
+        @*@Html.HiddenFor(model => model.ClientQuestionID)*@
+
+        @*<div class="form-group">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.CourseID, "Subject", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("CourseID", new SelectList(ViewBag.CourseList, "CourseID", "CourseName"), "--Select Course--", htmlAttributes: new { @class = "form-control", @placeholder = "Course", @onchange = "this.form.submit();" })
+                        @Html.ValidationMessageFor(model => model.CourseID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 pull-right">
+                    @Html.LabelFor(model => model.TopicID, "Topic", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @if (ViewBag.TopicList != null)
+                        {
+                            @Html.DropDownList("TopicID", new SelectList(ViewBag.TopicList, "TopicID", "TopicName"), "--Select Topic--", htmlAttributes: new { @class = "form-control", @placeholder = "Topic", @onchange = "this.form.submit();" })
+                            @Html.ValidationMessageFor(model => model.TopicID, "", new { @class = "text-danger" })
+                        }
+                    </div>
+                </div>
+            </div>*@
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="float-right">
+                        <h2 style="color:blue;">Time Left: <span id="timecountdownHr"></span>:<span id="timecountdownMin"></span>:<span id="timecountdownSec"></span></h2>
+                        <h1 id="timecountdown"></h1>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row" style="border-color:blue; border-width:thick; background-color:yellow;">
+                <div class="col-md-9">
+                    <strong>
+                        @Html.DisplayFor(model => model.Number)
+                        @Html.DisplayFor(model => model.QuestionString)
+                    </strong>
+                </div>
+                <div class="col-md-3">
+                    <i>
+                        [@Html.DisplayFor(model => model.QuestionMarks) Marks]
+                    </i>
+                </div>
+            </div>
+            @*<span class="label label-warning"> @model.QuestionID</span>
+                <span id="@string.Format("{0}{1}", "ID_Q", count)" style="display:none;">@question.QuestionID</span>
+                <p style="display: inline; padding: 2%;" id="@string.Format("{0}{1}", "Q", count)">@question.QuestionText</p>*@
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    @if (ClientAnswers != null)
+                    {
+                        @Html.Partial("~/Views/Quiz/_ClientQuiz.cshtml", ClientAnswers)
+                    }
+                </div>
+                <div class="col-md-6">
+                    <p style="color:red; font-style:italic;">@ViewBag.ErrAnswer</p>
+                    <p style="color:green; font-weight:bold; font-style:italic;">@ViewBag.AnsExplanation</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-4">
+                <button value="Submit" class="btn btn-primary btn-lg pull-left">
+                    <span class="glyphicon glyphicon-chevron-left"></span>&nbsp;&nbsp;Prev&nbsp;&nbsp;
+                </button>
+            </div>
+            <div class="col-md-4">
+                <button value="Submit" class="btn btn-primary btn-lg pull-right" title="Save">
+                    &nbsp;&nbsp;Next&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+            </div>
+            <div class="col-md-1">
+
+            </div>
+            @*<div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>*@
+        </div>
+    </div>
+    <!--Modal Popup-->
+    <div id="modalPopup" class="btn darkBackgroundBtn smallPaddingAround" data-toggle="modal" data-target="#successDarkModal" style="display:none">
+    </div>
+
+    <!--Audio-->
+    <audio id="timesupAudio">
+        <!--credit: audio from http://www.orangefreesounds.com/wecker-sound/ artist:Alexander-->
+        <source src="~/Audio/Wecker-sound.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+
+     var dt = '@ViewBag.Rem_Time';
+     var dateAr = dt.split('-');
+     var newDate = dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2];
+     var end = new Date(dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2]);
+
+     var _second = 1000;
+     var _minute = _second * 60;
+     var _hour = _minute * 60;
+     var _day = _hour * 24;
+     var timer;
+
+    var timesupAudio = document.getElementById("timesupAudio");
+     function showRemaining() {
+         var now = new Date();
+         var distance = end - now;
+         if (distance < 0) {
+             clearInterval(timer);
+             //document.getElementById('timecountdown').innerHTML = 'Count Down Ends';
+             //window.location.href = '/Home/myIndex';
+             $('#modalPopup').click();
+             timesupAudio.volume = 0.5;
+             timesupAudio.play();
+             return;
+         }
+
+         var days = Math.floor(distance / _day);
+         var _hours = Math.floor((distance % _day) / _hour);
+         var _minutes = Math.floor((distance % _hour) / _minute);
+         var _seconds = Math.floor((distance % _minute) / _second);
+
+         document.getElementById('timecountdownHr').innerHTML = 'Hrs: ' + _hours;
+         document.getElementById('timecountdownMin').innerHTML = 'Mins: ' + _minutes;
+         document.getElementById('timecountdownSec').innerHTML = 'Secs: ' + _seconds;
+     }
+    timer = setInterval(showRemaining, 1000);
+
+</script>
+
+

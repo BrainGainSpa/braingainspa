@@ -1,0 +1,98 @@
+﻿@model braingainspa.Models.PricingViewModel
+
+@{
+    ViewBag.Title = "Pricings";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <br />
+    <fieldset>
+        <legend>Classes</legend>
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-6">
+
+                @using (Html.BeginForm("Pricings", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <p style="color:blue; font-style:italic;">@Html.ViewBag.Msg</p>
+                    <p style="color:red; font-style:italic;">@Html.ViewBag.Err</p>
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.PricingID)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FacultyID, "Class", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("FacultyID", new SelectList(ViewBag.FacultyList, "FacultyID", "FacultyName", 4), "-- Select Class --", htmlAttributes: new { @class = "form-control", @placeholder = "Class", @style = "height:40px", @onchange = "this.form.submit();" })
+                            @Html.ValidationMessageFor(model => model.FacultyID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                        @Html.LabelFor(model => model.FacultyID, "Faculty", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("FacultyID", new SelectList(ViewBag.FacultyList, "FacultyID", "FacultyName"), "-- Select Class --", htmlAttributes: new { @class = "form-control", @placeholder = "Faculty", @onchange = "this.form.submit();" })
+                            @Html.ValidationMessageFor(model => model.FacultyID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DurationID, "Duration", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("DurationID", new SelectList(ViewBag.DurationList, "DurationID", "Description"), "-- Select Duration --", htmlAttributes: new { @class = "form-control", @placeholder = "Duration", @style = "height:40px", @onchange = "this.form.submit();" })
+                            @Html.ValidationMessageFor(model => model.DurationID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(x => x.Amount, new { htmlAttributes = new { @class = "form-control", @placeholder = "Amount" } })
+                            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <a href="@Url.Action("NewPricing", "Account")" class="btn btn-primary btn-md" data-toggle="tooltip" title="Reset"><i class="glyphicon glyphicon-plus"></i>&nbsp;New&nbsp;</a>
+                        </div>
+                        <div class="col-md-6">
+                            <button value="Submit" class="btn btn-primary btn-md pull-right" title="Save">
+                                <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Save&nbsp;&nbsp;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                }
+
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-10">
+                @Html.Partial("~/Views/Account/_Pricings.cshtml")
+            </div>
+            <div class="col-md-1">
+
+            </div>
+        </div>
+
+    </fieldset>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

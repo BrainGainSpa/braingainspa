@@ -1,0 +1,83 @@
+﻿@model braingainspa.Models.Account
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAcctAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Account</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Purse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Purse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TempPurse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TempPurse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Withdrawals)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Withdrawals)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCompany)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCompany)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Updated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Updated)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin2)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AccountID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

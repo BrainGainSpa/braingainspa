@@ -1,0 +1,136 @@
+﻿@model braingainspa.Models.QResultViewModel
+@{
+    ViewBag.Title = "Free Trial Result";
+    Layout = "~/Views/Shared/_LayoutFreeQuiz.cshtml";
+}
+
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-success">
+                <div class="panel-heading" style="text-align:center;">
+                    <h3>
+                        FREE TRIAL RESULT
+                    </h3>
+                </div>
+                <div class="panel-body">
+
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>Details:</b>
+                                </td>
+                                <td style="font-weight:bold">@Model.Client</td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td>
+                                    <b>Quiz ID:</b>
+                                </td>
+                                <td style="font-weight:bold">@Model.Token</td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td>
+                                    <b> Quiz:</b>
+                                </td>
+                                <td style="font-weight:bold">@Model.Topic</td>
+                            </tr>
+                            <tr></tr>
+                            @*<tr>
+            <td>
+                <b>Topic:</b>
+            </td>
+            <td style="font-weight:bold">@Model.Topic</td>
+        </tr>
+        <tr></tr>*@
+                            <tr>
+                                <td>
+                                    <b>Time Spent:</b>
+                                </td>
+                                <td style="font-weight:bold">@Model.TimeSpent.ToString()</td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td>
+                                    <b>No Of Questions:</b>
+                                </td>
+                                <td style="font-weight:bold">@Model.TotalQuestions</td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td>
+                                    <b>Questions Attempted:</b>
+                                </td>
+                                <td style="font-weight:bold">@Model.Attemped</td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td>
+                                    <b>Questions Passed:</b>
+                                </td>
+                                <td style="font-weight:bold">@Model.SuccessQuestion</td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td>
+                                    <b>Questions Failed:</b>
+                                </td>
+                                <td style="font-weight:bold">@Model.FailedQuestions</td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td>
+                                    <b>Score:</b>
+                                </td>
+                                <td style="font-weight:bold">@Model.QuizScores</td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td>
+                                    <b>Percentage:</b>
+                                </td>
+                                <td style="font-weight:bold">@Model.Percentage%</td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td>
+                                    <b>Qualification:</b>
+                                </td>
+                                <td style="font-weight:bold">@Model.Qualification</td>
+                            </tr>
+                            <tr></tr>
+                            <tr></tr>
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                    
+                    
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-success btn-lg" href="@Url.Action("FreeSignout", "Account")">
+                <strong><< Back Free Trials</strong>
+            </a>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align:center;">
+
+            @*<a class="btn btn-primary btn-md" href="@Url.Action("Signup", "Account")">
+            <strong>Sign Up Here To Access More Study Quiz For Exams, While You Earn</strong>
+        </a>*@
+            <a class="btn btn-success btn-lg" href="#">
+                <strong>Sign Up Here To Access More Study Quiz For Exams, While You Earn</strong>
+            </a>
+
+        </div>
+    </div>
+
+    </div>
+

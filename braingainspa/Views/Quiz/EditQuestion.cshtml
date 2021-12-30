@@ -1,0 +1,89 @@
+﻿@model braingainspa.Models.Question
+
+@{
+    ViewBag.Title = "EditQuestion";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <fieldset>
+                <legend>Edit Topic</legend>
+
+                @using (Html.BeginForm("EditQuestion", "Quiz", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <p style="color:blue; font-style:italic;">@Html.ViewBag.Msg</p>
+                        <p style="color:red; font-style:italic;">@Html.ViewBag.Err</p>
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.QuestionID)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TopicID, "Topic", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("TopicID", new SelectList(ViewBag.TopicList, "TopicID", "TopicName"), "--Select Topic--", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TopicID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.QuestionString, "Question String", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.QuestionString, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.QuestionString, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AnswerExplanation, "Answer Explanation", htmlAttributes: new { @class = "control -label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.AnswerExplanation, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AnswerExplanation, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CorrectAnswer, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.CorrectAnswer, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CorrectAnswer, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button value="Submit" class="btn btn-primary btn-md pull-right">  Update  </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div>
+                    <strong>@Html.ActionLink("Return to List", "Questions")</strong>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

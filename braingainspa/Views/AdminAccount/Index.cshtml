@@ -1,0 +1,76 @@
+﻿@model IEnumerable<braingainspa.Models.Account>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAcctAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Purse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TempPurse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Withdrawals)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsCompany)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Updated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Admin2)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Purse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TempPurse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Withdrawals)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsCompany)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Updated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Admin2)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AccountID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AccountID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AccountID })
+        </td>
+    </tr>
+}
+
+</table>

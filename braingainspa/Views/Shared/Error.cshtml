@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    @*<hgroup>*@
+    <div>
+        <h1 style="color:red">Error.</h1>
+        <h3 style="color:red">An unexpected error occurred while processing your request.</h3>
+        <h5 style="color:red">You may either refresh the page to continue or attempt a login.</h5>
+    </div>
+    @*</hgroup>*@
+    <h5>@ViewBag.ErrMessage</h5>
+    <div>
+        <p>
+            <a href="@Url.Action("Default", "Home")" class="btn btn-primary btn-lg pull-right">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+﻿@model braingainspa.Models.QuestionViewModels
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <br />
+            <table class="table table-bordered table-responsive">
+                <tr>
+                    <th>Topic</th>
+                    @*<th>Number</th>*@
+                    <th>Question Text</th>
+                    <th>Marks</th>
+                    <th>Instruction</th>
+                    <th text-align="center">Actions</th>
+                </tr>
+                <tbody>
+                    @if (ViewBag.QuestionList != null)
+                    {
+                        foreach (var item in ViewBag.QuestionList)
+                        {
+                            <tr id="row_@item.QuestionID">
+                                <td>
+                                    <strong>@item.TopicName</strong>
+                                </td>
+                                @*<td>
+                                        <strong>@item.Number</strong>
+                                    </td>*@
+                                <td style="text-align:left;">
+                                    <strong>@item.QuestionString</strong>
+                                </td>
+                                <td width="50">
+                                    <strong>@item.QuestionMarks</strong>
+                                </td>
+                                <td width="300">
+                                    <strong>@item.Instruction</strong>
+                                </td>
+                                <td align="center" width="100">
+                                    <a href="@Url.Action("EditQuestion", "Quiz", new { id = @item.QuestionID })" class="btn btn-success" data-toggle="tooltip" title="View Details"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                    <a href="@Url.Action("DeleteQuestion","Quiz", new { id = @item.QuestionID })" onclick="return confirm('Are you sure that you want to Delete the specified item?')" class="btn btn-danger" data-toggle="tooltip" title="Delete Item"><i class="glyphicon glyphicon-trash"></i></a>
+                                </td>
+                            </tr>
+                            <tr></tr>
+                        }
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+        @*<div class="col-md-2">
+
+        </div>*@
+    </div>
+</div>

@@ -1,0 +1,99 @@
+﻿@model braingainspa.Models.BankInfoViewModels
+@{
+    ViewBag.Title = "BrainGainSpa->Bank Info";
+    Layout = "~/Views/Shared/_LayoutSigned.cshtml";
+}
+
+<div class="container">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            height: 50px;
+            width: 40px;
+        }
+    </style>
+
+    <div id="dvskl" class="row">
+
+        <div class="col-md-8">
+            <fieldset>
+                <legend>BANK INFORMATION</legend>
+
+                @using (Html.BeginForm("Bank_Info", "Utility", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    @if (@Html.ViewBag.Msg != null)
+                    {
+                        <div class="alert alert-success alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            @Html.ViewBag.Msg
+                        </div>
+                    }
+                    @if (@Html.ViewBag.Err != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            @Html.ViewBag.Err
+                        </div>
+                    }
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @Html.HiddenFor(model => model.BankInfoID)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BANK_ID, "Bank*", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("BANK_ID", new SelectList(ViewBag.BankList, "BANK_ID", "BANK1"), "--Select Bank--", htmlAttributes: new { @class = "form-control", @placeholder = "Bank" })
+                            @Html.ValidationMessageFor(model => model.BANK_ID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AccountName, "Account Name*", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.AccountName, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @style = "width: 100%;max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.AccountName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AccountNumber, "Account Number*", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.AccountNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @maxlength = 10, @style = "width: 100%;max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BranchName, "Branch Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.BranchName, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @style = "width: 100%;max-width: 100%;" } })
+                            @*@Html.ValidationMessageFor(model => model.BranchName, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" style="text-align:right;">
+                        <div class="col-md-12">
+                            <br />
+                            <button value="Submit" class="btn btn-primary btn-lg">
+                                <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Submit&nbsp;&nbsp;
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                }
+            </fieldset>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+
+    </div>
+</div>
+

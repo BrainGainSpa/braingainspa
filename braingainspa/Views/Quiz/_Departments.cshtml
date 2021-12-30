@@ -1,0 +1,44 @@
+﻿@model braingainspa.Models.Department
+
+
+<div class="row">
+    <div class="col-md-12">       
+        <table class="table table-bordered table-responsive">
+            <tr>
+
+                <th>Faculty</th>
+                <th>Department</th>
+                <th>Description</th>
+                <th text-align="center">Actions</th>
+            </tr>
+            <tbody>
+                @if (ViewBag.DepartmentList != null)
+                {
+                    foreach (var item in ViewBag.DepartmentList)
+                    {
+                        <tr id="row_@item.DepartmentID">
+                            <td>
+                                <strong>@item.FacultyName</strong>
+                            </td>
+                            <td>
+                                <strong>@item.DepartmentName</strong>
+                            </td>
+                            <td>
+                                @item.Description
+                            </td>
+                            <td align="center">
+                                <a href="@Url.Action("EditDepartment", "Quiz", new { id = @item.DepartmentID })" class="btn btn-success" data-toggle="tooltip" title="View Details"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                <a href="@Url.Action("DeleteDepartment","Quiz", new { id = @item.DepartmentID })" onclick="return confirm('Are you sure that you want to Delete the specified item?')" class="btn btn-danger" data-toggle="tooltip" title="Delete Item"><i class="glyphicon glyphicon-trash"></i></a>
+                            </td>
+                        </tr>
+                            <tr></tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+        
+    </div>
+</div>
+
+

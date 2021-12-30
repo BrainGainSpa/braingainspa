@@ -1,0 +1,55 @@
+﻿@model IEnumerable<braingainspa.Models.ClientQuiz>
+@{
+    ViewBag.Title = "Question Archives";
+    Layout = "~/Views/Shared/_LayoutSigned.cshtml";
+}
+
+@*<h4>Archives</h4>*@
+
+<div class="row">
+    <div class="col-md-10">
+        <fieldset>
+            <legend>ARCHIVES</legend>
+            <table class="table table-bordered table-responsive">
+                <tr>
+                    <th>Link</th>
+                    <th>Description</th>
+                    <th>Topics</th>
+                    <th>Dates</th>
+                    @*<th align="center">Actions</th>*@
+                </tr>
+                <tbody>
+                    @if (ViewBag.ArchiveList != null)
+                    {
+                        foreach (var item in ViewBag.ArchiveList)
+                        {
+                            <tr id="row_@item.ClientQuizID">
+                                <td>
+                                    <a href="@Url.Action("QuizResultArchive", "Quiz", new { id = @item.ClientQuizID })"><strong>@item.Token</strong></a>
+                                </td>
+                                <td>
+                                    <strong>@item.ResourceTypeName</strong>
+                                </td>
+                                <td>
+                                    <strong>@item.TopicName</strong>
+                                </td>
+                                <td>
+                                    <strong>@item.Created.ToString("dd-MMM-yyyy")</strong>
+                                </td>
+                                @*<td align="center">
+                                        <a href="@Url.Action("EditFaculty", "Quiz", new { id = @item.FacultyID })" class="btn btn-success" data-toggle="tooltip" title="View Details"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                        <a href="@Url.Action("DeleteFaculty","Quiz", new { id = @item.FacultyID })" onclick="return confirm('Are you sure that you want to Delete the specified item?')" class="btn btn-danger" data-toggle="tooltip" title="Delete Item"><i class="glyphicon glyphicon-trash"></i></a>
+                                    </td>*@
+                            </tr>
+                            <tr></tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </fieldset>
+
+        <div class="col-md-2">
+
+        </div>
+    </div>
+</div>

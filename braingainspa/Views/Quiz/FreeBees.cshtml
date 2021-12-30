@@ -1,0 +1,433 @@
+﻿@model braingainspa.Models.QuestionXModels
+@{
+    ViewBag.Title = "Free Bees";
+    Layout = "~/Views/Shared/_LayoutFreeQuiz.cshtml";
+}
+
+@{
+    string nDirection = string.Empty;
+    int queCount = int.Parse(Session["QueCount"].ToString());
+
+    //var startTime = 0;
+    //var endTime = int.Parse(Session["quetime"].ToString());
+
+}
+
+<style>
+
+    .containerPadding {
+        padding: 170px 0px 170px 0px;
+    }
+
+    .textWhite {
+        color: white;
+    }
+
+    .fontSizeLarge {
+        font-size: 20px;
+    }
+
+    .fontXLarge {
+        font-size: 35px;
+    }
+
+    .darkBackground {
+        background-color: #222126;
+    }
+
+    .darkBackgroundBtn {
+        background-color: #948cad;
+        color: black;
+    }
+    /*Override default boostrap 3*/
+    .row {
+        margin-left: 0px; /*default -15px*/
+        margin-right: 0px; /*default -15px*/
+    }
+
+    .centerBlock {
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+    }
+
+    @@media (max-width:360px) {
+        .containerPadding {
+            padding: 10px 0px 10px 0px;
+        }
+    }
+
+    #seconds {
+        font-size: 2em;
+        color: forestgreen;
+    }
+
+    #minutes {
+        font-size: 2em;
+        color: forestgreen;
+    }
+
+    #colon {
+        font-size: 2em;
+        color: forestgreen;
+    }
+
+    #qscore {
+        font-size: 2em;
+        color: forestgreen;
+    }
+
+    
+    .line-breaks {
+        white-space: pre-line;
+    }
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="container">
+    <div class="row">
+        @Html.Partial("_SuccessDarkModal")
+    </div>
+    <div class="clearfix"></div>
+    <br />
+</div>
+
+@using (Html.BeginForm("FreePostAnswers", "Quiz", FormMethod.Post, new { @id = "form", enctype = "multipart/form-data" }))
+{
+
+    <input type="hidden" id="Direction" name="Direction" value="forward" />
+    <input type="hidden" name="Token" value="@(Model.Token)" />
+    <input type="hidden" name="TestID" value="@(Model.QuestionID)" />
+    <input type="hidden" name="QuestionID" value="@(Model.QuestionNumber)" />
+    <input type="hidden" name="Marks" value="@(Model.QuestionMarks)" />
+    <input type="hidden" name="FIGSlot" value="@(Model.FIGSlot)" />
+    <input type="hidden" name="AnswerSelection" value='true' />
+
+    <div class="row">
+        <h2 style="color:green;">
+            @*@Session["QzTitle"].ToString()*@
+        </h2>
+        <div class="col-md-8" style="text-align:left;">
+
+            <div class="card">
+                <div class="card-header text-white bg-success">
+                    <span class="line-breaks" style="text-align:left;color:white;">Q.@Model.QuestionNumber &nbsp; @Html.Raw(@Model.QuestionString) </span>
+                    
+                </div>
+                <div class="card-body bg-white">
+                    <div class="row">
+                        <div class="col-md-7" style="text-align:left;">
+                            <div class="prelude" style="text-align:left; font-style:italic; font-weight:bold; ">@Model.Instruction</div>
+                        </div>
+                        <div class="col-md-5">
+                            @if (Session["img"].ToString() == "1")
+                            {
+                                <img class="img-responsive" id="targetImg2" src="@Model.ImagePath" width="300" height="400" alt="Question Pix" />
+                                <br />
+                            }
+                        </div>
+                    </div>
+                    <br />
+                    <div >
+
+                        @if (Model.Options.Count > 0)
+                        {
+                            foreach (var item in Model.Options)
+                            {
+                                <label style="font-weight:bold;color:darkviolet;">
+                                    @if (Model.AnswerID == item.AnswerID)
+                                    {
+                                        <input type="radio" name="rdoAnswer" id="@string.Format(" {0}{1}", "rdoAnswer" , item.AnswerID)" checked="checked" value="@item.AnswerID" /><span> &nbsp; &nbsp; @item.OptionLetter &nbsp; &nbsp; @item.AnswerString</span>
+                                    }
+                                    else
+                                    {
+                                        if (Model.Answered == true)
+                                        {
+                                            <input type="radio" name="rdoAnswer" id="@string.Format(" {0}{1}", "rdoAnswer" , item.AnswerID)" value="@item.AnswerID" disabled="disabled" /><span> &nbsp; &nbsp; @item.OptionLetter &nbsp; &nbsp; @item.AnswerString</span>
+                                        }
+                                        else
+                                        {
+                                            <input type="radio" name="rdoAnswer" id="@string.Format(" {0}{1}", "rdoAnswer" , item.AnswerID)" value="@item.AnswerID" /><span> &nbsp; &nbsp; @item.OptionLetter &nbsp; &nbsp; @item.AnswerString</span>
+                                        }
+
+                                    }
+                                </label>
+
+                                <br />
+                            }
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <br /><br />
+                                <div class="col-md-3">
+                                    @if (Model.FIGSlot > 0)
+                                    {
+                                        @Html.EditorFor(model => model.FIGAnswer1, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @placeholder = "Enter the Answer", @style = "width: 100%;max-width: 100%;" } })
+                                    }
+                                </div>
+                                <div class="col-md-3">
+                                    @if (Model.FIGSlot > 1)
+                                    {
+                                        @Html.EditorFor(model => model.FIGAnswer2, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @placeholder = "Enter the Answer", @style = "width: 100%;max-width: 100%;" } })
+                                    }
+                                </div>
+                                <div class="col-md-3">
+                                    @if (Model.FIGSlot > 2)
+                                    {
+                                        @Html.EditorFor(model => model.FIGAnswer3, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @placeholder = "Enter the Answer", @style = "width: 100%;max-width: 100%;" } })
+                                    }
+                                </div>
+                                <div class="col-md-3">
+                                    @if (Model.FIGSlot == 3)
+                                    {
+                                        @Html.EditorFor(model => model.FIGAnswer4, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @placeholder = "Enter the Answer", @style = "width: 100%;max-width: 100%;" } })
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <br />
+            <span style="color:green;font-size:medium;font-style:italic;">@Model.QLine1</span><br />
+            <div class="row">
+                <div class="" style="border: 1px solid green; padding: 4px 5px 4px 5px;">
+                    <table>
+                        <tr>
+                            <td> </td>
+                            <td> </td>
+                            <td><strong style="color:blue;">@Session["QuePosition"].ToString()</strong></td>
+                            <td> </td>
+                            <td> </td>
+                            <td><input type="button" id="SF" class="btn btn-success btn-lg" onclick="saveForward(this);" value="Submit" /></td>
+                            @*<td><a href="javascript:void(0);" id="SF" class="btn btn-primary btn-md" onclick="saveForward(this);"><strong>Submit</strong></a></td>*@
+                            <td> </td>
+                            <td> </td>
+                            <td>
+                                @if (Session["QueEnd"] != null)
+                                {
+                                    <input type="button" id="FN" class="btn btn-success btn-lg" value="Finish >>|" onclick="pauseAudio();" />
+                                    @*<input type="button" id="FN" class="btn btn-primary btn-lg" disabled="disabled" value="Finish" onclick="pauseAudio();" />*@
+                                    @*<a href="javascript:void(0);" id="FN" class="btn btn-primary btn-md" onclick="pauseAudio()"><strong>Finish</strong></a>*@
+                                }
+                                else
+                                {
+                                    <input type="button" id="SB" class="btn btn-success btn-lg" value="Next >>" onclick="saveBackward(this);" />
+                                    @*<input type="button" id="SB" class="btn btn-primary btn-lg" disabled="disabled" value="Next" onclick="saveBackward(this);" />*@
+                                    @*<a href="javascript:void(0);" id="SB" class="btn btn-primary btn-md" onclick="saveBackward(this);"><strong>Next >></strong></a>*@
+                                }
+                            </td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <br />
+            @if (Session["skipQue"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    @Session["skipQueText"];
+                </div>
+
+            }
+            @if (Model.SNegQue > 0)
+            {
+                <div style="text-align:center; border: 1px solid green; padding: 4px 2px 4px 2px; width:100%;">
+                    <span style="color:red;font-size:medium;font-weight:bold;">Your selection: [ @Model.SInCorrectAnswer ] is incorrect</span><br />
+                    <span style="color:blue;font-size:medium;font-weight:bold;">The Correct Answer Is [ @Model.SCorrectAnswer ]</span><br />
+                    <strong>----------------------------------------EXPLANATION-----------------------------------------</strong><br />
+                    <span class="line-breaks" style="color:green;font-size:medium;">@Html.Raw(@Model.SAnswerExplanation)</span><br />
+                </div>
+
+                @*<div style="text-align:center; border: 1px solid green; padding: 4px 2px 4px 2px; width:100%;">
+                <span style="color:red;font-size:medium;font-weight:bold;">Your selection: [ @Session["AnsIncorrect"] ] is incorrect</span><br />
+                <span style="color:blue;font-size:medium;font-weight:bold;">The Correct Answer Is [ @Session["AnsCorrect"] ]</span><br />
+                <strong>----------------------------------------EXPLANATION-----------------------------------------</strong><br />
+                <span style="color:green;font-size:medium;font-weight:bold;">@Session["AnsExplanation"]</span>
+            </div>*@
+            }
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header text-white bg-success" style="text-align:center;">
+                    <h4 style="color:white;"><i class="fa fa-hourglass-half"></i>TIMER</h4>
+                </div>
+                <div class="card-body md-white" style="text-align:center;">
+                    <h5>
+                        <span id="minutes">00</span><span id="colon">:</span><span id="seconds">00</span>
+                    </h5>
+                    @*<h5><span id="timecountdownMin"></span>:<span id="timecountdownSec"></span></h5>
+                        <h5 id="timecountdown"></h5>*@
+                </div>
+            </div>
+            <br />
+            <div class="clearfix"></div>
+            <div class="card">
+                <div class="card-header text-white bg-success" style="text-align:center;">
+                    <h4>SCORE</h4>
+                </div>
+                <div class="card-body bg-white" style="text-align:center;">
+                    <h5>
+                        <span class="qscore">
+                            @Model.SMarks
+                        </span>
+                    </h5>
+                    @*@if (@Session["Marks"] == null)
+                        {
+                        <h4>
+                            <span class="score">0</span>
+                            @Session["Marks"]
+                        </h4>
+                        }
+                        else
+                        {
+
+                        }*@
+                </div>
+            </div>
+            <br />
+            <div class="clearfix"></div>
+            <div class="card">
+                <div class="card-header text-white bg-success" style="text-align:center;">
+                    <h4>ALERT</h4>
+                </div>
+                <div class="card-body bg-white" style="text-align:center;">
+                    <div>
+                        @if (Model.SPosQue > 0)
+                        {
+                            <img src="../Content/images/ThumbsUp.jpg" height="40" width="40" /><br />
+                            <h5>
+                                <span style="color:blue;font-size:medium;font-weight:bold;">@Model.SExplitive</span>
+                            </h5>
+                        }
+                        @if (Model.SNegQue > 0)
+                        {
+                            <img src="../Content/images/ThumbsDown.png" height="40" width="40" /><br />
+                            <h5>
+                                <span style="color:red;font-size:medium;font-weight:bold;">@Model.SExplitive</span>
+                            </h5>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+<!--Modal Popup-->
+<div id="modalPopup" class="btn darkBackgroundBtn smallPaddingAround" data-toggle="modal" data-target="#successDarkModal" style="display:none">
+</div>
+@*</div>*@
+<!--Audio-->
+<audio id="timesupAudio">
+    <!--credit: audio from http://www.orangefreesounds.com/wecker-sound/ artist:Alexander-->
+    <source src="~/Audio/Wecker-sound.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    var secondscount = 0;
+    var duration = parseInt('@Session["quetime"]')
+    var mCtr = parseInt('@Session["Counter"]');
+    @*var duration = parseInt('@TempData["quetime"]')
+    var mCtr = parseInt('@TempData["Counter"]');*@
+    if (mCtr == 0) {
+        secondscount = 0;
+    }
+    else {
+        secondscount = parseInt(mCtr);
+    }
+    //debugger;
+    const renderTimer = () => {
+        secondscount += 1;
+        var minutes = Math.floor(secondscount / 60).toString().padStart(2, "0");
+        var seconds = (secondscount % 60).toString().padStart(2, "0");
+        document.getElementById('minutes').innerHTML = minutes;
+        document.getElementById('seconds').innerHTML = seconds;
+
+        //setCounter();
+        //debugger;
+        var minut = parseInt(minutes)
+        if (minut >= duration) {
+            clearInterval(timer);
+            pauseAudio();
+            //$('#modalPopup').click();
+            //timesupAudio.volume = 0.5;
+            //timesupAudio.play();
+
+            return;
+        }
+        setCounter();
+
+    }
+
+    const timer = setInterval(renderTimer, 1000)
+
+
+    function setCounter() {
+        $.ajax({
+            type: "POST",
+            dataType: 'JSON',
+            url: '/Quiz/CountUpTimer',
+            data: { TCounter: secondscount },
+            success: function (result) {
+
+            }
+        });
+    }
+
+    function pauseAudio() {
+        //timesupAudio.pause();
+        var compTm = document.getElementById("minutes").innerText + 'mins : ' + document.getElementById("seconds").innerText + 'secs';
+        //debugger;
+        $.ajax({
+            url: '@Url.Action("StopTimer", "Quiz")',
+            type: "GET",
+            data: { CompTime: compTm },
+            success: function (result) {
+                if (result.success) {
+                    clearInterval(timer);
+                    //debugger;
+                    window.location.href = "/Quiz/QResult";
+                }
+                else {
+
+                }
+
+            }
+        });
+    }
+
+    function saveForward(sender) {
+
+        //$('#FN').removeAttr('disabled');
+        //$('#SF').attr('disabled', 'disabled');
+        //$('#SB').attr('disabled');
+        $('#Direction').val('forward').change();
+        document.getElementById('form').submit();
+    }
+
+    function saveBackward(sender) {
+        //$('#FN').attr('disabled', 'disabled');
+        //$('#SF').removeAttr('disabled');
+        //$('#SB').attr('disabled', 'disabled');
+        $('#Direction').val('backward').change();
+        document.getElementById('form').submit();
+    }
+
+    function Submit(sender) {
+        //debugger;
+        $(this).closest("form").submit();
+    }
+
+</script>
+

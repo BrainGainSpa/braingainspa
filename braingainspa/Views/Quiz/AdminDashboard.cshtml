@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "Sign In";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@*<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Online Quiz</title>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")*@
+
+    <h1>ADMIN DASHBOARD</h1>
+    <hr />
+    <div class="container">
+        <div class="row">
+            @*<div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="w3-card">
+                <div class="w3-container w3-padding-16">
+                    <a href="../Quiz/Schools">
+                        <img src="../../Content/images/skool.jpg" class="w3-hover-opacity" alt="School" height="200" width="240" />
+                    </a>
+                </div>
+                <div class="w3-container w3-center">
+                    <a href="../Quiz/Schools"><strong>Schools</strong></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="w3-card">
+                <div class="w3-container w3-padding-16">
+                    <a href="../Quiz/Faculties">
+                        <img src="../../Content/images/faculty1.jpg" class="w3-hover-opacity" alt="Faculty" height="200" width="240" />
+                    </a>
+                </div>
+                <div class="w3-container w3-center">
+                    <a href="../Quiz/Faculties"><strong>Faculties</strong></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="w3-card">
+                <div class="w3-container w3-padding-16">
+                    <a href="../Quiz/Departments">
+                        <img src="../../Content/images/department.jpg" class="w3-hover-opacity" alt="Department" height="200" width="240" />
+                    </a>
+                </div>
+                <div class="w3-container w3-center">
+                    <a href="../Quiz/Departments"><strong>Departments</strong></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="w3-card">
+                <div class="w3-container w3-padding-16">
+                    <a href="../Quiz/Courses">
+                        <img src="../../Content/images/courses.jpg" class="w3-hover-opacity" alt="" height="200" width="240" />
+                    </a>
+                </div>
+                <div class="w3-container w3-center">
+                    <a href="../Quiz/Courses"><strong>Courses</strong></a>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div style="height: 40px;">
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="w3-card">
+                    <div class="w3-container w3-padding-16">
+                        <a href="../Quiz/Topics">
+                            <img src="../../Content/images/Modules.jpg" class="w3-hover-opacity" alt="Department" height="200" width="240" />
+                        </a>
+                    </div>
+                    <div class="w3-container w3-center">
+                        <a href="../Quiz/Topics"><strong>Topics</strong></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="w3-card">
+                    <div class="w3-container w3-padding-16">
+                        <a href="../Quiz/Questions">
+                            <img src="../../Content/images/Questions.jpg" class="w3-hover-opacity" alt="School" height="200" width="240" />
+                        </a>
+                    </div>
+                    <div class="w3-container w3-center">
+                        <a href="../Quiz/Questions"><strong>Questions</strong></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="w3-card">
+                    <div class="w3-container w3-padding-16">
+                        <a href="../Quiz/Answers">
+                            <img src="../../Content/images/Units.jpg" class="w3-hover-opacity" alt="CourseUnits" height="200" width="240" />
+                        </a>
+                    </div>
+                    <div class="w3-container w3-center">
+                        <a href="../Quiz/Answers"><strong>Answers</strong></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12 align-content-center">
+                <div class="w3-card">
+                    <div class="w3-container w3-padding-16">
+                        <a href="../Account/Signup">
+                            <img src="../../Content/images/Sections.jpg" class="w3-hover-opacity" alt="Sections" height="200" width="240" />
+                        </a>
+                    </div>
+                    <div class="w3-container w3-center">
+                        <a href="../Quiz/Signup"><strong>Signup</strong></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+        <div style="height: 40px"></div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="w3-card">
+                    <div class="w3-container w3-padding-16">
+                        <a href="../Account/Signin">
+                            <img src="../../Content/images/CourseDept.png" class="w3-hover-opacity" alt="School" height="200" width="240" />
+                        </a>
+                    </div>
+                    <div class="w3-container w3-center">
+                        <a href="../Account/Signin"><strong>CourseDepartments</strong></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="w3-card">
+                    <div class="w3-container w3-padding-16">
+                        <a href="../Quiz/ClientQuiz">
+                            <img src="../../Content/images/StudentCourses.png" class="w3-hover-opacity" alt="Student Courses" height="200" width="240" />
+                        </a>
+                    </div>
+                    <div class="w3-container w3-center">
+                        <a href="../Quiz/ClientQuiz"><strong>Client Quiz</strong></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>*@
+        </div>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>*@

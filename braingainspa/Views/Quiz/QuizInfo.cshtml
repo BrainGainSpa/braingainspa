@@ -1,0 +1,73 @@
+﻿@model braingainspa.Models.QuizInfoViewModels
+@{
+    ViewBag.Title = "Quiz Info";
+    Layout = "~/Views/Shared/_LayoutSigned.cshtml";
+}
+
+<h5 style="color:green; font-weight:bold;">Quiz Info</h5>
+
+<div class="container">
+    
+    <div class="row" style="text-align:left;">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6 pull-left">
+                    <h5>Topic: @Model.QuizName</h5>
+                    @ViewBag.QuizDescription
+                </div>
+                <div class="col-md-6 pull-right">
+                    <h5>Test Duration : @Model.QuizDuration minutes</h5>
+                    <br /><h5>Total Questions : @Model.QuestionsCount.ToString()</h5>
+                </div>
+
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    Before you begin, please read the following instruction very carefully.
+                </div>
+            </div>
+
+            <h5 style="color:green; font-weight:bold;">How to score more?</h5>
+            <ul>
+                <li>The test is used to evaluate your knowledge, Ability, Tests and Examination Readiness</li>
+                <li>Do not use Internet or external resources outside of this machine</li>
+                <li>Remeber that this is a test of experience, so be satisfied with ONE answer on Descriptive type questions. The more answers you provide, the more the ideas, the better you score.</li>
+                <li>Negative markings are applied on Multiple Choice Questions. The number of score deducted is based on the Percentage(%) of errors made</li>
+            </ul>
+
+            <h5 style="color:green; font-weight:bold;">how to use the application?</h5>
+            <ul>
+                <li>Your answers are not tracked unless you click on the <span class="highlight"><b>Submit</b></span> button</li>
+                <li>You need to click the <strong>Next >></strong> button to move to the next question.</li>
+                @*<li>Click the <strong><< Previous</strong> button to review the previous question.</li>
+                <li>
+            Questions which have <b>Excercises</b> in them, use Visual Studio and Write something like "Completed/Done/Finished" etc on the description to indicate
+            you have completed. Otherwise, your answers may not be reviewed
+        </li>*@
+                <li>You may click on the <b>Finish</b> button to end the evaluation before it times out.</li>
+                <li>Your time starts immediately you click on the <span class="highlight"><b>Register & Start Skill Practice</b></span> button below</li>
+            </ul>
+
+            <h5 style="color:red; font-weight:bold;">Tips</h5>
+            <ul>
+                <li>Remember that you must review all the options properly before you select an answer. This will help plan your offer time</li>
+                <li>Once you click on the <strong>Submit</strong> button, the answer is locked in and cannot be changed.</li>
+                @*<li>Once you click on <strong>Submit</strong>, the answer is locked in and cannot be changed.</li>*@
+            </ul>
+            @using (Html.BeginForm("QuizInfo", "Quiz", FormMethod.Post))
+            {
+                <div>
+                    <input type="submit" id="upload" value="Register & Start Skill Practice" class="btn btn-primary btn-md pull-right" />
+                </div>
+            }
+
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+
+</div>
+
+

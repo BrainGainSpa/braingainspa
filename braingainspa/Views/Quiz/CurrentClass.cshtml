@@ -1,0 +1,104 @@
+﻿@model IEnumerable<braingainspa.Models.CurrentClassViewModels>
+@{
+    ViewBag.Title = "Current Class";
+    Layout = "~/Views/Shared/_LayoutSigned.cshtml";
+}
+
+@{
+    int queCount = int.Parse(Session["clscnt"].ToString());
+}
+@*Session["ClientAnswers"] = ClientAnswers;*@
+
+@*@{
+        IEnumerable<ClientAnswerViewModel> ClientAnswers = Session["ClientAnswers"] as IEnumerable<ClientAnswerViewModel>;
+
+    }*@
+
+<h4 style="color:green; font-weight:bold;">@ViewBag.SubjectTitle</h4>
+
+<div class="container">
+    <div class="row">
+        @*@if (@ViewBag.SubscriptionERR != null)
+            {
+
+            <div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @Html.ViewBag.SubscriptionERR <span><strong><a href="@Url.Action("Subscriptions", "Account")">Subscribe here</a></strong></span>
+            </div>
+                @*<strong>
+                    <a href="@Url.Action("Subscriptions", "Account")" style="text-decoration:none;" data-toggle="tooltip" title="Subject">Subscribe</a>
+                </strong>*
+            }*@
+
+        @if (Model != null)
+        {
+
+            foreach (var item in Model)
+            {
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="card mb-3" style="max-width: 18rem;">
+                        <div class="card-header text-white bg-primary">
+                            <strong>@item.CourseName</strong>
+                        </div>
+                        <div class="card-body bg-white">
+                            @*<h5 class="card-title">Primary card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
+                            <table class="table table-responsive">
+                                <tbody>
+                                    @if (item.CurrentTopics != null)
+                                    {
+                                        foreach (var topic in item.CurrentTopics)
+                                        {
+                                            <tr id="row_@topic.TopicID">
+
+                                                <td>
+                                                    <strong>
+                                                        <a href="@Url.Action("QuizInfo", "Quiz", new { id = @topic.TopicID })" style="text-decoration:none;" data-toggle="tooltip" title="Subect">@topic.TopicName</a>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    @*<div class="panel panel-primary">
+                            <div class="panel-heading">
+                                @item.CourseName
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-responsive">
+                                    <tbody>
+                                        @if (item.CurrentTopics != null)
+                                        {
+                                            foreach (var topic in item.CurrentTopics)
+                                            {
+                                                <tr id="row_@topic.TopicID">
+
+                                                    <td>
+                                                        <strong>
+                                                            <a href="@Url.Action("QuizInfo", "Quiz", new { id = @topic.TopicID })" style="text-decoration:none;" data-toggle="tooltip" title="Subect">@topic.TopicName</a>
+                                                        </strong>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>*@
+                </div>
+            }
+        }
+    </div>
+
+</div>
+
+
+
+
+

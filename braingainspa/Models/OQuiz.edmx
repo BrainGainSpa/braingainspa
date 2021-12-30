@@ -1,0 +1,3207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_A482AA_quizModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.AcademicClasses' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AcademicClasses">
+          <Key>
+            <PropertyRef Name="AcademicClassID" />
+            <PropertyRef Name="IsDelete" />
+          </Key>
+          <Property Name="AcademicClassID" Type="int" Nullable="false" />
+          <Property Name="AcademicClassName" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IsVisible" Type="bit" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="Purse" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="TempPurse" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Withdrawals" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IsCompany" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="255" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="StateID" Type="smallint" />
+          <Property Name="LGAID" Type="smallint" />
+          <Property Name="Created" Type="smalldatetime" />
+          <Property Name="Updated" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Answers">
+          <Key>
+            <PropertyRef Name="AnswerID" />
+          </Key>
+          <Property Name="AnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionID" Type="int" />
+          <Property Name="OptionLetter" Type="nchar" MaxLength="1" />
+          <Property Name="AnswerString" Type="nvarchar(max)" />
+          <Property Name="IsCorrect" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.AppSettings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AppSettings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CourseFees" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="RegistrationFee" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="RegistrationFee2" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="DefaultReferralCode" Type="char" MaxLength="5" />
+          <Property Name="ReferralCodeEarning" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="MaxUnderline" Type="int" />
+          <Property Name="MaxFirstLevel" Type="int" />
+          <Property Name="CompRegPercent" Type="float" />
+          <Property Name="CompSubPercent" Type="float" />
+          <Property Name="CurrentSemester" Type="int" />
+          <Property Name="CurrentSession" Type="int" />
+          <Property Name="NoReferralAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="MaximumOptions" Type="int" />
+          <Property Name="QuestionsBatches" Type="int" />
+          <Property Name="SupportPhone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.BankInfoes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BankInfoes">
+          <Key>
+            <PropertyRef Name="BankInfoID" />
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="BankInfoID" Type="int" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" Nullable="false" />
+          <Property Name="BankID" Type="smallint" />
+          <Property Name="BranchName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccountNumber" Type="nchar" MaxLength="10" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.BankPayments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BankPayments">
+          <Key>
+            <PropertyRef Name="BankPaymentID" />
+          </Key>
+          <Property Name="BankPaymentID" Type="int" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+          <Property Name="GSM" Type="nvarchar" MaxLength="15" />
+          <Property Name="TellerNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Branch" Type="nvarchar" MaxLength="50" />
+          <Property Name="Confirmed" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.BANKS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BANKS">
+          <Key>
+            <PropertyRef Name="BANK1" />
+            <PropertyRef Name="BANK_ID" />
+          </Key>
+          <Property Name="BANK1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BANK_ID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientPayments">
+          <Key>
+            <PropertyRef Name="ClientPaymentID" />
+          </Key>
+          <Property Name="ClientPaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="Mode" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentModeID" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ClientQuestions">
+          <Key>
+            <PropertyRef Name="ClientQuestionID" />
+          </Key>
+          <Property Name="ClientQuestionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="ClientQuizID" Type="bigint" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="QuestionID" Type="int" />
+          <Property Name="QuestionNumber" Type="int" />
+          <Property Name="QuestionMarks" Type="int" />
+          <Property Name="AnswerID" Type="int" />
+          <Property Name="IsCorrect" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ClientQuizs">
+          <Key>
+            <PropertyRef Name="ClientQuizID" />
+          </Key>
+          <Property Name="ClientQuizID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="TopicID" Type="int" />
+          <Property Name="ResourceTypeID" Type="int" />
+          <Property Name="QuestionCount" Type="int" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="LastQuestionID" Type="int" />
+          <Property Name="StartTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="EndTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalScore" Type="float" />
+          <Property Name="Score" Type="float" />
+          <Property Name="Percentage" Type="float" />
+          <Property Name="Qualification" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Commissions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Commissions">
+          <Key>
+            <PropertyRef Name="CommissionID" />
+          </Key>
+          <Property Name="CommissionID" Type="int" Nullable="false" />
+          <Property Name="TranssactionID" Type="bigint" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="AlternateEmail" Type="nvarchar(max)" />
+          <Property Name="Created" Type="smalldatetime" />
+          <Property Name="Updated" Type="smalldatetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Countries' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.CourseDepartments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CourseDepartments">
+          <Key>
+            <PropertyRef Name="CourseDepartmentID" />
+          </Key>
+          <Property Name="CourseDepartmentID" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="DepartmentID" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.CoursePlus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CoursePlus">
+          <Key>
+            <PropertyRef Name="CoursePlusID" />
+          </Key>
+          <Property Name="CoursePlusID" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="SemesterID" Type="int" />
+          <Property Name="MthID" Type="int" />
+          <Property Name="MonthID" Type="int" />
+          <Property Name="YearID" Type="int" />
+          <Property Name="imgpath" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FacultyID" Type="int" />
+          <Property Name="DepartmentID" Type="int" />
+          <Property Name="SemesterID" Type="int" />
+          <Property Name="CYear" Type="int" />
+          <Property Name="MonthID" Type="int" />
+          <Property Name="YearID" Type="int" />
+          <Property Name="CourseCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CourseName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CreditUnits" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FacultyID" Type="int" />
+          <Property Name="DepartmentName" Type="nvarchar" MaxLength="300" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Downlines">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pid" Type="int" />
+          <Property Name="PPid" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DurationInMonths">
+          <Key>
+            <PropertyRef Name="DurationID" />
+          </Key>
+          <Property Name="DurationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EntityTypes">
+          <Key>
+            <PropertyRef Name="EntityTypeID" />
+          </Key>
+          <Property Name="EntityTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Faculties">
+          <Key>
+            <PropertyRef Name="FacultyID" />
+          </Key>
+          <Property Name="FacultyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolID" Type="int" />
+          <Property Name="ResourceTypeID" Type="int" />
+          <Property Name="FacultyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.FailedRegistrations' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FailedRegistrations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="Excluded" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Gender' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="6" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Items' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="ItemName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cost" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.MDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MDetails">
+          <Key>
+            <PropertyRef Name="MDetailID" />
+          </Key>
+          <Property Name="MDetailID" Type="int" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="AccountTypeID" Type="tinyint" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="100" />
+          <Property Name="BankID" Type="int" />
+          <Property Name="AccountNumber" Type="nchar" MaxLength="10" />
+          <Property Name="BankName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CardNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="ExpiryDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="CVV" Type="nchar" MaxLength="3" />
+          <Property Name="DefaultAccount" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Modules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Modules">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="MContent" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Months' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Months">
+          <Key>
+            <PropertyRef Name="MonthID" />
+          </Key>
+          <Property Name="MonthID" Type="int" Nullable="false" />
+          <Property Name="MonthName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsVisible" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PastQuestions">
+          <Key>
+            <PropertyRef Name="PastQuestionID" />
+          </Key>
+          <Property Name="PastQuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="Year" Type="int" />
+          <Property Name="linktoYearId" Type="int" />
+          <Property Name="YearID" Type="int" />
+          <Property Name="DurationInMinutes" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Payment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="NetworkID" Type="int" />
+          <Property Name="ReferralID" Type="bigint" />
+          <Property Name="DirectReferralID" Type="bigint" />
+          <Property Name="BankID" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Mode" Type="nchar" MaxLength="10" />
+          <Property Name="ChequeNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Paid" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="PaymentModes">
+          <Key>
+            <PropertyRef Name="PaymentModeID" />
+          </Key>
+          <Property Name="PaymentModeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentModeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PaymentTransactions">
+          <Key>
+            <PropertyRef Name="PaymentTransactionID" />
+          </Key>
+          <Property Name="PaymentTransactionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="RefereeCode" Type="char" MaxLength="5" />
+          <Property Name="ReferralCode" Type="char" MaxLength="5" />
+          <Property Name="TransactionTypeID" Type="int" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Level" Type="int" />
+          <Property Name="NLevel" Type="int" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="100" />
+          <Property Name="TempFlag" Type="bit" />
+          <Property Name="AcctFlag" Type="bit" />
+          <Property Name="ToCompanyFlag" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Percentages">
+          <Key>
+            <PropertyRef Name="PercentID" />
+          </Key>
+          <Property Name="PercentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PercentName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PValue" Type="nvarchar" MaxLength="50" />
+          <Property Name="PType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Percentage" Type="float" />
+          <Property Name="Registration" Type="float" />
+          <Property Name="Subscription" Type="float" />
+          <Property Name="PAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PLevel" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntityTypeID" Type="int" />
+          <Property Name="TitleID" Type="int" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="GenderID" Type="int" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="ReferralCode" Type="char" MaxLength="5" />
+          <Property Name="AcademicClassID" Type="int" />
+          <Property Name="SemesterID" Type="int" />
+          <Property Name="PayMode" Type="int" />
+          <Property Name="RefereeCode" Type="char" MaxLength="5" />
+          <Property Name="ParentCode" Type="nchar" MaxLength="6" />
+          <Property Name="ActiveSubscriptionID" Type="bigint" />
+          <Property Name="IsCompany" Type="bit" />
+          <Property Name="MaxFirstLevel" Type="int" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Pricings">
+          <Key>
+            <PropertyRef Name="PricingID" />
+          </Key>
+          <Property Name="PricingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolID" Type="int" />
+          <Property Name="FacultyID" Type="int" />
+          <Property Name="DurationID" Type="int" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Purchases' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Purchases">
+          <Key>
+            <PropertyRef Name="PurchaseID" />
+          </Key>
+          <Property Name="PurchaseID" Type="int" Nullable="false" />
+          <Property Name="ItemID" Type="int" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="QuestionMarks">
+          <Key>
+            <PropertyRef Name="QuestionMarkID" />
+          </Key>
+          <Property Name="QuestionMarkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionMark" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="TopicID" Type="int" />
+          <Property Name="QuestionTypeID" Type="int" />
+          <Property Name="ResourceTypeID" Type="int" />
+          <Property Name="CoursePlusID" Type="int" />
+          <Property Name="SectionID" Type="int" />
+          <Property Name="QuestionNumber" Type="int" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuestionString" Type="nvarchar(max)" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="250" />
+          <Property Name="QuestionMarks" Type="int" />
+          <Property Name="CorrectAnswer" Type="nvarchar" MaxLength="50" />
+          <Property Name="AnswerExplanation" Type="nvarchar(max)" />
+          <Property Name="QuestionDuration" Type="int" />
+          <Property Name="Year" Type="int" />
+          <Property Name="IsVerified" Type="bit" />
+          <Property Name="Instruction" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.QuestionTypes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="QuestionTypes">
+          <Key>
+            <PropertyRef Name="QuestionTypeID" />
+          </Key>
+          <Property Name="QuestionTypeID" Type="int" Nullable="false" />
+          <Property Name="QuestionType" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsVisible" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ResourceTypes">
+          <Key>
+            <PropertyRef Name="ResourceTypeID" />
+          </Key>
+          <Property Name="ResourceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResourceTypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="200" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Sales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="SalesID" />
+          </Key>
+          <Property Name="SalesID" Type="bigint" Nullable="false" />
+          <Property Name="ItemID" Type="int" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Craeted" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Schools">
+          <Key>
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="SchoolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="Website" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Sections' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Sections">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="int" Nullable="false" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="SN" Type="nvarchar" MaxLength="5" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="SContent" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="ContentType" Type="nvarchar" MaxLength="500" />
+          <Property Name="Data" Type="varbinary(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Semesters' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Semesters">
+          <Key>
+            <PropertyRef Name="SemesterID" />
+          </Key>
+          <Property Name="SemesterID" Type="int" Nullable="false" />
+          <Property Name="Semester" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsVisible" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SiteMenu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="100" />
+          <Property Name="NavURL" Type="nvarchar" MaxLength="200" />
+          <Property Name="ParentMenuID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.States' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="StateID" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="StateID" Type="int" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Student_Details' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Student_Details">
+          <Key>
+            <PropertyRef Name="StudentDetailID" />
+          </Key>
+          <Property Name="StudentDetailID" Type="bigint" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="SchoolID" Type="int" />
+          <Property Name="FacultyID" Type="int" />
+          <Property Name="DepartmentID" Type="int" />
+          <Property Name="LevelID" Type="int" />
+          <Property Name="SemesterID" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.StudentCourses' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StudentCourses">
+          <Key>
+            <PropertyRef Name="StudentCourseID" />
+          </Key>
+          <Property Name="StudentCourseID" Type="bigint" Nullable="false" />
+          <Property Name="StudentDetailID" Type="bigint" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="Year" Type="int" />
+          <Property Name="TutorialScore" Type="float" />
+          <Property Name="ExamScore" Type="float" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.StudentPayments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StudentPayments">
+          <Key>
+            <PropertyRef Name="StudentPaymentID" />
+          </Key>
+          <Property Name="StudentPaymentID" Type="bigint" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="LevelID" Type="int" />
+          <Property Name="SemesterID" Type="int" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Subscriptions">
+          <Key>
+            <PropertyRef Name="SubscriptionID" />
+          </Key>
+          <Property Name="SubscriptionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="ResourceTypeID" Type="int" />
+          <Property Name="PricingID" Type="int" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Titles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Titles">
+          <Key>
+            <PropertyRef Name="TitleID" />
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="TitleID" Type="tinyint" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Created" Type="smalldatetime" />
+          <Property Name="Updated" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Topics">
+          <Key>
+            <PropertyRef Name="TopicID" />
+          </Key>
+          <Property Name="TopicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="TopicName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DurationInMinutes" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Transactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="bigint" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="CommitID" Type="int" />
+          <Property Name="TransactionTypeID" Type="int" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Credit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Debit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TransactionTypes">
+          <Key>
+            <PropertyRef Name="TransactionTypeID" />
+          </Key>
+          <Property Name="TransactionTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionTypeName" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Investment" Type="bit" />
+          <Property Name="Subscription" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A482AA_quiz.dbo.Units' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Units">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="ModuleID" Type="int" />
+          <Property Name="UnitDetails" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonID" Type="bigint" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="850" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" />
+          <Property Name="Password" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="StatusTypeID" Type="tinyint" />
+          <Property Name="FirstTimeLogin" Type="tinyint" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="ConfirmEmail" Type="bit" />
+          <Property Name="ConfirmPhone" Type="bit" />
+          <Property Name="PhoneCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="EmailCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsRegistered" Type="bit" />
+          <Property Name="Deactivated" Type="bit" />
+          <Property Name="LoginCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Used" Type="bit" />
+          <Property Name="LastLoginDate" Type="datetime" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Years">
+          <Key>
+            <PropertyRef Name="YearID" />
+          </Key>
+          <Property Name="YearID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YearName" Type="int" />
+          <Property Name="IsVisible" Type="bit" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Answers_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="0..1" />
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_Faculties">
+          <End Role="Faculties" Type="Self.Faculties" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculties">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Faculties_Schools">
+          <End Role="Schools" Type="Self.Schools" Multiplicity="0..1" />
+          <End Role="Faculties" Type="Self.Faculties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schools">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="Faculties">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PastQuestions_Courses">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="PastQuestions" Type="Self.PastQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="PastQuestions">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topics_Courses">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="Topics" Type="Self.Topics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Topics">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_A482AA_quizModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientPayments" EntityType="Self.ClientPayments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientQuestions" EntityType="Self.ClientQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientQuizs" EntityType="Self.ClientQuizs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Downlines" EntityType="Self.Downlines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DurationInMonths" EntityType="Self.DurationInMonths" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntityTypes" EntityType="Self.EntityTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PastQuestions" EntityType="Self.PastQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentModes" EntityType="Self.PaymentModes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentTransactions" EntityType="Self.PaymentTransactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Percentages" EntityType="Self.Percentages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pricings" EntityType="Self.Pricings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionMarks" EntityType="Self.QuestionMarks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResourceTypes" EntityType="Self.ResourceTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schools" EntityType="Self.Schools" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteMenu" EntityType="Self.SiteMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Topics" EntityType="Self.Topics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionTypes" EntityType="Self.TransactionTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Years" EntityType="Self.Years" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AcademicClasses" EntityType="Self.AcademicClasses" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AcademicClasses].[AcademicClassID] AS [AcademicClassID], 
+    [AcademicClasses].[AcademicClassName] AS [AcademicClassName], 
+    [AcademicClasses].[Description] AS [Description], 
+    [AcademicClasses].[Amount] AS [Amount], 
+    [AcademicClasses].[IsVisible] AS [IsVisible], 
+    [AcademicClasses].[IsDelete] AS [IsDelete], 
+    [AcademicClasses].[Created] AS [Created], 
+    [AcademicClasses].[Updated] AS [Updated]
+    FROM [dbo].[AcademicClasses] AS [AcademicClasses]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AppSettings" EntityType="Self.AppSettings" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AppSettings].[ID] AS [ID], 
+    [AppSettings].[CourseFees] AS [CourseFees], 
+    [AppSettings].[RegistrationFee] AS [RegistrationFee], 
+    [AppSettings].[RegistrationFee2] AS [RegistrationFee2], 
+    [AppSettings].[DefaultReferralCode] AS [DefaultReferralCode], 
+    [AppSettings].[ReferralCodeEarning] AS [ReferralCodeEarning], 
+    [AppSettings].[MaxUnderline] AS [MaxUnderline], 
+    [AppSettings].[MaxFirstLevel] AS [MaxFirstLevel], 
+    [AppSettings].[CompRegPercent] AS [CompRegPercent], 
+    [AppSettings].[CompSubPercent] AS [CompSubPercent], 
+    [AppSettings].[CurrentSemester] AS [CurrentSemester], 
+    [AppSettings].[CurrentSession] AS [CurrentSession], 
+    [AppSettings].[NoReferralAmount] AS [NoReferralAmount], 
+    [AppSettings].[MaximumOptions] AS [MaximumOptions], 
+    [AppSettings].[QuestionsBatches] AS [QuestionsBatches], 
+    [AppSettings].[SupportPhone] AS [SupportPhone], 
+    [AppSettings].[Created] AS [Created], 
+    [AppSettings].[Updated] AS [Updated]
+    FROM [dbo].[AppSettings] AS [AppSettings]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="BankInfoes" EntityType="Self.BankInfoes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BankInfoes].[BankInfoID] AS [BankInfoID], 
+    [BankInfoes].[PersonID] AS [PersonID], 
+    [BankInfoes].[BankID] AS [BankID], 
+    [BankInfoes].[BranchName] AS [BranchName], 
+    [BankInfoes].[AccountName] AS [AccountName], 
+    [BankInfoes].[AccountNumber] AS [AccountNumber], 
+    [BankInfoes].[IsDeleted] AS [IsDeleted], 
+    [BankInfoes].[Created] AS [Created], 
+    [BankInfoes].[Updated] AS [Updated]
+    FROM [dbo].[BankInfoes] AS [BankInfoes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="BankPayments" EntityType="Self.BankPayments" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BankPayments].[BankPaymentID] AS [BankPaymentID], 
+    [BankPayments].[PersonID] AS [PersonID], 
+    [BankPayments].[FullName] AS [FullName], 
+    [BankPayments].[GSM] AS [GSM], 
+    [BankPayments].[TellerNumber] AS [TellerNumber], 
+    [BankPayments].[Amount] AS [Amount], 
+    [BankPayments].[Branch] AS [Branch], 
+    [BankPayments].[Confirmed] AS [Confirmed], 
+    [BankPayments].[Created] AS [Created], 
+    [BankPayments].[Updated] AS [Updated]
+    FROM [dbo].[BankPayments] AS [BankPayments]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="BANKS" EntityType="Self.BANKS" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BANKS].[BANK1] AS [BANK1], 
+    [BANKS].[BANK_ID] AS [BANK_ID]
+    FROM [dbo].[BANKS] AS [BANKS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Commissions" EntityType="Self.Commissions" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Commissions].[CommissionID] AS [CommissionID], 
+    [Commissions].[TranssactionID] AS [TranssactionID], 
+    [Commissions].[Amount] AS [Amount], 
+    [Commissions].[Created] AS [Created], 
+    [Commissions].[Updated] AS [Updated]
+    FROM [dbo].[Commissions] AS [Commissions]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Countries" EntityType="Self.Countries" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Countries].[CountryID] AS [CountryID], 
+    [Countries].[Country] AS [Country]
+    FROM [dbo].[Countries] AS [Countries]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CourseDepartments" EntityType="Self.CourseDepartments" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CourseDepartments].[CourseDepartmentID] AS [CourseDepartmentID], 
+    [CourseDepartments].[CourseID] AS [CourseID], 
+    [CourseDepartments].[DepartmentID] AS [DepartmentID], 
+    [CourseDepartments].[IsDeleted] AS [IsDeleted], 
+    [CourseDepartments].[Created] AS [Created], 
+    [CourseDepartments].[Updated] AS [Updated]
+    FROM [dbo].[CourseDepartments] AS [CourseDepartments]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CoursePlus" EntityType="Self.CoursePlus" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CoursePlus].[CoursePlusID] AS [CoursePlusID], 
+    [CoursePlus].[CourseID] AS [CourseID], 
+    [CoursePlus].[SemesterID] AS [SemesterID], 
+    [CoursePlus].[MthID] AS [MthID], 
+    [CoursePlus].[MonthID] AS [MonthID], 
+    [CoursePlus].[YearID] AS [YearID], 
+    [CoursePlus].[imgpath] AS [imgpath], 
+    [CoursePlus].[IsDeleted] AS [IsDeleted], 
+    [CoursePlus].[Created] AS [Created], 
+    [CoursePlus].[Updated] AS [Updated]
+    FROM [dbo].[CoursePlus] AS [CoursePlus]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FailedRegistrations" EntityType="Self.FailedRegistrations" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FailedRegistrations].[ID] AS [ID], 
+    [FailedRegistrations].[FirstName] AS [FirstName], 
+    [FailedRegistrations].[LastName] AS [LastName], 
+    [FailedRegistrations].[Phone] AS [Phone], 
+    [FailedRegistrations].[Email] AS [Email], 
+    [FailedRegistrations].[Excluded] AS [Excluded], 
+    [FailedRegistrations].[Created] AS [Created], 
+    [FailedRegistrations].[Updated] AS [Updated]
+    FROM [dbo].[FailedRegistrations] AS [FailedRegistrations]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Gender" EntityType="Self.Gender" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Gender].[GenderID] AS [GenderID], 
+    [Gender].[Gender] AS [Gender], 
+    [Gender].[Created] AS [Created], 
+    [Gender].[Updated] AS [Updated]
+    FROM [dbo].[Gender] AS [Gender]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Items" EntityType="Self.Items" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Items].[ItemID] AS [ItemID], 
+    [Items].[ItemName] AS [ItemName], 
+    [Items].[Cost] AS [Cost], 
+    [Items].[Created] AS [Created], 
+    [Items].[Updated] AS [Updated]
+    FROM [dbo].[Items] AS [Items]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MDetails" EntityType="Self.MDetails" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MDetails].[MDetailID] AS [MDetailID], 
+    [MDetails].[PersonID] AS [PersonID], 
+    [MDetails].[AccountTypeID] AS [AccountTypeID], 
+    [MDetails].[AccountName] AS [AccountName], 
+    [MDetails].[BankID] AS [BankID], 
+    [MDetails].[AccountNumber] AS [AccountNumber], 
+    [MDetails].[BankName] AS [BankName], 
+    [MDetails].[CardNumber] AS [CardNumber], 
+    [MDetails].[ExpiryDate] AS [ExpiryDate], 
+    [MDetails].[CVV] AS [CVV], 
+    [MDetails].[DefaultAccount] AS [DefaultAccount], 
+    [MDetails].[Created] AS [Created], 
+    [MDetails].[Updated] AS [Updated]
+    FROM [dbo].[MDetails] AS [MDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Modules" EntityType="Self.Modules" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Modules].[ModuleID] AS [ModuleID], 
+    [Modules].[CourseID] AS [CourseID], 
+    [Modules].[MContent] AS [MContent], 
+    [Modules].[Description] AS [Description], 
+    [Modules].[IsDeleted] AS [IsDeleted], 
+    [Modules].[Created] AS [Created], 
+    [Modules].[Updated] AS [Updated]
+    FROM [dbo].[Modules] AS [Modules]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Months" EntityType="Self.Months" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Months].[MonthID] AS [MonthID], 
+    [Months].[MonthName] AS [MonthName], 
+    [Months].[IsVisible] AS [IsVisible], 
+    [Months].[Created] AS [Created], 
+    [Months].[Updated] AS [Updated]
+    FROM [dbo].[Months] AS [Months]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Payment" EntityType="Self.Payment" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Payment].[PaymentID] AS [PaymentID], 
+    [Payment].[PersonID] AS [PersonID], 
+    [Payment].[NetworkID] AS [NetworkID], 
+    [Payment].[ReferralID] AS [ReferralID], 
+    [Payment].[DirectReferralID] AS [DirectReferralID], 
+    [Payment].[BankID] AS [BankID], 
+    [Payment].[Date] AS [Date], 
+    [Payment].[Mode] AS [Mode], 
+    [Payment].[ChequeNumber] AS [ChequeNumber], 
+    [Payment].[Amount] AS [Amount], 
+    [Payment].[Paid] AS [Paid], 
+    [Payment].[Created] AS [Created], 
+    [Payment].[Updated] AS [Updated], 
+    [Payment].[IsDeleted] AS [IsDeleted]
+    FROM [dbo].[Payment] AS [Payment]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Purchases" EntityType="Self.Purchases" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Purchases].[PurchaseID] AS [PurchaseID], 
+    [Purchases].[ItemID] AS [ItemID], 
+    [Purchases].[Amount] AS [Amount], 
+    [Purchases].[Created] AS [Created], 
+    [Purchases].[Updated] AS [Updated]
+    FROM [dbo].[Purchases] AS [Purchases]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="QuestionTypes" EntityType="Self.QuestionTypes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [QuestionTypes].[QuestionTypeID] AS [QuestionTypeID], 
+    [QuestionTypes].[QuestionType] AS [QuestionType], 
+    [QuestionTypes].[IsVisible] AS [IsVisible], 
+    [QuestionTypes].[IsDeleted] AS [IsDeleted], 
+    [QuestionTypes].[Created] AS [Created], 
+    [QuestionTypes].[Updated] AS [Updated]
+    FROM [dbo].[QuestionTypes] AS [QuestionTypes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Sales" EntityType="Self.Sales" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Sales].[SalesID] AS [SalesID], 
+    [Sales].[ItemID] AS [ItemID], 
+    [Sales].[Amount] AS [Amount], 
+    [Sales].[Craeted] AS [Craeted], 
+    [Sales].[Updated] AS [Updated]
+    FROM [dbo].[Sales] AS [Sales]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Sections" EntityType="Self.Sections" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Sections].[SectionID] AS [SectionID], 
+    [Sections].[UnitID] AS [UnitID], 
+    [Sections].[SN] AS [SN], 
+    [Sections].[Title] AS [Title], 
+    [Sections].[SContent] AS [SContent], 
+    [Sections].[Name] AS [Name], 
+    [Sections].[ContentType] AS [ContentType], 
+    [Sections].[Data] AS [Data], 
+    [Sections].[IsDeleted] AS [IsDeleted], 
+    [Sections].[Created] AS [Created], 
+    [Sections].[Updated] AS [Updated]
+    FROM [dbo].[Sections] AS [Sections]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Semesters" EntityType="Self.Semesters" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Semesters].[SemesterID] AS [SemesterID], 
+    [Semesters].[Semester] AS [Semester], 
+    [Semesters].[IsVisible] AS [IsVisible], 
+    [Semesters].[IsDeleted] AS [IsDeleted], 
+    [Semesters].[Created] AS [Created], 
+    [Semesters].[Updated] AS [Updated]
+    FROM [dbo].[Semesters] AS [Semesters]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="States" EntityType="Self.States" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [States].[StateID] AS [StateID], 
+    [States].[State] AS [State], 
+    [States].[Code] AS [Code], 
+    [States].[CountryID] AS [CountryID]
+    FROM [dbo].[States] AS [States]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Student_Details" EntityType="Self.Student_Details" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Student_Details].[StudentDetailID] AS [StudentDetailID], 
+    [Student_Details].[PersonID] AS [PersonID], 
+    [Student_Details].[SchoolID] AS [SchoolID], 
+    [Student_Details].[FacultyID] AS [FacultyID], 
+    [Student_Details].[DepartmentID] AS [DepartmentID], 
+    [Student_Details].[LevelID] AS [LevelID], 
+    [Student_Details].[SemesterID] AS [SemesterID], 
+    [Student_Details].[IsDeleted] AS [IsDeleted], 
+    [Student_Details].[Created] AS [Created], 
+    [Student_Details].[Updated] AS [Updated]
+    FROM [dbo].[Student_Details] AS [Student_Details]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="StudentCourses" EntityType="Self.StudentCourses" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StudentCourses].[StudentCourseID] AS [StudentCourseID], 
+    [StudentCourses].[StudentDetailID] AS [StudentDetailID], 
+    [StudentCourses].[CourseID] AS [CourseID], 
+    [StudentCourses].[Year] AS [Year], 
+    [StudentCourses].[TutorialScore] AS [TutorialScore], 
+    [StudentCourses].[ExamScore] AS [ExamScore], 
+    [StudentCourses].[IsDeleted] AS [IsDeleted], 
+    [StudentCourses].[IsActive] AS [IsActive], 
+    [StudentCourses].[Created] AS [Created], 
+    [StudentCourses].[Updated] AS [Updated]
+    FROM [dbo].[StudentCourses] AS [StudentCourses]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="StudentPayments" EntityType="Self.StudentPayments" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StudentPayments].[StudentPaymentID] AS [StudentPaymentID], 
+    [StudentPayments].[PersonID] AS [PersonID], 
+    [StudentPayments].[LevelID] AS [LevelID], 
+    [StudentPayments].[SemesterID] AS [SemesterID], 
+    [StudentPayments].[Amount] AS [Amount], 
+    [StudentPayments].[IsDeleted] AS [IsDeleted], 
+    [StudentPayments].[Created] AS [Created], 
+    [StudentPayments].[Updated] AS [Updated]
+    FROM [dbo].[StudentPayments] AS [StudentPayments]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Titles" EntityType="Self.Titles" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Titles].[TitleID] AS [TitleID], 
+    [Titles].[Title] AS [Title], 
+    [Titles].[Created] AS [Created], 
+    [Titles].[Updated] AS [Updated]
+    FROM [dbo].[Titles] AS [Titles]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Transactions].[TransactionID] AS [TransactionID], 
+    [Transactions].[PersonID] AS [PersonID], 
+    [Transactions].[CommitID] AS [CommitID], 
+    [Transactions].[TransactionTypeID] AS [TransactionTypeID], 
+    [Transactions].[Amount] AS [Amount], 
+    [Transactions].[Credit] AS [Credit], 
+    [Transactions].[Debit] AS [Debit], 
+    [Transactions].[Created] AS [Created], 
+    [Transactions].[Updated] AS [Updated]
+    FROM [dbo].[Transactions] AS [Transactions]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Units" EntityType="Self.Units" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Units].[UnitID] AS [UnitID], 
+    [Units].[CourseID] AS [CourseID], 
+    [Units].[ModuleID] AS [ModuleID], 
+    [Units].[UnitDetails] AS [UnitDetails], 
+    [Units].[Description] AS [Description], 
+    [Units].[IsDeleted] AS [IsDeleted], 
+    [Units].[Created] AS [Created], 
+    [Units].[Updated] AS [Updated]
+    FROM [dbo].[Units] AS [Units]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Answers_Questions" Association="Self.FK_Answers_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_Departments" Association="Self.FK_Courses_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_Faculties" Association="Self.FK_Courses_Faculties">
+            <End Role="Faculties" EntitySet="Faculties" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Faculties_Schools" Association="Self.FK_Faculties_Schools">
+            <End Role="Schools" EntitySet="Schools" />
+            <End Role="Faculties" EntitySet="Faculties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PastQuestions_Courses" Association="Self.FK_PastQuestions_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="PastQuestions" EntitySet="PastQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topics_Courses" Association="Self.FK_Topics_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Topics" EntitySet="Topics" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_A482AA_quizModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AcademicClass">
+          <Key>
+            <PropertyRef Name="AcademicClassID" />
+            <PropertyRef Name="IsDelete" />
+          </Key>
+          <Property Name="AcademicClassID" Type="Int32" Nullable="false" />
+          <Property Name="AcademicClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsVisible" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="Int32" Nullable="false" />
+          <Property Name="PersonID" Type="Int64" Nullable="false" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StateID" Type="Int16" />
+          <Property Name="LGAID" Type="Int16" />
+          <Property Name="Created" Type="DateTime" Precision="0" />
+          <Property Name="Updated" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswerID" />
+          </Key>
+          <Property Name="AnswerID" Type="Int32" Nullable="false" />
+          <Property Name="QuestionID" Type="Int32" />
+          <Property Name="OptionLetter" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="AnswerString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsCorrect" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Question" Relationship="DB_A482AA_quizModel.FK_Answers_Questions" FromRole="Answer" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="AppSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CourseFees" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RegistrationFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RegistrationFee2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DefaultReferralCode" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="ReferralCodeEarning" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CurrentSemester" Type="Int32" />
+          <Property Name="CurrentSession" Type="Int32" />
+          <Property Name="NoReferralAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MaximumOptions" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="QuestionsBatches" Type="Int32" />
+          <Property Name="MaxUnderline" Type="Int32" />
+          <Property Name="MaxFirstLevel" Type="Int32" />
+          <Property Name="SupportPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CompRegPercent" Type="Double" />
+          <Property Name="CompSubPercent" Type="Double" />
+        </EntityType>
+        <EntityType Name="Commission">
+          <Key>
+            <PropertyRef Name="CommissionID" />
+          </Key>
+          <Property Name="CommissionID" Type="Int32" Nullable="false" />
+          <Property Name="TranssactionID" Type="Int64" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" />
+          <Property Name="PersonID" Type="Int64" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AlternateEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="0" />
+          <Property Name="Updated" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="CourseDepartment">
+          <Key>
+            <PropertyRef Name="CourseDepartmentID" />
+          </Key>
+          <Property Name="CourseDepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="DepartmentID" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CoursePlu">
+          <Key>
+            <PropertyRef Name="CoursePlusID" />
+          </Key>
+          <Property Name="CoursePlusID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="SemesterID" Type="Int32" />
+          <Property Name="MthID" Type="Int32" />
+          <Property Name="MonthID" Type="Int32" />
+          <Property Name="YearID" Type="Int32" />
+          <Property Name="imgpath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="FacultyID" Type="Int32" />
+          <Property Name="DepartmentID" Type="Int32" />
+          <Property Name="SemesterID" Type="Int32" />
+          <Property Name="CYear" Type="Int32" />
+          <Property Name="MonthID" Type="Int32" />
+          <Property Name="YearID" Type="Int32" />
+          <Property Name="CourseCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CourseName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreditUnits" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Department" Relationship="DB_A482AA_quizModel.FK_Courses_Departments" FromRole="Cours" ToRole="Department" />
+          <NavigationProperty Name="Faculty" Relationship="DB_A482AA_quizModel.FK_Courses_Faculties" FromRole="Cours" ToRole="Faculty" />
+          <NavigationProperty Name="Topics" Relationship="DB_A482AA_quizModel.FK_Topics_Courses" FromRole="Cours" ToRole="Topic" />
+          <NavigationProperty Name="PastQuestions" Relationship="DB_A482AA_quizModel.FK_PastQuestions_Courses" FromRole="Cours" ToRole="PastQuestion" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="FacultyID" Type="Int32" />
+          <Property Name="DepartmentName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Courses" Relationship="DB_A482AA_quizModel.FK_Courses_Departments" FromRole="Department" ToRole="Cours" />
+        </EntityType>
+        <EntityType Name="EntityType">
+          <Key>
+            <PropertyRef Name="EntityTypeID" />
+          </Key>
+          <Property Name="EntityTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="FacultyID" />
+          </Key>
+          <Property Name="FacultyID" Type="Int32" Nullable="false" />
+          <Property Name="SchoolID" Type="Int32" />
+          <Property Name="FacultyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="School" Relationship="DB_A482AA_quizModel.FK_Faculties_Schools" FromRole="Faculty" ToRole="School" />
+          <NavigationProperty Name="Courses" Relationship="DB_A482AA_quizModel.FK_Courses_Faculties" FromRole="Faculty" ToRole="Cours" />
+          <Property Name="ResourceTypeID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FailedRegistration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Excluded" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="Int32" Nullable="false" />
+          <Property Name="Gender1" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="MDetail">
+          <Key>
+            <PropertyRef Name="MDetailID" />
+          </Key>
+          <Property Name="MDetailID" Type="Int32" Nullable="false" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="AccountTypeID" Type="Byte" />
+          <Property Name="AccountName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BankID" Type="Int32" />
+          <Property Name="AccountNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ExpiryDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CVV" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="DefaultAccount" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="MContent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Month">
+          <Key>
+            <PropertyRef Name="MonthID" />
+          </Key>
+          <Property Name="MonthID" Type="Int32" Nullable="false" />
+          <Property Name="MonthName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsVisible" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Percentage">
+          <Key>
+            <PropertyRef Name="PercentID" />
+          </Key>
+          <Property Name="PercentID" Type="Int32" Nullable="false" />
+          <Property Name="PercentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Percentage1" Type="Double" />
+          <Property Name="PAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="PValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Registration" Type="Double" />
+          <Property Name="Subscription" Type="Double" />
+          <Property Name="PLevel" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="Int64" Nullable="false" />
+          <Property Name="EntityTypeID" Type="Int32" />
+          <Property Name="TitleID" Type="Int32" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GenderID" Type="Int32" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="ReferralCode" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="AcademicClassID" Type="Int32" />
+          <Property Name="SemesterID" Type="Int32" />
+          <Property Name="PayMode" Type="Int32" />
+          <Property Name="RefereeCode" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="ParentCode" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="ActiveSubscriptionID" Type="Int64" />
+          <Property Name="IsCompany" Type="Boolean" />
+          <Property Name="MaxFirstLevel" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="PurchaseID" />
+          </Key>
+          <Property Name="PurchaseID" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="TopicID" Type="Int32" />
+          <Property Name="QuestionTypeID" Type="Int32" />
+          <Property Name="CoursePlusID" Type="Int32" />
+          <Property Name="SectionID" Type="Int32" />
+          <Property Name="QuestionNumber" Type="Int32" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuestionString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Answer" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CorrectAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AnswerExplanation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Answers" Relationship="DB_A482AA_quizModel.FK_Answers_Questions" FromRole="Question" ToRole="Answer" />
+          <NavigationProperty Name="Topic" Relationship="DB_A482AA_quizModel.FK_Questions_Topics" FromRole="Question" ToRole="Topic" />
+          <Property Name="QuestionMarks" Type="Int32" />
+          <Property Name="QuestionDuration" Type="Int32" />
+          <Property Name="IsVerified" Type="Boolean" />
+          <NavigationProperty Name="ClientQuestions" Relationship="DB_A482AA_quizModel.FK_ClientQuestions_Questions" FromRole="Question" ToRole="ClientQuestion" />
+          <Property Name="ResourceTypeID" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Instruction" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="QuestionType">
+          <Key>
+            <PropertyRef Name="QuestionTypeID" />
+          </Key>
+          <Property Name="QuestionTypeID" Type="Int32" Nullable="false" />
+          <Property Name="QuestionType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsVisible" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="SalesID" />
+          </Key>
+          <Property Name="SalesID" Type="Int64" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Craeted" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="SchoolID" Type="Int32" Nullable="false" />
+          <Property Name="SchoolName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Faculties" Relationship="DB_A482AA_quizModel.FK_Faculties_Schools" FromRole="School" ToRole="Faculty" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="Int32" Nullable="false" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="SN" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ContentType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Data" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Semester">
+          <Key>
+            <PropertyRef Name="SemesterID" />
+          </Key>
+          <Property Name="SemesterID" Type="Int32" Nullable="false" />
+          <Property Name="Semester1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsVisible" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Student_Details">
+          <Key>
+            <PropertyRef Name="StudentDetailID" />
+          </Key>
+          <Property Name="StudentDetailID" Type="Int64" Nullable="false" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="SchoolID" Type="Int32" />
+          <Property Name="FacultyID" Type="Int32" />
+          <Property Name="DepartmentID" Type="Int32" />
+          <Property Name="LevelID" Type="Int32" />
+          <Property Name="SemesterID" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="StudentCours">
+          <Key>
+            <PropertyRef Name="StudentCourseID" />
+          </Key>
+          <Property Name="StudentCourseID" Type="Int64" Nullable="false" />
+          <Property Name="StudentDetailID" Type="Int64" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="TutorialScore" Type="Double" />
+          <Property Name="ExamScore" Type="Double" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="StudentPayment">
+          <Key>
+            <PropertyRef Name="StudentPaymentID" />
+          </Key>
+          <Property Name="StudentPaymentID" Type="Int64" Nullable="false" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="LevelID" Type="Int32" />
+          <Property Name="SemesterID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="TopicID" />
+          </Key>
+          <Property Name="TopicID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="TopicName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cours" Relationship="DB_A482AA_quizModel.FK_Topics_Courses" FromRole="Topic" ToRole="Cours" />
+          <NavigationProperty Name="Questions" Relationship="DB_A482AA_quizModel.FK_Questions_Topics" FromRole="Topic" ToRole="Question" />
+          <Property Name="DurationInMinutes" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="Int64" Nullable="false" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="CommitID" Type="Int32" />
+          <Property Name="TransactionTypeID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Credit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Debit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="TransactionTypeID" />
+          </Key>
+          <Property Name="TransactionTypeID" Type="Int32" Nullable="false" />
+          <Property Name="TransactionTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Investment" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="Subscription" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="ModuleID" Type="Int32" />
+          <Property Name="UnitDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="850" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StatusTypeID" Type="Byte" />
+          <Property Name="FirstTimeLogin" Type="Byte" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="ConfirmEmail" Type="Boolean" />
+          <Property Name="ConfirmPhone" Type="Boolean" />
+          <Property Name="PhoneCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="EmailCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsRegistered" Type="Boolean" />
+          <Property Name="Deactivated" Type="Boolean" />
+          <Property Name="LoginCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Used" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Year">
+          <Key>
+            <PropertyRef Name="YearID" />
+          </Key>
+          <Property Name="YearID" Type="Int32" Nullable="false" />
+          <Property Name="YearName" Type="Int32" />
+          <Property Name="IsVisible" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="CArumala_edquizEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AcademicClasses" EntityType="Self.AcademicClass" />
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Answers" EntityType="DB_A482AA_quizModel.Answer" />
+          <EntitySet Name="AppSettings" EntityType="Self.AppSetting" />
+          <EntitySet Name="Commissions" EntityType="Self.Commission" />
+          <EntitySet Name="Contacts" EntityType="Self.Contact" />
+          <EntitySet Name="CourseDepartments" EntityType="Self.CourseDepartment" />
+          <EntitySet Name="CoursePlus" EntityType="Self.CoursePlu" />
+          <EntitySet Name="Courses" EntityType="Self.Cours" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="EntityTypes" EntityType="Self.EntityType" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+          <EntitySet Name="FailedRegistrations" EntityType="Self.FailedRegistration" />
+          <EntitySet Name="Genders" EntityType="Self.Gender" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="MDetails" EntityType="Self.MDetail" />
+          <EntitySet Name="Modules" EntityType="Self.Module" />
+          <EntitySet Name="Months" EntityType="Self.Month" />
+          <EntitySet Name="Percentages" EntityType="Self.Percentage" />
+          <EntitySet Name="Persons" EntityType="Self.Person" />
+          <EntitySet Name="Purchases" EntityType="Self.Purchase" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="QuestionTypes" EntityType="Self.QuestionType" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Sales" EntityType="Self.Sale" />
+          <EntitySet Name="Schools" EntityType="Self.School" />
+          <EntitySet Name="Sections" EntityType="Self.Section" />
+          <EntitySet Name="Semesters" EntityType="Self.Semester" />
+          <EntitySet Name="Student_Details" EntityType="Self.Student_Details" />
+          <EntitySet Name="StudentCourses" EntityType="Self.StudentCours" />
+          <EntitySet Name="StudentPayments" EntityType="Self.StudentPayment" />
+          <EntitySet Name="Topics" EntityType="Self.Topic" />
+          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+          <EntitySet Name="TransactionTypes" EntityType="Self.TransactionType" />
+          <EntitySet Name="Units" EntityType="Self.Unit" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Years" EntityType="Self.Year" />
+          <AssociationSet Name="FK_Faculties_Schools" Association="DB_A482AA_quizModel.FK_Faculties_Schools">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Faculty" EntitySet="Faculties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Answers_Questions" Association="DB_A482AA_quizModel.FK_Answers_Questions">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="Answer" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_Departments" Association="DB_A482AA_quizModel.FK_Courses_Departments">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Cours" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_Faculties" Association="DB_A482AA_quizModel.FK_Courses_Faculties">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Cours" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topics_Courses" Association="DB_A482AA_quizModel.FK_Topics_Courses">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="Topic" EntitySet="Topics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_Topics" Association="DB_A482AA_quizModel.FK_Questions_Topics">
+            <End Role="Topic" EntitySet="Topics" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <EntitySet Name="QuestionMarks" EntityType="DB_A482AA_quizModel.QuestionMark" />
+          <EntitySet Name="ClientQuestions" EntityType="DB_A482AA_quizModel.ClientQuestion" />
+          <EntitySet Name="DurationInMonths" EntityType="DB_A482AA_quizModel.DurationInMonth" />
+          <EntitySet Name="Pricings" EntityType="DB_A482AA_quizModel.Pricing" />
+          <EntitySet Name="Subscriptions" EntityType="DB_A482AA_quizModel.Subscription" />
+          <EntitySet Name="ClientQuizs" EntityType="DB_A482AA_quizModel.ClientQuiz" />
+          <EntitySet Name="ResourceTypes" EntityType="DB_A482AA_quizModel.ResourceType" />
+          <AssociationSet Name="FK_ClientQuestions_Questions" Association="DB_A482AA_quizModel.FK_ClientQuestions_Questions">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="ClientQuestion" EntitySet="ClientQuestions" />
+          </AssociationSet>
+          <EntitySet Name="PastQuestions" EntityType="DB_A482AA_quizModel.PastQuestion" />
+          <AssociationSet Name="FK_PastQuestions_Courses" Association="DB_A482AA_quizModel.FK_PastQuestions_Courses">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="PastQuestion" EntitySet="PastQuestions" />
+          </AssociationSet>
+          <EntitySet Name="BankInfoes" EntityType="DB_A482AA_quizModel.BankInfo" />
+          <EntitySet Name="BankPayments" EntityType="DB_A482AA_quizModel.BankPayment" />
+          <EntitySet Name="BANKS" EntityType="DB_A482AA_quizModel.BANK" />
+          <EntitySet Name="Countries" EntityType="DB_A482AA_quizModel.Country" />
+          <EntitySet Name="Payments" EntityType="DB_A482AA_quizModel.Payment" />
+          <EntitySet Name="States" EntityType="DB_A482AA_quizModel.State" />
+          <EntitySet Name="Titles" EntityType="DB_A482AA_quizModel.Title" />
+          <EntitySet Name="ClientPayments" EntityType="DB_A482AA_quizModel.ClientPayment" />
+          <EntitySet Name="PaymentTransactions" EntityType="DB_A482AA_quizModel.PaymentTransaction" />
+          <EntitySet Name="PaymentModes" EntityType="DB_A482AA_quizModel.PaymentMode" />
+          <EntitySet Name="Accounts" EntityType="DB_A482AA_quizModel.Account" />
+          <EntitySet Name="Downlines" EntityType="DB_A482AA_quizModel.Downline" />
+          <AssociationSet Name="FK_Downlines_Downlines" Association="DB_A482AA_quizModel.FK_Downlines_Downlines">
+            <End Role="Downline" EntitySet="Downlines" />
+            <End Role="Downline1" EntitySet="Downlines" />
+          </AssociationSet>
+          <EntitySet Name="SiteMenus" EntityType="DB_A482AA_quizModel.SiteMenu" />
+        </EntityContainer>
+        <Association Name="FK_Faculties_Schools">
+          <End Type="DB_A482AA_quizModel.School" Role="School" Multiplicity="0..1" />
+          <End Type="DB_A482AA_quizModel.Faculty" Role="Faculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="Faculty">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Answers_Questions">
+          <End Type="DB_A482AA_quizModel.Question" Role="Question" Multiplicity="0..1" />
+          <End Type="DB_A482AA_quizModel.Answer" Role="Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_Departments">
+          <End Type="DB_A482AA_quizModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="DB_A482AA_quizModel.Cours" Role="Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Cours">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_Faculties">
+          <End Type="DB_A482AA_quizModel.Faculty" Role="Faculty" Multiplicity="0..1" />
+          <End Type="DB_A482AA_quizModel.Cours" Role="Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Cours">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topics_Courses">
+          <End Type="DB_A482AA_quizModel.Cours" Role="Cours" Multiplicity="0..1" />
+          <End Type="DB_A482AA_quizModel.Topic" Role="Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_Topics">
+          <End Type="DB_A482AA_quizModel.Topic" Role="Topic" Multiplicity="0..1" />
+          <End Type="DB_A482AA_quizModel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topic">
+              <PropertyRef Name="TopicID" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="TopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="QuestionMark">
+          <Key>
+            <PropertyRef Name="QuestionMarkID" />
+          </Key>
+          <Property Name="QuestionMarkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionMark1" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ClientQuestion">
+          <Key>
+            <PropertyRef Name="ClientQuestionID" />
+          </Key>
+          <Property Name="ClientQuestionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="QuestionID" Type="Int32" />
+          <Property Name="AnswerID" Type="Int32" />
+          <Property Name="IsCorrect" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="QuestionNumber" Type="Int32" />
+          <Property Name="QuestionMarks" Type="Int32" />
+          <Property Name="ClientQuizID" Type="Int32" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Question" Relationship="DB_A482AA_quizModel.FK_ClientQuestions_Questions" FromRole="ClientQuestion" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="DurationInMonth">
+          <Key>
+            <PropertyRef Name="DurationID" />
+          </Key>
+          <Property Name="DurationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Pricing">
+          <Key>
+            <PropertyRef Name="PricingID" />
+          </Key>
+          <Property Name="PricingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolID" Type="Int32" />
+          <Property Name="DurationID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="FacultyID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="SubscriptionID" />
+          </Key>
+          <Property Name="SubscriptionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="PricingID" Type="Int32" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="ResourceTypeID" Type="Int32" />
+          <Property Name="Duration" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ClientQuiz">
+          <Key>
+            <PropertyRef Name="ClientQuizID" />
+          </Key>
+          <Property Name="ClientQuizID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="TopicID" Type="Int32" />
+          <Property Name="QuestionCount" Type="Int32" />
+          <Property Name="LastQuestionID" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="ResourceTypeID" Type="Int32" />
+          <Property Name="StartTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EndTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalScore" Type="Double" />
+          <Property Name="Score" Type="Double" />
+          <Property Name="Percentage" Type="Double" />
+          <Property Name="Qualification" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ResourceType">
+          <Key>
+            <PropertyRef Name="ResourceTypeID" />
+          </Key>
+          <Property Name="ResourceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ResourceTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_ClientQuestions_Questions">
+          <End Type="DB_A482AA_quizModel.Question" Role="Question" Multiplicity="0..1" />
+          <End Type="DB_A482AA_quizModel.ClientQuestion" Role="ClientQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="ClientQuestion">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PastQuestion">
+          <Key>
+            <PropertyRef Name="PastQuestionID" />
+          </Key>
+          <Property Name="PastQuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="DurationInMinutes" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cours" Relationship="DB_A482AA_quizModel.FK_PastQuestions_Courses" FromRole="PastQuestion" ToRole="Cours" />
+          <Property Name="linktoYearId" Type="Int32" />
+          <Property Name="YearID" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_PastQuestions_Courses">
+          <End Type="DB_A482AA_quizModel.Cours" Role="Cours" Multiplicity="0..1" />
+          <End Type="DB_A482AA_quizModel.PastQuestion" Role="PastQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="PastQuestion">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BankInfo">
+          <Key>
+            <PropertyRef Name="BankInfoID" />
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="BankInfoID" Type="Int32" Nullable="false" />
+          <Property Name="PersonID" Type="Int64" Nullable="false" />
+          <Property Name="BankID" Type="Int16" />
+          <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccountNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="BankPayment">
+          <Key>
+            <PropertyRef Name="BankPaymentID" />
+          </Key>
+          <Property Name="BankPaymentID" Type="Int32" Nullable="false" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GSM" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TellerNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Confirmed" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="BANK">
+          <Key>
+            <PropertyRef Name="BANK1" />
+            <PropertyRef Name="BANK_ID" />
+          </Key>
+          <Property Name="BANK1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BANK_ID" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <Property Name="Country1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="NetworkID" Type="Int32" />
+          <Property Name="ReferralID" Type="Int64" />
+          <Property Name="DirectReferralID" Type="Int64" />
+          <Property Name="BankID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Mode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ChequeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Paid" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateID" />
+            <PropertyRef Name="State1" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="StateID" Type="Int32" Nullable="false" />
+          <Property Name="State1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="TitleID" />
+            <PropertyRef Name="Title1" />
+          </Key>
+          <Property Name="TitleID" Type="Byte" Nullable="false" />
+          <Property Name="Title1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="0" />
+          <Property Name="Updated" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="ClientPayment">
+          <Key>
+            <PropertyRef Name="ClientPaymentID" />
+          </Key>
+          <Property Name="ClientPaymentID" Type="Int32" Nullable="false" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="Mode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="PaymentModeID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PaymentTransaction">
+          <Key>
+            <PropertyRef Name="PaymentTransactionID" />
+          </Key>
+          <Property Name="PaymentTransactionID" Type="Int64" Nullable="false" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="RefereeCode" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="ReferralCode" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="TransactionTypeID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Level" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="NLevel" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TempFlag" Type="Boolean" />
+          <Property Name="AcctFlag" Type="Boolean" />
+          <Property Name="ToCompanyFlag" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PaymentMode">
+          <Key>
+            <PropertyRef Name="PaymentModeID" />
+          </Key>
+          <Property Name="PaymentModeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentModeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="Purse" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TempPurse" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="Withdrawals" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsCompany" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Downline">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pid" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PersonID" Type="Int64" />
+          <Property Name="PPid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Downlines1" Relationship="DB_A482AA_quizModel.FK_Downlines_Downlines" FromRole="Downline" ToRole="Downline1" />
+          <NavigationProperty Name="Downline1" Relationship="DB_A482AA_quizModel.FK_Downlines_Downlines" FromRole="Downline1" ToRole="Downline" />
+        </EntityType>
+        <Association Name="FK_Downlines_Downlines">
+          <End Type="DB_A482AA_quizModel.Downline" Role="Downline" Multiplicity="0..1" />
+          <End Type="DB_A482AA_quizModel.Downline" Role="Downline1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Downline">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Downline1">
+              <PropertyRef Name="Pid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SiteMenu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NavURL" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ParentMenuID" Type="Int32" />
+          <Property Name="MenuName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_A482AA_quizModelStoreContainer" CdmEntityContainer="CArumala_edquizEntities">
+          <EntitySetMapping Name="AcademicClasses">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.AcademicClass">
+              <MappingFragment StoreEntitySet="AcademicClasses">
+                <ScalarProperty Name="AcademicClassID" ColumnName="AcademicClassID" />
+                <ScalarProperty Name="AcademicClassName" ColumnName="AcademicClassName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="Address1" ColumnName="Address" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="LGAID" ColumnName="LGAID" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Answer">
+              <MappingFragment StoreEntitySet="Answers">
+                <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="OptionLetter" ColumnName="OptionLetter" />
+                <ScalarProperty Name="AnswerString" ColumnName="AnswerString" />
+                <ScalarProperty Name="IsCorrect" ColumnName="IsCorrect" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppSettings">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.AppSetting">
+              <MappingFragment StoreEntitySet="AppSettings">
+                <ScalarProperty Name="CompSubPercent" ColumnName="CompSubPercent" />
+                <ScalarProperty Name="CompRegPercent" ColumnName="CompRegPercent" />
+                <ScalarProperty Name="SupportPhone" ColumnName="SupportPhone" />
+                <ScalarProperty Name="MaxFirstLevel" ColumnName="MaxFirstLevel" />
+                <ScalarProperty Name="MaxUnderline" ColumnName="MaxUnderline" />
+                <ScalarProperty Name="QuestionsBatches" ColumnName="QuestionsBatches" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CourseFees" ColumnName="CourseFees" />
+                <ScalarProperty Name="RegistrationFee" ColumnName="RegistrationFee" />
+                <ScalarProperty Name="RegistrationFee2" ColumnName="RegistrationFee2" />
+                <ScalarProperty Name="DefaultReferralCode" ColumnName="DefaultReferralCode" />
+                <ScalarProperty Name="ReferralCodeEarning" ColumnName="ReferralCodeEarning" />
+                <ScalarProperty Name="CurrentSemester" ColumnName="CurrentSemester" />
+                <ScalarProperty Name="CurrentSession" ColumnName="CurrentSession" />
+                <ScalarProperty Name="NoReferralAmount" ColumnName="NoReferralAmount" />
+                <ScalarProperty Name="MaximumOptions" ColumnName="MaximumOptions" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commissions">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Commission">
+              <MappingFragment StoreEntitySet="Commissions">
+                <ScalarProperty Name="CommissionID" ColumnName="CommissionID" />
+                <ScalarProperty Name="TranssactionID" ColumnName="TranssactionID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AlternateEmail" ColumnName="AlternateEmail" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseDepartments">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.CourseDepartment">
+              <MappingFragment StoreEntitySet="CourseDepartments">
+                <ScalarProperty Name="CourseDepartmentID" ColumnName="CourseDepartmentID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoursePlus">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.CoursePlu">
+              <MappingFragment StoreEntitySet="CoursePlus">
+                <ScalarProperty Name="CoursePlusID" ColumnName="CoursePlusID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="MthID" ColumnName="MthID" />
+                <ScalarProperty Name="MonthID" ColumnName="MonthID" />
+                <ScalarProperty Name="YearID" ColumnName="YearID" />
+                <ScalarProperty Name="imgpath" ColumnName="imgpath" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Cours">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="CYear" ColumnName="CYear" />
+                <ScalarProperty Name="MonthID" ColumnName="MonthID" />
+                <ScalarProperty Name="YearID" ColumnName="YearID" />
+                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CreditUnits" ColumnName="CreditUnits" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntityTypes">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.EntityType">
+              <MappingFragment StoreEntitySet="EntityTypes">
+                <ScalarProperty Name="EntityTypeID" ColumnName="EntityTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Faculty">
+              <MappingFragment StoreEntitySet="Faculties">
+                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FailedRegistrations">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.FailedRegistration">
+              <MappingFragment StoreEntitySet="FailedRegistrations">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Excluded" ColumnName="Excluded" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+                <ScalarProperty Name="Gender1" ColumnName="Gender" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MDetails">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.MDetail">
+              <MappingFragment StoreEntitySet="MDetails">
+                <ScalarProperty Name="MDetailID" ColumnName="MDetailID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="AccountTypeID" ColumnName="AccountTypeID" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="BankID" ColumnName="BankID" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="CVV" ColumnName="CVV" />
+                <ScalarProperty Name="DefaultAccount" ColumnName="DefaultAccount" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Module">
+              <MappingFragment StoreEntitySet="Modules">
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="MContent" ColumnName="MContent" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Months">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Month">
+              <MappingFragment StoreEntitySet="Months">
+                <ScalarProperty Name="MonthID" ColumnName="MonthID" />
+                <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Percentages">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Percentage">
+              <MappingFragment StoreEntitySet="Percentages">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="PLevel" ColumnName="PLevel" />
+                <ScalarProperty Name="Subscription" ColumnName="Subscription" />
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="PType" ColumnName="PType" />
+                <ScalarProperty Name="PValue" ColumnName="PValue" />
+                <ScalarProperty Name="PercentID" ColumnName="PercentID" />
+                <ScalarProperty Name="PercentName" ColumnName="PercentName" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Percentage1" ColumnName="Percentage" />
+                <ScalarProperty Name="PAmount" ColumnName="PAmount" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Person">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="MaxFirstLevel" ColumnName="MaxFirstLevel" />
+                <ScalarProperty Name="IsCompany" ColumnName="IsCompany" />
+                <ScalarProperty Name="ActiveSubscriptionID" ColumnName="ActiveSubscriptionID" />
+                <ScalarProperty Name="ParentCode" ColumnName="ParentCode" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="EntityTypeID" ColumnName="EntityTypeID" />
+                <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="ReferralCode" ColumnName="ReferralCode" />
+                <ScalarProperty Name="AcademicClassID" ColumnName="AcademicClassID" />
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="PayMode" ColumnName="PayMode" />
+                <ScalarProperty Name="RefereeCode" ColumnName="RefereeCode" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchases">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Purchase">
+              <MappingFragment StoreEntitySet="Purchases">
+                <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Question">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="Instruction" ColumnName="Instruction" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="QuestionDuration" ColumnName="QuestionDuration" />
+                <ScalarProperty Name="QuestionMarks" ColumnName="QuestionMarks" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="TopicID" ColumnName="TopicID" />
+                <ScalarProperty Name="QuestionTypeID" ColumnName="QuestionTypeID" />
+                <ScalarProperty Name="CoursePlusID" ColumnName="CoursePlusID" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="QuestionNumber" ColumnName="QuestionNumber" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="QuestionString" ColumnName="QuestionString" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+                <ScalarProperty Name="AnswerExplanation" ColumnName="AnswerExplanation" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionTypes">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.QuestionType">
+              <MappingFragment StoreEntitySet="QuestionTypes">
+                <ScalarProperty Name="QuestionTypeID" ColumnName="QuestionTypeID" />
+                <ScalarProperty Name="QuestionType1" ColumnName="QuestionType" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Sale">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="SalesID" ColumnName="SalesID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Craeted" ColumnName="Craeted" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schools">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.School">
+              <MappingFragment StoreEntitySet="Schools">
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Section">
+              <MappingFragment StoreEntitySet="Sections">
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SContent" ColumnName="SContent" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Semesters">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Semester">
+              <MappingFragment StoreEntitySet="Semesters">
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="Semester1" ColumnName="Semester" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_Details">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Student_Details">
+              <MappingFragment StoreEntitySet="Student_Details">
+                <ScalarProperty Name="StudentDetailID" ColumnName="StudentDetailID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentCourses">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.StudentCours">
+              <MappingFragment StoreEntitySet="StudentCourses">
+                <ScalarProperty Name="StudentCourseID" ColumnName="StudentCourseID" />
+                <ScalarProperty Name="StudentDetailID" ColumnName="StudentDetailID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="TutorialScore" ColumnName="TutorialScore" />
+                <ScalarProperty Name="ExamScore" ColumnName="ExamScore" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentPayments">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.StudentPayment">
+              <MappingFragment StoreEntitySet="StudentPayments">
+                <ScalarProperty Name="StudentPaymentID" ColumnName="StudentPaymentID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topics">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Topic">
+              <MappingFragment StoreEntitySet="Topics">
+                <ScalarProperty Name="DurationInMinutes" ColumnName="DurationInMinutes" />
+                <ScalarProperty Name="TopicID" ColumnName="TopicID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="TopicName" ColumnName="TopicName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="CommitID" ColumnName="CommitID" />
+                <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionTypes">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.TransactionType">
+              <MappingFragment StoreEntitySet="TransactionTypes">
+                <ScalarProperty Name="Subscription" ColumnName="Subscription" />
+                <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+                <ScalarProperty Name="TransactionTypeName" ColumnName="TransactionTypeName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Investment" ColumnName="Investment" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Unit">
+              <MappingFragment StoreEntitySet="Units">
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="UnitDetails" ColumnName="UnitDetails" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="StatusTypeID" ColumnName="StatusTypeID" />
+                <ScalarProperty Name="FirstTimeLogin" ColumnName="FirstTimeLogin" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ConfirmEmail" ColumnName="ConfirmEmail" />
+                <ScalarProperty Name="ConfirmPhone" ColumnName="ConfirmPhone" />
+                <ScalarProperty Name="PhoneCode" ColumnName="PhoneCode" />
+                <ScalarProperty Name="EmailCode" ColumnName="EmailCode" />
+                <ScalarProperty Name="IsRegistered" ColumnName="IsRegistered" />
+                <ScalarProperty Name="Deactivated" ColumnName="Deactivated" />
+                <ScalarProperty Name="LoginCode" ColumnName="LoginCode" />
+                <ScalarProperty Name="Used" ColumnName="Used" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Years">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Year">
+              <MappingFragment StoreEntitySet="Years">
+                <ScalarProperty Name="YearID" ColumnName="YearID" />
+                <ScalarProperty Name="YearName" ColumnName="YearName" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionMarks">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.QuestionMark">
+              <MappingFragment StoreEntitySet="QuestionMarks">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="QuestionMark1" ColumnName="QuestionMark" />
+                <ScalarProperty Name="QuestionMarkID" ColumnName="QuestionMarkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientQuestions">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.ClientQuestion">
+              <MappingFragment StoreEntitySet="ClientQuestions">
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="ClientQuizID" ColumnName="ClientQuizID" />
+                <ScalarProperty Name="QuestionMarks" ColumnName="QuestionMarks" />
+                <ScalarProperty Name="QuestionNumber" ColumnName="QuestionNumber" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsCorrect" ColumnName="IsCorrect" />
+                <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="ClientQuestionID" ColumnName="ClientQuestionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DurationInMonths">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.DurationInMonth">
+              <MappingFragment StoreEntitySet="DurationInMonths">
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="DurationID" ColumnName="DurationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pricings">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Pricing">
+              <MappingFragment StoreEntitySet="Pricings">
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DurationID" ColumnName="DurationID" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="PricingID" ColumnName="PricingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscriptions">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Subscription">
+              <MappingFragment StoreEntitySet="Subscriptions">
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="PricingID" ColumnName="PricingID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="SubscriptionID" ColumnName="SubscriptionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientQuizs">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.ClientQuiz">
+              <MappingFragment StoreEntitySet="ClientQuizs">
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="TotalScore" ColumnName="TotalScore" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastQuestionID" ColumnName="LastQuestionID" />
+                <ScalarProperty Name="QuestionCount" ColumnName="QuestionCount" />
+                <ScalarProperty Name="TopicID" ColumnName="TopicID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="ClientQuizID" ColumnName="ClientQuizID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResourceTypes">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.ResourceType">
+              <MappingFragment StoreEntitySet="ResourceTypes">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ResourceTypeName" ColumnName="ResourceTypeName" />
+                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PastQuestions">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.PastQuestion">
+              <MappingFragment StoreEntitySet="PastQuestions">
+                <ScalarProperty Name="YearID" ColumnName="YearID" />
+                <ScalarProperty Name="linktoYearId" ColumnName="linktoYearId" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DurationInMinutes" ColumnName="DurationInMinutes" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="PastQuestionID" ColumnName="PastQuestionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankInfoes">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.BankInfo">
+              <MappingFragment StoreEntitySet="BankInfoes">
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="BankID" ColumnName="BankID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="BankInfoID" ColumnName="BankInfoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankPayments">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.BankPayment">
+              <MappingFragment StoreEntitySet="BankPayments">
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TellerNumber" ColumnName="TellerNumber" />
+                <ScalarProperty Name="GSM" ColumnName="GSM" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="BankPaymentID" ColumnName="BankPaymentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BANKS">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.BANK">
+              <MappingFragment StoreEntitySet="BANKS">
+                <ScalarProperty Name="BANK_ID" ColumnName="BANK_ID" />
+                <ScalarProperty Name="BANK1" ColumnName="BANK1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Country1" ColumnName="Country" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ChequeNumber" ColumnName="ChequeNumber" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="BankID" ColumnName="BankID" />
+                <ScalarProperty Name="DirectReferralID" ColumnName="DirectReferralID" />
+                <ScalarProperty Name="ReferralID" ColumnName="ReferralID" />
+                <ScalarProperty Name="NetworkID" ColumnName="NetworkID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="State1" ColumnName="State" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Titles">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Title">
+              <MappingFragment StoreEntitySet="Titles">
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Title1" ColumnName="Title" />
+                <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientPayments">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.ClientPayment">
+              <MappingFragment StoreEntitySet="ClientPayments">
+                <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="ClientPaymentID" ColumnName="ClientPaymentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTransactions">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.PaymentTransaction">
+              <MappingFragment StoreEntitySet="PaymentTransactions">
+                <ScalarProperty Name="ToCompanyFlag" ColumnName="ToCompanyFlag" />
+                <ScalarProperty Name="AcctFlag" ColumnName="AcctFlag" />
+                <ScalarProperty Name="TempFlag" ColumnName="TempFlag" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="NLevel" ColumnName="NLevel" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+                <ScalarProperty Name="ReferralCode" ColumnName="ReferralCode" />
+                <ScalarProperty Name="RefereeCode" ColumnName="RefereeCode" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="PaymentTransactionID" ColumnName="PaymentTransactionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentModes">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.PaymentMode">
+              <MappingFragment StoreEntitySet="PaymentModes">
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PaymentModeName" ColumnName="PaymentModeName" />
+                <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="IsCompany" ColumnName="IsCompany" />
+                <ScalarProperty Name="Withdrawals" ColumnName="Withdrawals" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="TempPurse" ColumnName="TempPurse" />
+                <ScalarProperty Name="Purse" ColumnName="Purse" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Downlines">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.Downline">
+              <MappingFragment StoreEntitySet="Downlines">
+                <ScalarProperty Name="PPid" ColumnName="PPid" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteMenus">
+            <EntityTypeMapping TypeName="DB_A482AA_quizModel.SiteMenu">
+              <MappingFragment StoreEntitySet="SiteMenu">
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="ParentMenuID" ColumnName="ParentMenuID" />
+                <ScalarProperty Name="NavURL" ColumnName="NavURL" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

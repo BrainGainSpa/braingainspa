@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d93d88e9d82b46a6880f52bc3b32a9c5" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.AcademicClass" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Address" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Answer" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.AppSetting" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Commission" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Contact" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.CourseDepartment" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.CoursePlu" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Cours" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Department" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.EntityType" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Faculty" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.FailedRegistration" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Gender" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Item" Width="1.5" PointX="10.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.MDetail" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Module" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Month" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Percentage" Width="1.5" PointX="10.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Person" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Purchase" Width="1.5" PointX="4.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Question" Width="1.5" PointX="12.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.QuestionType" Width="1.5" PointX="6.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Role" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Sale" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.School" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Section" Width="1.5" PointX="14.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Semester" Width="1.5" PointX="14.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Student_Details" Width="1.5" PointX="14.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.StudentCours" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.StudentPayment" Width="1.5" PointX="2.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Topic" Width="1.5" PointX="4.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Transaction" Width="1.5" PointX="6.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.TransactionType" Width="1.5" PointX="8.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Unit" Width="1.5" PointX="14.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.User" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Year" Width="1.5" PointX="16.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="DB_A482AA_quizModel.FK_Faculties_Schools" />
+        <AssociationConnector Association="DB_A482AA_quizModel.FK_Answers_Questions" />
+        <AssociationConnector Association="DB_A482AA_quizModel.FK_Courses_Departments" />
+        <AssociationConnector Association="DB_A482AA_quizModel.FK_Courses_Faculties" />
+        <AssociationConnector Association="DB_A482AA_quizModel.FK_Topics_Courses" />
+        <AssociationConnector Association="DB_A482AA_quizModel.FK_Questions_Topics" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.QuestionMark" Width="1.5" PointX="11.375" PointY="16.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.ClientQuestion" Width="1.5" PointX="17.375" PointY="9.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.DurationInMonth" Width="1.5" PointX="17.375" PointY="14.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Pricing" Width="1.5" PointX="17.375" PointY="17.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Subscription" Width="1.5" PointX="19.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.ClientQuiz" Width="1.5" PointX="0.75" PointY="19.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.ResourceType" Width="1.5" PointX="3.375" PointY="19.75" />
+        <AssociationConnector Association="DB_A482AA_quizModel.FK_ClientQuestions_Questions" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.PastQuestion" Width="1.5" PointX="11.375" PointY="20" />
+        <AssociationConnector Association="DB_A482AA_quizModel.FK_PastQuestions_Courses" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.BankInfo" Width="1.5" PointX="19.375" PointY="4.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.BankPayment" Width="1.5" PointX="5.375" PointY="19.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.BANK" Width="1.5" PointX="7.375" PointY="19.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Country" Width="1.5" PointX="19.375" PointY="8.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Payment" Width="1.5" PointX="19.375" PointY="11.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.State" Width="1.5" PointX="13.375" PointY="19.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Title" Width="1.5" PointX="19.375" PointY="16.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.ClientPayment" Width="1.5" PointX="19.375" PointY="19.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.PaymentTransaction" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.PaymentMode" Width="1.5" PointX="21.375" PointY="4.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Account" Width="1.5" PointX="21.375" PointY="7.75" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.Downline" Width="1.5" PointX="21.375" PointY="10.75" />
+        <AssociationConnector Association="DB_A482AA_quizModel.FK_Downlines_Downlines" />
+        <EntityTypeShape EntityType="DB_A482AA_quizModel.SiteMenu" Width="1.5" PointX="21.375" PointY="14.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

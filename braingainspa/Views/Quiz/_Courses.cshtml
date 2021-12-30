@@ -1,0 +1,55 @@
+﻿@model braingainspa.Models.Cours
+
+
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th align="center"><strong>Class</strong></th>
+                @*<th>Department</th>*@
+                <th align="center"><strong>Subject</strong></th>
+                <th align="center"><strong>Subject Code</strong></th>
+                @*<th>Credit Units</th>*@
+                <th align="center">Actions</th>
+            </tr>
+            <tbody>
+                @if (ViewBag.CourseList != null)
+                {
+                    foreach (var item in ViewBag.CourseList)
+                    {
+                        <tr id="row_@item.CourseID">
+                            <td>
+                                <strong>@item.FacultyName</strong>
+                            </td>
+                            @*<td>
+                                    <strong>@item.DepartmentName</strong>
+                                </td>*@
+                            <td>
+                                <strong>@item.CourseName</strong>
+                            </td>
+                            <td>
+                                <strong>@item.CourseCode</strong>
+                            </td>
+                            @*<td>
+                                @item.CreditUnits
+                            </td>*@
+                            <td align="center">
+                                <a href="@Url.Action("EditCourse", "Quiz", new { id = @item.CourseID })" class="btn btn-success" data-toggle="tooltip" title="View Details"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                <a href="@Url.Action("DeleteCourse","Quiz", new { id = @item.CourseID })" onclick="return confirm('Are you sure that you want to Delete the specified item?')" class="btn btn-danger" data-toggle="tooltip" title="Delete Item"><i class="glyphicon glyphicon-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr></tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿@model braingainspa.Models.AnswerViewModels
+
+<div class="row">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>Option Letter</th>
+                <th>Answer</th>
+                <th>Correct Answer</th>
+                <th align="center">Actions</th>
+            </tr>
+            <tbody>
+                @if (ViewBag.AnswerList != null)
+                {
+                    foreach (var item in ViewBag.AnswerList)
+                    {
+                        <tr id="row_@item.AnswerID">
+                            <td>
+                                <strong>@item.OptionLetter</strong>
+                            </td>
+                            <td>
+                                <strong>@item.AnswerString</strong>
+                            </td>
+                            <td>
+                                @item.IsCorrect
+                            </td>
+                            <td align="center">
+                                <a href="@Url.Action("EditAnswer", "Quiz", new { id = @item.AnswerID })" class="btn btn-success" data-toggle="tooltip" title="View Details"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                <a href="@Url.Action("DeleteAnswer","Quiz", new { id = @item.AnswerID })" onclick="return confirm('Are you sure that you want to Delete the specified item?')" class="btn btn-danger" data-toggle="tooltip" title="Delete Item"><i class="glyphicon glyphicon-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr></tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+    <div class="col-md-1">
+
+    </div>
+</div>
+

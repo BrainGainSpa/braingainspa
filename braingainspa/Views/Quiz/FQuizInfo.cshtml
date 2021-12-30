@@ -1,0 +1,103 @@
+﻿@model braingainspa.Models.FreeQuizInfoViewModels
+@{
+    ViewBag.Title = "Quiz Info";
+    Layout = "~/Views/Shared/_LayoutFreeQuiz.cshtml";
+}
+
+<div class="container">
+    <br /><br />
+    <div class="row">
+
+        <div class="col-md-10">
+            <div class="panel panel-success">
+                <div class="panel-heading" style="text-align:center;">
+                    <h3>
+                        FREE QUIZ INFORMATION
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6 pull-left">
+                            <h4>@Model.QuizName</h4>
+                            @ViewBag.QuizDescription
+                        </div>
+                        <div class="col-md-6 pull-right">
+                            <h5>Test Duration : @Model.QuizDuration minutes</h5>
+                            <h5>Total Questions : @Model.QuestionsCount.ToString()</h5>
+                        </div>
+
+                    </div>
+                    @*<br />*@
+                    <div class="row">
+                        <div class="col-md-12">
+                            Before you begin, please read the following instructions very carefully.
+                        </div>
+                    </div>
+
+                    <h5 style="color:green; font-weight:bold;">How to score more?</h5>
+                    <ul>
+                        <li>The test is used to evaluate your knowledge, Ability and Test your Examination Readiness</li>
+                        <li>Do not use Internet or external resources outside of this platform</li>
+                        <li>Remeber that this is a test of experience, so be satisfied with ONE answer on Descriptive type questions. The more answers you provide, the more the ideas, the better you score.</li>
+                        <li>Negative markings are applied on Multiple Choice Questions. The number of score deducted is based on the Percentage(%) of errors made</li>
+                    </ul>
+
+                    <h5 style="color:green; font-weight:bold;">how to use the application?</h5>
+                    <ul>
+                        <li>Your answers are not tracked unless you click on the <span class="highlight"><b>Submit</b></span> button</li>
+                        <li>You need to click the <strong>Next >></strong> button to move to the next question.</li>
+                        @*<li>Click the <strong><< Previous</strong> button to review the previous question.</li>
+                    <li>
+                Questions which have <b>Excercises</b> in them, use Visual Studio and Write something like "Completed/Done/Finished" etc on the description to indicate
+                you have completed. Otherwise, your answers may not be reviewed
+            </li>*@
+                        <li>You may click on the <b>Finish</b> button to end the evaluation before it times out.</li>
+                        <li>Your time starts immediately you click on the <span class="highlight"><b>Register & Start Skill Practice</b></span> button below</li>
+                    </ul>
+
+                    <h5 style="color:red; font-weight:bold;">Tips</h5>
+                    <ul>
+                        <li>Remember that you must review all the options properly before you select an answer. This will help plan your offer time</li>
+                        <li>Once you click on the <strong>Submit</strong> button, the answer is locked in and cannot be changed.</li>
+                        @*<li>Once you click on <strong>Submit</strong>, the answer is locked in and cannot be changed.</li>*@
+                    </ul>
+                    @using (Html.BeginForm("FQuizInfo", "Quiz", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(model => model.QuizDuration)
+                        @Html.HiddenFor(model => model.QuestionsCount)
+                        @Html.HiddenFor(model => model.QuizName)
+                        @Html.HiddenFor(model => model.SubjectID)
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Email, "Email*")
+
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @style = "width: 100%;max-width: 100%;" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Phone, "Phone")
+
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @style = "width: 100%;max-width: 100%;" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="text-align:center;">
+                            <input type="submit" id="upload" value="Register & Start Skill Practice" class="btn btn-success btn-lg" style="margin-top:50px" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+

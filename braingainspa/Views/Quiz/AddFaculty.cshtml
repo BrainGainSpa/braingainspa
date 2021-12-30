@@ -1,0 +1,71 @@
+﻿@model braingainspa.Models.Faculty
+
+@{
+    ViewBag.Title = "Add Falculty";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <fieldset>
+                <legend>Add School</legend>
+
+                @using (Html.BeginForm("AddFaculty", "Quiz", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <p style="color:blue; font-style:italic;">@Html.ViewBag.Msg</p>
+                        <p style="color:red; font-style:italic;">@Html.ViewBag.Err</p>
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SchoolID, "School ID", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("SchoolID", new SelectList(ViewBag.Schools, "SchoolID", "SchoolName"), "-- Select School --", htmlAttributes: new { @class = "form-control", @placeholder = "School" })
+                                @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FacultyName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.FacultyName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name" } })
+                                @Html.ValidationMessageFor(model => model.FacultyName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Description" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button value="Submit" class="btn btn-primary btn-md pull-right">  Save  </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div>
+                    <strong>@Html.ActionLink("Return to List", "Faculties")</strong>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @*<script src="../../Scripts/jquery-1.10.2.min.js"></script>*@
+    @*<script src="../../Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>document.getElementsByTagName("html")[0].className += " js";</script>
+    <link rel="stylesheet" href="../../Content/assets/css/style.css">
+    @*<link rel="stylesheet" href="../../Views/Shared/assets/css/style.css">*@
+
+    <link rel="shortcut icon" href="../../Content/imagesb/favicon.png" type="image/x-icon">
+    <link rel="icon" href="../../Content/imagesb/favicon.png" type="image/x-icon">
+</head>
+<body>
+    @*<header>
+            @Html.Partial("~/Views/Shared/_Header.cshtml")
+        </header>*@
+    <header class="cd-main-header js-cd-main-header">
+        <div class="cd-logo-wrapper">
+            <a href="#0" class="cd-logo">
+
+                <img src="../../Content/assets/img/cd-logo.svg" alt="Logo">
+            </a>
+        </div>
+
+        <div class="cd-search js-cd-search">
+            <form>
+                <input class="reset" type="search" placeholder="Search...">
+            </form>
+        </div>
+
+        <button class="reset cd-nav-trigger js-cd-nav-trigger" aria-label="Toggle menu"><span></span></button>
+
+        <ul class="cd-nav__list js-cd-nav__list">
+            <li class="cd-nav__item"><a href="#0">Tour</a></li>
+            <li class="cd-nav__item"><a href="#0">Support</a></li>
+            <li class="cd-nav__item cd-nav__item--has-children cd-nav__item--account js-cd-item--has-children">
+                <a href="#0">
+                    <img src="../../Content/assets/img/cd-avatar.svg" alt="avatar">
+                    <span>@TempData["FN"]</span>
+                    @*<span>Account</span>*@
+
+                </a>
+
+                <ul class="cd-nav__sub-list">
+
+                    <li class="cd-nav__sub-item"><a href="@Url.Action("Profile", "Account")">My Account</a></li>
+                    @*<li class="cd-nav__sub-item"><a href="#0">Edit Account</a></li>*@
+                    <li class="cd-nav__sub-item"><a href="@Url.Action("Default", "Home")">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </header> <!-- .cd-main-header -->
+    <main class="cd-main-content">
+        <nav class="cd-side-nav js-cd-side-nav">
+            <!-- sidebar-header  -->
+            <div class="sidebar-item sidebar-header d-flex flex-nowrap">
+                <div class="user-pic">
+                    <img class="img-responsive img-rounded" id="imgPix" src="../../Content/images/user.jpg" alt="User picture">
+                </div>
+                <div class="user-info">
+                    <span class="user-name">
+                        @*<asp:Label ID="lblFirstName" runat="server" Text="John"></asp:Label><br />*@
+                        @Session["FN"].ToString() <br />
+                        <strong>
+                            @*<asp:Label ID="lblLastName" runat="server" Text="Smith"></asp:Label>*@
+                            @Session["LN"].ToString() <br />
+                        </strong>
+                    </span>
+                    <span class="user-role">
+                        @*<asp:Label ID="lblUserType" runat="server" Text="Administrator"></asp:Label>*@
+                        @Session["EntityType"].ToString() <br />
+                    </span>
+                    <span class="user-role">
+                        Referree Code:
+                        @Session["ReferreeCode"].ToString() <br />
+                        @*<asp:Label ID="lblReferralCode" runat="server" Text="N/A"></asp:Label>*@
+                    </span>
+                    <span class="user-status">
+                        <i class="fa fa-circle"></i>
+                        <span>Online</span>
+                    </span>
+                </div>
+            </div>
+            <ul class="cd-side__list js-cd-side__list">
+                <li class="cd-side__label"><span>Academics</span></li>
+                <li class="cd-side__item cd-side__item--has-children cd-side__item--overview js-cd-item--has-children">
+                    <a href="#0">Overview</a>
+                    <ul class="cd-side__sub-list">
+                        <li class="cd-side__sub-item"><a href="@Url.Action("CurrentClass", "Quiz", new { id = 1 })">&nbsp;Quiz&nbsp;</a></li>
+                        <li class="cd-side__sub-item"><a href="@Url.Action("CurrentClass", "Quiz", new { id = 2 })">&nbsp;Past Questions&nbsp;</a></li>
+                        <li class="cd-side__sub-item"><a href="#0">E-Library</a></li>
+                    </ul>
+                </li>
+                <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
+                    <a href="#0">Personal<span class="cd-count">3</span></a>
+
+                    <ul class="cd-side__sub-list">
+                        <li class="cd-side__sub-item"><a aria-current="page" href="" @Url.Action("MyCodes", "Account") ">My Codes</a></li>
+                        <li class="cd-side__sub-item"><a href="" @Url.Action("ChangePassword", "Account") ">Change Password</a></li>
+                        <li class="cd-side__sub-item"><a href="#0">Other</a></li>
+                    </ul>
+                </li>
+
+                <li class="cd-side__item cd-side__item--has-children cd-side__item--comments js-cd-item--has-children">
+                    <a href="#0">Comments</a>
+
+                    <ul class="cd-side__sub-list">
+                        <li class="cd-side__sub-item"><a href="#0">All Comments</a></li>
+                        <li class="cd-side__sub-item"><a href="#0">Edit Comment</a></li>
+                        <li class="cd-side__sub-item"><a href="#0">Delete Comment</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="cd-side__list js-cd-side__list">
+                <li class="cd-side__label"><span>Secondary</span></li>
+                <li class="cd-side__item cd-side__item--has-children cd-side__item--bookmarks js-cd-item--has-children">
+                    <a href="#0">Bookmarks</a>
+
+                    <ul class="cd-side__sub-list">
+                        <li class="cd-side__sub-item"><a href="@Url.Action("Subscriptions", "Account")">Subscription</a></li>
+                        <li class="cd-side__sub-item"><a href="#0">Edit Bookmark</a></li>
+                        <li class="cd-side__sub-item"><a href="#0">Import Bookmark</a></li>
+                    </ul>
+                </li>
+                <li class="cd-side__item cd-side__item--has-children cd-side__item--images js-cd-item--has-children">
+                    <a href="#0">Images</a>
+
+                    <ul class="cd-side__sub-list">
+                        <li class="cd-side__sub-item"><a href="#0">All Images</a></li>
+                        <li class="cd-side__sub-item"><a href="#0">Edit Image</a></li>
+                    </ul>
+                </li>
+
+                <li class="cd-side__item cd-side__item--has-children cd-side__item--users js-cd-item--has-children">
+                    <a href="#0">Users</a>
+
+                    <ul class="cd-side__sub-list">
+                        <li class="cd-side__sub-item"><a href="#0">All Users</a></li>
+                        <li class="cd-side__sub-item"><a href="#0">Edit User</a></li>
+                        <li class="cd-side__sub-item"><a href="#0">Add User</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="cd-side__list js-cd-side__list">
+                <li class="cd-side__label"><span>Action</span></li>
+                <li class="cd-side__btn"><button class="reset" href="#0">+ Button</button></li>
+            </ul>
+        </nav>
+
+        <div class="cd-content-wrapper">
+            <div class="text-component text-center">
+                <div class="container body-content">
+                    <br />
+                    @if (bool.Parse(Session["Subscription"].ToString()) == false)
+                    {
+                        <div class="alert alert-warning alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Warning!</strong> No Subscription was detected. Please, subscribe to a class to enjoy Tutorials and their quiz.
+                        </div>
+                    }
+                    <br />
+                    @RenderBody()
+
+                </div>
+            </div>
+        </div> <!-- .content-wrapper -->
+    </main> <!-- .cd-main-content -->
+    <script src="../../Content/assets/js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
+    <script src="../../Content/assets/js/menu-aim.js"></script>
+    <script src="../../Content/assets/js/main.js"></script>
+    @*<footer>
+            @Html.Partial("../../Views/Shared/_Footer.cshtml")
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>*@
+
+    <script src="../../Scripts/jquery.validate.min.js"></script>
+    <script src="../../Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

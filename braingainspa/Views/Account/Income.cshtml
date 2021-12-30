@@ -1,0 +1,77 @@
+﻿@model IEnumerable<braingainspa.Models.IncomeViewModel>
+@{
+    ViewBag.Title = "Income";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+
+    decimal _totalAmount = 0;
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-10">
+            <fieldset>
+                <legend>INCOME</legend>
+                <br />
+                <table class="table table-bordered table-responsive">
+                    <tr>
+                        <th>Payer</th>
+                        <th>Trans Type</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Date</th>
+
+                    </tr>
+                    <tbody>
+                        @if (ViewBag.IncomeList != null)
+                        {
+                            foreach (var item in ViewBag.IncomeList)
+                            {
+                                <tr id="row_@item.PaymentTransactionID">
+                                    <td>
+                                        <strong>@item.Payer</strong>
+                                    </td>
+                                    <td>
+                                        <strong>@item.TransactionTypeName</strong>
+                                    </td>
+                                    <td>
+                                        <strong>@item.Amount</strong>
+                                    </td>
+                                    <td>
+                                        @item.Comment
+                                    </td>
+                                    <td>
+                                        @item.Created
+                                    </td>
+
+                                </tr>
+
+
+                                _totalAmount += item.Amount;
+                            }
+
+                            <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td class="text-right"><h4>Total:</h4></td>
+                                <td class="text-left" style="color:blueviolet;"><h4><strong>₦@_totalAmount.ToString("#,##0.00")</strong></h4></td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+            </fieldset>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<braingainspa.Models.TopicViewModels>
+
+@{
+    ViewBag.Title = "View Topics";
+    Layout = "~/Views/Shared/_LayoutSigned.cshtml";
+}
+
+<h2>View Topics</h2>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    @ViewBag.SelectedCourse
+                </div>
+
+                <div class="panel-body">
+                    <table class="table table-responsive">
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr id="row_@item.TopicID">
+
+                                        <td>
+                                            <strong>
+                                                <a href="@Url.Action("QuizInfo", "Quiz", new { id = @item.TopicID })" data-toggle="tooltip" title="Subect">@item.TopicName</a>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                }
+
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+
+        </div>
+    </div>
+</div>

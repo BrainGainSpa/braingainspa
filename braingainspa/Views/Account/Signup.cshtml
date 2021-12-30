@@ -1,0 +1,208 @@
+﻿@model braingainspa.Models.SignupViewModel
+
+@{
+    ViewBag.Title = "Sign Up";
+    Layout = "~/Views/Shared/_LayoutOut.cshtml";
+}
+@using CaptchaMvc.HtmlHelpers
+
+<div class="container">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            height: 50px;
+            width: 40px;
+        }
+    </style>
+
+
+    <div id="dvskl" class="row">
+        <div class="col-md-6">
+
+            <img src="../../Content/images/HIGHER-EDUCATION.png" alt="Higher Education" style="height:auto; width:auto; margin-top:50px;text-align:left;" />
+        </div>
+        <div class="col-md-6">
+            <fieldset>
+                <legend>SIGN UP</legend>
+                <div class="form-group">
+                    @*<div class="thumbnail">*@
+                    @*<img src="../../Content/images/secure-login-icon.jpg" class="w3-hover-opacity" alt="Sections" height="200" width="240" />*@
+                    <img src="../../Content/images/Register.png" class="center" alt="Sign Up">
+                    @*</div>*@
+                </div>
+                <hr />
+                @using (Html.BeginForm("Signup", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @*<p style="color:blue; font-style:italic;">@Html.ViewBag.Msg</p>
+                            <p style="color:red; font-style:italic;">@Html.ViewBag.Err</p>*@
+
+                        @if (@Html.ViewBag.Msg != null)
+                        {
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                @Html.ViewBag.Msg
+                            </div>
+                        }
+                        @if (@Html.ViewBag.Err != null)
+                        {
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                @Html.ViewBag.Err
+                            </div>
+                        }
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.FirstName, "First Name*")
+
+                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @style = "width: 100%;max-width: 100%;" } })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.LastName, "Last Name*")
+
+                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @style = "width: 100%;max-width: 100%;" } })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Phone, "Phone Number*")
+
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @style = "width: 100%;max-width: 100%;" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+
+                                <h6 style="color:maroon; font-style:italic;">Enter a valid Number to receive correspondence</h6>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Email, "Email*")
+
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @style = "width: 100%;max-width: 100%;" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                                <h6 style="color:maroon; font-style:italic;">Enter a valid Email to receive correspondence</h6>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12" style="text-align:left;">
+                                <span><strong>Account Type:</strong></span>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>
+                                    Student
+                                </strong>
+                                @Html.RadioButtonFor(model => model.EntityType, "1", new { Checked = "checked", @id = "Student" })
+                            </div>
+                            <div class="col-md-4">
+                                <strong>
+                                    Parent
+                                </strong>
+                                @Html.RadioButtonFor(model => model.EntityType, "2", new { @id = "Parent" })
+                            </div>
+                            <div class="col-md-4 ">
+                                <strong>Private</strong>
+                                @Html.RadioButtonFor(model => model.EntityType, "3", new { @id = "Private" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 ">
+                                @Html.LabelFor(model => model.ReferralCode, "Referral Code")
+
+                                @Html.EditorFor(model => model.ReferralCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "78543", @style = "width: 100%;max-width: 100%;" } })
+                                @Html.ValidationMessageFor(model => model.ReferralCode, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.ReferreeCode, "Parent Code")
+
+                                @Html.EditorFor(model => model.ReferreeCode, new { htmlAttributes = new { @class = "form-control", @name = "RefereeCode", @placeholder = "785438", @style = "width: 100%;max-width: 100%;" } })
+                                @Html.ValidationMessageFor(model => model.ReferreeCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Password, "Password*")
+
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "******", @style = "width: 100%;max-width: 100%;" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.ConfirmPassword, "Confirm Password*")
+
+                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "******", @style = "width: 100%;max-width: 100%;" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.Captcha(4) <br />
+                                @*@Html.MathCaptcha() <br />*@
+                                <p style="color:red;font-style:italic;"> @ViewBag.ErrorMessage </p>
+                            </div>
+                            @*<div class="col-md-2 thumbnail" style="text-align:center; display:none;" id="LoaderDiv">
+                                    @*<img src="~/Content/Images/loading_blue_lg.gif" width="30" height="30" id="loader" />*
+                                </div>*@
+                        </div>
+                        <div class="col-md-6">
+                            <br />
+                            <div class="form-group">
+
+                                <button value="Submit" class="btn btn-success btn-lg pull-right">
+                                    <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Sign Up &nbsp;&nbsp;
+                                </button>
+                            </div>
+                            <br />
+                            <div class="form-group" style="text-align:right;">
+                                <strong><i>Already registered? @Html.ActionLink("Sign In Here", "Signin", "Account", null)</i></strong>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </fieldset>
+        </div>
+       
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    //$('input[type="radio"]').change(function () {
+    //    debugger
+    //    // Get the value of currently clicked radio button
+    //    var value = $(this).val();
+
+    //    if (this.value == '1') {
+    //        $("#txtRefereeCode").removeAttr("disabled");
+    //    }
+    //    else {
+    //        $("#txtRefereeCode").attr("disabled", "disabled");
+    //    }
+
+    //});
+
+    $('input[type=radio]').click(function () {
+        if ($(this).attr('id') == "Student") {
+            $("#ReferreeCode").prop("disabled", false);
+        } else {
+            $("#ReferreeCode").prop("disabled", true);
+
+        }
+    });
+
+</script>

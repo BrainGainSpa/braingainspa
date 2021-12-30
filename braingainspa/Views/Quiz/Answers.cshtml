@@ -1,0 +1,115 @@
+﻿@model braingainspa.Models.AnswerViewModels
+
+@{
+    ViewBag.Title = "Answers";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <fieldset>
+        <legend>ANSWERS</legend>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-6">
+                @using (Html.BeginForm("Answers", "Quiz", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @if (@Html.ViewBag.Msg != null)
+                    {
+                        <div class="alert alert-success alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            @Html.ViewBag.Msg
+                        </div>
+                    }
+                    @if (@Html.ViewBag.Err != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            @Html.ViewBag.Err
+                        </div>
+                    }
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.AnswerID)
+                    @Html.HiddenFor(model => model.QuestionID)
+
+
+
+                    <div class="form-group">
+                        @Html.Label("Question", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8" style="text-align:left;">
+                            <h4 style="color:blue;"><strong>@Html.ViewBag.QueText</strong></h4>
+                            @*@Html.EditorFor(model => model.QuestionID, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @*@Html.DropDownList("QuestionID", new SelectList(ViewBag.QuestionList, "QuestionID", "QuestionString"), "--Select Question--", htmlAttributes: new { @class = "form-control", @placeholder = "Question", @onchange = "this.form.submit();" })*@
+                            @*@Html.ValidationMessageFor(model => model.QuestionID, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OptionLetter, "Option Letter", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.OptionLetter, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.OptionLetter, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AnswerString, "Answer Text", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.AnswerString, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.AnswerString, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IsCorrect, "Correct Answer", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8" style="text-align:left;">
+                            @Html.CheckBoxFor(model => model.IsCorrect)
+                            @*<div class="checkbox">
+                    @Html.EditorFor(model => model.IsCorrect)
+                    @Html.ValidationMessageFor(model => model.IsCorrect, "", new { @class = "text-danger" })
+                </div>*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <a href="@Url.Action("AnswerS", "Quiz")" class="btn btn-primary btn-md" data-toggle="tooltip" title="Reset"><i class="glyphicon glyphicon-plus"></i>&nbsp;New&nbsp;</a>
+                        </div>
+                        <div class="col-md-6">
+                            <button value="Submit" class="btn btn-primary btn-md pull-right" title="Save">
+                                <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Save&nbsp;&nbsp;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <a href="@Url.Action("EditQuestion", "Quiz", new { id = ViewBag.QueID })" class="btn btn-primary btn-md pull-right" data-toggle="tooltip" title="Reset"><i class="glyphicon glyphicon-chevron-left"></i>&nbsp;Back To Question&nbsp;</a>
+            </div>
+        </div>
+        <hr />
+        
+        <div class="row">
+            @Html.Partial("~/Views/Quiz/_Answers.cshtml")
+
+        </div>
+    </fieldset>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

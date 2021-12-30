@@ -1,0 +1,41 @@
+﻿@model braingainspa.Models.Topic
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>Subject</th>
+                <th>Topic</th>
+                <th>Description</th>
+                <th text-align="center">Actions</th>
+            </tr>
+            <tbody>
+                @if (ViewBag.TopicList != null)
+                {
+                    foreach (var item in ViewBag.TopicList)
+                    {
+                        <tr id="row_@item.TopicID">
+                            <td>
+                                <strong>@item.CourseName</strong>
+                            </td>
+                            <td>
+                                <strong>@item.TopicName</strong>
+                            </td>
+                            <td>
+                                @item.Description [@item.TopicID]
+                            </td>
+                            <td align="center" width="100px">
+                                <a href="@Url.Action("EditTopic", "Quiz", new { id = @item.TopicID })" class="btn btn-success" data-toggle="tooltip" title="View Details"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                <a href="@Url.Action("DeleteTopic","Quiz", new { id = @item.TopicID })" onclick="return confirm('Are you sure that you want to Delete the specified item?')" class="btn btn-danger" data-toggle="tooltip" title="Delete Item"><i class="glyphicon glyphicon-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr></tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+    
+</div>

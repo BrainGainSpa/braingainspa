@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Signup Response";
+    Layout = "~/Views/Shared/_LayoutUnSigned.cshtml";
+}
+
+<div class="container">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-6">
+                <br />
+                <div class="card ">
+                    <div class="card-header text-white bg-primary" style="text-align:center; height:30px; font-size:14px;">
+                        <strong st>Registration Success</strong>
+                    </div>
+                    <div class="card-body bg-white" style="text-align:center;">
+                        <br />
+                        <img src="../../Content/images/Successful01.jpg" alt="Successful Registration" height="80" width="80" />
+                        <hr />
+                        <br />
+                        <h5 style="color:green;">Your Email Verification has been completed successfully. You may Sign in</h5>
+                        <br />
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-12" style="text-align:right;">
+                                    <a href="@Url.Action("Signin", "Account")" data-toggle="tooltip" title="Sign in"><strong>Click here to Sign in</strong></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
+</div>
+

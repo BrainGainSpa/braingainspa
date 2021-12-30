@@ -1,0 +1,99 @@
+﻿@model braingainspa.Models.ResultViewModel
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_LayoutSigned.cshtml";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card-header text-white bg-success" style="text-align:center; font-size:larger;">
+                <span class="highlight"><b>Result</b></span>
+            </div>
+            <div class="card-body bg-white">
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <b>Quiz ID:</b>
+                            </td>
+                            <td style="font-weight:bold">@Model.Token</td>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                            <td>
+                                <b> Quiz:</b>
+                            </td>
+                            <td style="font-weight:bold">@Model.Quiz</td>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                            <td>
+                                <b>Topic:</b>
+                            </td>
+                            <td style="font-weight:bold">@Model.Topic</td>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                            <td>
+                                <b>Time Spent:</b>
+                            </td>
+                            <td style="font-weight:bold">@Model.EndTime</td>
+                        </tr>
+                        @*<tr></tr>
+                            <tr>
+                                <td>
+                                    <b>End Time:</b>
+                                </td>
+                                <td style="font-weight:bold">@Model.EndTime</td>
+                            </tr>*@
+                        @*<tr>
+                                <td>
+                                    Total Points:
+                                </td>
+                                <td style="font-weight:bold">@Model.TotalPoints%</td>
+                            </tr>*@
+                        <tr></tr>
+                        <tr>
+                            <td>
+                                <b>Points Scored:</b>
+                            </td>
+                            <td style="font-weight:bold">@Model.Points%</td>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                            <td>
+                                <b>Qualification:</b>
+                            </td>
+                            <td style="font-weight:bold">@Model.Qualification</td>
+                        </tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                    </tbody>
+                </table>
+                <br />
+                <div>
+                    @if (Html.ViewBag.Archives == null)
+                    {
+                        <a class="btn btn-primary btn-md" href="@Url.Action("QuizInfo", "Quiz", new { id = @Model.TopicID })">
+                            <strong>Continue Skill Practice On The Same Topic</strong>
+                        </a>
+                    }
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    @*<button value="Submit" class="btn btn-primary btn-md">
+                            <span class="glyphicon glyphicon-arrow-up"></span><strong>Start Another Skill Practice</strong>
+                        </button>*@
+                    @*<a class="btn btn-primary btn-md" href="@Url.Action("CurrentClass", "Quiz", new { id = 1 })">
+                            <strong>Continue Skill Practice On The Same Page</strong>
+                        </a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

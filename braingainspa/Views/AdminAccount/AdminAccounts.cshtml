@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "Admin Accounts";
+    Layout = "~/Views/Shared/_LayoutAcctAdmin.cshtml";
+
+    decimal _totalAmount = 0;
+}
+
+<h2>Admin Accounts</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="" style="background-color:lightgreen; border:1px solid blue;border-radius:3px;">
+                @if (@TempData["Company"] != null)
+                {
+                    <span style="color:green; font-weight:bold; font-size:x-large">₦@TempData["Company"]</span>
+                }
+                else
+                {
+                    <span style="color:green;font-weight:bold; font-size:x-large">₦0.00</span>
+                }
+                <br />
+                <span><strong>Company</strong></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="" style="background-color:lightgreen; border:1px solid blue;border-radius:3px;">
+                @if (@TempData["Rewards"] != null)
+                {
+                    <span style="color:gold; font-weight:bold; font-size:x-large">₦@TempData["Rewards"]</span>
+                }
+                else
+                {
+                    <span style="color:gold;font-weight:bold; font-size:x-large;">₦0.00</span>
+                }
+                <br />
+                <span><strong>Rewards</strong></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="" style="background-color:cornflowerblue; border:1px solid red;border-radius:3px;">
+                @if (@TempData["Admin1"] != null)
+                {
+                    <span style="color:goldenrod;font-weight:bold; font-size:x-large">₦@TempData["Admin1"]</span>
+                }
+                else
+                {
+                    <span style="color:goldenrod;font-weight:bold; font-size:x-large">₦0.00</span>
+                }
+                <br />
+                <span><strong>Admin 1</strong></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="" style="background-color:cornflowerblue; border:1px solid red;border-radius:3px;">
+                @if (@TempData["Admin2"] != null)
+                {
+                    <span style="color:goldenrod;font-weight:bold; font-size:x-large">₦@TempData["Admin2"]</span>
+                }
+                else
+                {
+                    <span style="color:goldenrod;font-weight:bold; font-size:x-large">₦0.00</span>
+                }
+                <br />
+                <span><strong>Admin 2</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <fieldset>
+                <legend>PAYMENTS</legend>
+                <br />
+                <table class="table table-bordered table-responsive">
+                    <tr>
+                        <th>Date</th>
+                        <th>Mode Of Payment</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                    </tr>
+                    <tbody>
+                        @if (ViewBag.AdminPaymentList != null)
+                        {
+                            foreach (var item in ViewBag.AdminPaymentList)
+                            {
+                                <tr id="row_@item.PaymentTransactionID">
+                                    <td>
+                                        <strong>@item.TransDate</strong>
+                                    </td>
+                                    <td>
+                                        <strong>@item.TransactionName</strong>
+                                    </td>
+                                    <td>
+                                        <strong>@item.Amount</strong>
+                                    </td>
+                                    <td>
+                                        <strong>@item.Comment</strong>
+                                    </td>
+                                </tr>
+
+                                _totalAmount += item.Amount;
+                            }
+
+                            <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td class="text-right"><h4>Total:</h4></td>
+                                <td class="text-left" style="color:blueviolet;"><h4><strong>₦@_totalAmount.ToString("#,##0.00")</strong></h4></td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+            </fieldset>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+
+</div>

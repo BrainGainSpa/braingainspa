@@ -1,0 +1,43 @@
+﻿@model braingainspa.Models.PricingViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>Class</th>
+                <th>Duration</th>
+                <th>Amount</th>
+                <th align="center">Actions</th>
+            </tr>
+            <tbody>
+                @if (ViewBag.PriceList != null)
+                {
+                    foreach (var item in ViewBag.PriceList)
+                    {
+                        <tr id="row_@item.PricingID">
+                            <td>
+                                <strong>@item.ClassName</strong>
+                            </td>
+                            <td>
+                                <strong>@item.Duration</strong>
+                            </td>
+                            <td>
+                                <strong>@item.Amount</strong>
+                            </td>
+                            <td align="center">
+                                <a href="@Url.Action("EditPricing", "Account", new { id = @item.PricingID })" class="btn btn-success" data-toggle="tooltip" title="View Details"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                <a href="@Url.Action("DeletePricing","Account", new { id = @item.PricingID })" onclick="return confirm('Are you sure that you want to Delete the specified item?')" class="btn btn-danger" data-toggle="tooltip" title="Delete Item"><i class="glyphicon glyphicon-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr></tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+

@@ -1,0 +1,75 @@
+﻿@model List<braingainspa.Models.SiteMenu>
+
+@{
+    ViewBag.Title = "Simple";
+    Layout = "~/Views/Shared/_LayoutSigned.cshtml";
+}
+<style>
+    /*Here we will add css for style for our treeview*/
+    .collapse {
+        width: 15px;
+        background-image: url('../../Content/images/ui-icons-454545_256x240.png');
+        background-repeat: no-repeat;
+        background-position: -36px -17px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .expand {
+        width: 15px;
+        background-image: url('../../Content/images/ui-icons-454545_256x240.png');
+        background-repeat: no-repeat;
+        background-position: -50px -17px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .treeview ul {
+        font: 14px arial, Sans-Serif;
+        margin: 0px;
+        padding-left: 20px;
+        list-style: none;
+    }
+
+    .treeview > li > a {
+        font-weight: bold;
+    }
+
+    .treeview li {
+    }
+
+        .treeview li a {
+            padding: 4px;
+            font-size: 12px;
+            display: inline-block;
+            text-decoration: none;
+            width: auto;
+        }
+</style>
+<h2>Simple</h2>
+
+<div style="border:solid 1px black; padding:18px; background-color:#FAFAFA; text-align:left;">
+    <div class="treeview">
+        @if (Model != null && Model.Count() > 0)
+        {
+            <ul>
+                @Treeview.GetTreeView(Model, Model.FirstOrDefault().ParentMenuID ?? 0)
+            </ul>
+        }
+    </div>
+
+</div>
+
+@* Here we read some Jquery code make this treeview collapsible *@
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".treeview li>ul").css('display', 'none'); // Hide all 2-level ul
+            $(".collapsible").click(function (e) {
+                e.preventDefault();
+                $(this).toggleClass("collapse expand");
+                $(this).closest('li').children('ul').slideToggle();
+            })
+        })
+    </script>
+}

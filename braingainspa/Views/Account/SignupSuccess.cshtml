@@ -1,0 +1,107 @@
+﻿@model braingainspa.Models.VerifyPhoneEmailViewModel
+@{
+    ViewBag.Title = "Signup Success";
+    Layout = "~/Views/Shared/_LayoutUnSigned.cshtml";
+}
+
+<div class="container">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-10">
+                <br />
+                @if (@Html.ViewBag.Msg != null)
+                {
+                    <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @Html.ViewBag.Msg
+                    </div>
+                }
+                @if (@Html.ViewBag.Err != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @Html.ViewBag.Err
+                    </div>
+                }
+                <br />
+                <div class="card">
+                    <div class="card-header text-white bg-primary" style="text-align:center; height:30px; font-size:14px;">
+                        <strong>Registration Success</strong>
+                    </div>
+                    <div class="card-body bg-white" style="text-align:center;">
+                        <div id="dvConfirm" runat="server">
+                            <img src="../../Content/images/Successful01.jpg" alt="Successful Registration" height="80" width="80" />
+
+                            <hr />
+                            <h5>Your Registration was successful. You are almost done.</h5>
+
+                            <h6>An Email has been sent to your registered mail account. You must login for verification.</h6>
+                            <h6>A Verification Code has also been sent to you on your registered Phone Number. Enter the the codes to Verify the Phone, in order to complete your registration.</h6>
+                            <hr />
+                        </div>
+
+                        @using (Html.BeginForm("SignupSuccess", "Account", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            
+                            
+                            @*@Html.Hidden =*@
+                            <div class="form-horizontal">
+                                <header>
+                                    <h5>Verify Phone Number</h5>
+                                    <asp:HiddenField ID="hdID" runat="server" />
+                                </header>
+                                <div class="form-group">
+                                    <div class="col-md-12" style="text-align:right;">
+                                        I didn't receive the Code, Please <a href="@Url.Action("ResendPhoneCode", "Account", new { @key = @Session["PhoneDetails"] })" data-toggle="tooltip" title="Code Resend"><strong>Resend it</strong></a>
+                                    </div>
+                                    <h5 style="font-style:italic; color:blueviolet;">(You may check if your number is under DND restriction by your network platform.)</h5>
+                                </div>
+                                <div class="row">
+                                    @Html.LabelFor(model => model.PhoneCode, "*Phone Code: ", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.PhoneCode, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.PhoneCode, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        @if (bool.Parse(Session["ConfirmPhone"].ToString()) == false)
+                                        {
+                                            <img src="../../Content/images/Delete.png" class="center" style="display:" Height="40" Width="40" alt="Sign Up">
+                                        }
+                                        else
+                                        {
+                                            <img src="../../Content/images/Verified.png" class="center" Height="40" Width="40" alt="Sign Up">
+                                        }
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button value="Submit" class="btn btn-primary btn-md" style="float:left;" title="Verify">
+                                            &nbsp;&nbsp;Verify&nbsp;&nbsp;<span class="glyphicon glyphicon-align-justify"></span>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3">
+
+                                    </div>
+                                </div>
+                                @*<div class="form-group">
+
+                        </div>*@
+                                <br /><br />
+                                <div class="form-group">
+                                    <div class="col-md-12" style="text-align:right;">
+                                        <a href="@Url.Action("Signin", "Account")" data-toggle="tooltip" title="Sign in"><strong>You may Sign in here</strong></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,214 @@
+﻿@model braingainspa.Models.Topic
+
+@{
+    ViewBag.Title = "Topics";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <fieldset>
+        <legend>TOPICS</legend>
+        <br />
+        <div class="row">
+            <div class="col-md-1">
+                
+            </div>
+            <div class="col-md-10">
+                @*@if (@Html.ViewBag.Msg != null)
+                {
+                    <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @Html.ViewBag.Msg
+                    </div>
+                }
+                @if (@Html.ViewBag.Err != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @Html.ViewBag.Err
+                    </div>
+                }*@
+                @if (TempData["ExcelERR"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @TempData["ExcelERR"]
+                    </div>
+                }
+                @if (TempData["ExcelMSG"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @TempData["ExcelMSG"]
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-6">
+                @using (Html.BeginForm("Topics", "Quiz", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.TopicID)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CourseID, "Subject", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("CourseID", new SelectList(ViewBag.CourseList, "CourseID", "CourseName"), "--Select Subject--", htmlAttributes: new { @class = "form-control", @style = "height:40px", @onchange = "this.form.submit();" })
+                                @Html.ValidationMessageFor(model => model.CourseID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TopicName, "Topic Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.TopicName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TopicName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <a href="@Url.Action("NewTopic", "Quiz")" class="btn btn-primary btn-md" data-toggle="tooltip" title="Reset"><i class="glyphicon glyphicon-plus"></i>&nbsp;New&nbsp;</a>
+                            </div>
+                            <div class="col-md-6">
+                                <button value="Submit" class="btn btn-primary btn-md pull-right" title="Save">
+                                    <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Save&nbsp;&nbsp;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+        @*<div class="row">
+                <div class="col-sm-12" style="padding-bottom:20px">
+                    <div class="col-sm-2">
+                        <span>Select File  :</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <input class="form-control" type="file" name="importFile" id="importFile" />
+                    </div>
+                    <div class="col-sm-3">
+                        <input class="btn btn-primary" id="btnUpload" type="button" value="Upload" />
+                    </div>
+                </div>
+            </div>*@
+        <div class="row ">
+            <div class="col-md-1">
+                <div class="col-md-1 thumbnail" style="text-align:right; display:none;" id="LoaderDiv">
+                    <img src="~/Content/images/spinner.gif" width="30" height="30" id="loader" />
+                </div>
+            </div>
+            <div class="col-md-5">
+                @*@using (Html.BeginForm("VerifyImport", "Quiz", FormMethod.Post, new { enctype = "multipart/form-data" }))*@
+                @using (Html.BeginForm("FreeTrialMigration", "Quiz", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                <input type="file" name="postedFiles" />
+                <div style="text-align:left;">
+                    <input type="submit" button id="verify" value="Verify Upload" class="btn btn-success btn-md" />
+                </div>
+                }
+                <div style="color:green; font-style:italic">Verify Upload Microsoft Excel File</div>
+            </div>
+            <div class="col-md-5">
+                @*@using (Html.BeginForm("ImportFromExcel", "Quiz", new { tpcid = Session["TopicID"] }, FormMethod.Post, new { enctype = "multipart/form-data" }))*@
+                @using (Html.BeginForm("ImportFromExcel", "Quiz", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @*@Html.ValidationSummary();*@
+                    <input type="file" name="postedFile" />
+                    <div style="text-align:left;">
+                        <input type="submit" button id="upload" value="Excel Upload" class="btn btn-success btn-md" />
+                    </div>
+                }
+                <div style="color:green; font-style:italic">Upload Questions and Answers using Microsoft Excel</div>
+
+            </div>
+
+        </div>
+        <hr />
+        <div class="row">
+            @Html.Partial("~/Views/Quiz/_Topics.cshtml")
+        </div>
+    </fieldset>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    <script>
+
+        $("#upload").click(function () {
+            //debugger;
+            if (window.FormData == undefined)
+                alert("Error: FormData is undefined");
+
+            else {
+                debugger;
+                $("#LoaderDiv").show();
+                var fileUpload = $("#postedFile").get(0);
+                var files = fileUpload.files;
+
+                var fileData = new FormData();
+
+                fileData.append(files[0].name, files[0]);
+
+                $.ajax({
+                    url: '/Quiz/ImportFromExcel',
+                    type: 'post',
+                    datatype: 'json',
+                    contentType: false,
+                    processData: false,
+                    async: false,
+                    data: fileData,
+                    success: function (response) {
+                        debugger;
+                        $("#LoaderDiv").hide();
+                        if (response.Status === 1) {
+                            alert(response.Message);
+                        }
+                        else {
+                            alert(response.Message);
+                            //alert("Failed to Import");
+                        }
+                        //alert(response);
+                    },
+                    error: function (response) {
+                        $("#LoaderDiv").hide();
+                        if (response.Status === 0) {
+                            alert(response.Message);
+                        }
+                        else {
+                            alert(message);
+                        }
+
+                    }
+                });
+            }
+
+        });
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

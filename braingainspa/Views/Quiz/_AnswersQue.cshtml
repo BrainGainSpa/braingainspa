@@ -1,0 +1,44 @@
+﻿
+@model braingainspa.Models.AnswerViewModels
+
+<div class="row">
+    <div class="col-md-2">
+        </div>
+    <div class="col-md-8" style="background-color:aliceblue;font-weight:bold;">
+        <h4>Answer Options</h4>
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>Option Letter</th>
+                <th>Answer Text</th>
+                <th>Correct Answer</th>
+            </tr>
+            <tbody>
+                @if (ViewBag.AnswerList != null)
+                {
+                    foreach (var item in ViewBag.AnswerList)
+                    {
+                        <tr id="row_@item.AnswerID">
+                            <td>
+                                <strong>@item.OptionLetter</strong>
+                            </td>
+                            <td>
+                                <strong>@item.AnswerString</strong>
+                            </td>
+                            <td>
+                                @item.IsCorrect
+                            </td>
+
+                        </tr>
+                        <tr></tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>
+

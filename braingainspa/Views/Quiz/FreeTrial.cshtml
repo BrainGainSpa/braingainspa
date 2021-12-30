@@ -1,0 +1,74 @@
+﻿@model IEnumerable<braingainspa.Models.FreeTrialViewModels>
+@{
+    ViewBag.Title = "Free Trial";
+    Layout = "~/Views/Shared/_LayoutFreeQuiz.cshtml";
+}
+
+@*@{
+        int queCount = int.Parse(Session["clscnt"].ToString());
+    }*@
+
+@*<h4 style="color:green; font-weight:bold;">@ViewBag.SubjectTitle</h4>*@
+
+@*<div>
+        <br />
+        <h3>Coming Soon...</h3>
+    </div>*@
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="panel panel-success">
+            <div class="panel-heading" style="text-align:center;">
+                <h3>
+                    FREE TRIALS
+                </h3>
+            </div>
+            <div class="panel-body" style="text-align:center; padding-left:50px;">
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="card mb-3" style="max-width: 18rem;">
+                                <div class="card-header text-white bg-success">
+                                    <strong>@item.FacultyName</strong>
+                                </div>
+                                <div class="card-body bg-white">
+
+                                    <table class="table table-responsive">
+                                        <tbody>
+                                            @if (item.FacultyName != null)
+                                            {
+                                                foreach (var course in item.FreeCourses)
+                                                {
+                                                    <tr id="row_@course.CourseID">
+
+                                                        <td>
+                                                            <strong>
+                                                                <a href="@Url.Action("FreeTrials", "Quiz", new { id = course.CourseID })" style="text-decoration:none;" data-toggle="tooltip" title="Subject">@course.CourseName</a>
+                                                            </strong>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+

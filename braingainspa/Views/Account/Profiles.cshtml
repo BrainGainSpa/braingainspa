@@ -1,0 +1,120 @@
+﻿@model braingainspa.Models.ProfileViewModel
+
+@{
+    ViewBag.Title = "Profiles";
+    Layout = "~/Views/Shared/_LayoutSigned.cshtml";
+}
+
+<div class="container">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            height: 50px;
+            width: 40px;
+        }
+    </style>
+
+    <div id="dvskl" class="row">
+
+        <div class="col-md-7">
+            <fieldset>
+                <legend>PROFILE</legend>
+
+                @using (Html.BeginForm("Profiles", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        @if (@Html.ViewBag.Msg != null)
+                        {
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                @Html.ViewBag.Msg
+                            </div>
+                        }
+                        @if (@Html.ViewBag.Err != null)
+                        {
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                @Html.ViewBag.Err
+                            </div>
+                        }
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                @if (Model.ImagePath != null)
+                                {
+                                    <img src="@Url.Content(Model.ImagePath)" alt="User Picture" height="200" width="200" />
+                                }
+                                else
+                                {
+                                    <img class="img-responsive img-rounded" src="~/Content/images/user.jpg" alt="User Picture" height="150" width="150">
+                                }                                
+                            </div>
+                        </div>
+                        <div>
+                            <input id="ImageFile" name="ImageFile" type="file" />
+                        </div>
+                        
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirstName, "First Name*")
+
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Angela", @style = "width: 100%;max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MiddleName, "Middle Name*")
+
+                            @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pam", @style = "width: 100%;max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LastName, "Last Name")
+
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Adewale", @style = "width: 100%;max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                @Html.LabelFor(model => model.ReferralCode, "Referral Code")
+
+                                @Html.EditorFor(model => model.ReferralCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "78543", @style = "width: 100%;max-width: 100%;" } })
+                                @Html.ValidationMessageFor(model => model.ReferralCode, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.ParentCode, "Parent Code")
+
+                                @Html.EditorFor(model => model.ParentCode, new { htmlAttributes = new { @class = "form-control", @name = "ParentCode", @placeholder = "785438", @style = "width: 100%;max-width: 100%;" } })
+                                @Html.ValidationMessageFor(model => model.ParentCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="text-align:right;">
+                        <div class="col-md-12">
+                            <br />
+                            <button value="Submit" class="btn btn-primary btn-lg">
+                                <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Submit&nbsp;&nbsp;
+                            </button>
+                        </div>
+
+                    </div>
+
+                }
+            </fieldset>
+        </div>
+        <div class="col-md-5">
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@helper GetTreeView(List<braingainspa.Models.Downline> downline, int pid)
+{
+    foreach (var i in downline.Where(a => a.Pid.Equals(pid)))
+    {
+        <li>
+            @{ var submenu = downline.Where(a => a.Pid.Equals(i.ID)).Count();}
+            @if (submenu > 0)
+            {
+                <span class="collapse collapsible">&nbsp;</span>
+            }
+            else
+            {
+                <span style="width:15px; display:inline-block">&nbsp;</span>
+            }
+            <span>
+                <a href="#0">@i.Name &nbsp; @i.Description</a>
+            </span>
+            @if (submenu > 0)
+            {
+                <ul>
+                    @GetTreeView(downline, i.ID)
+                    @* Recursive Call for Populate Sub items here *@
+                </ul>
+            }
+
+        </li>
+    }
+}
+
+@*@helper GetTreeView(List<braingainspa.Models.SiteMenu> siteMenu, int parentID)
+{
+    foreach (var i in siteMenu.Where(a => a.ParentMenuID.Equals(parentID)))
+    {
+        <li>
+            @{ var submenu = siteMenu.Where(a => a.ParentMenuID.Equals(i.MenuID)).Count();}
+            @if (submenu > 0)
+            {
+                <span class="collapse collapsible">&nbsp;</span>
+            }
+            else
+            {
+                <span style="width:15px; display:inline-block">&nbsp;</span>
+            }
+            <span>
+                <a href="@i.NavURL">@i.MenuName</a>
+            </span>
+            @if (submenu > 0)
+            {
+                <ul>
+                    @GetTreeView(siteMenu, i.MenuID)
+                    @* Recursive Call for Populate Sub items here *
+                </ul>
+            }
+        </li>
+    }
+}*@

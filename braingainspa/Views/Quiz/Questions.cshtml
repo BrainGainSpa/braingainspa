@@ -1,0 +1,388 @@
+﻿@model braingainspa.Models.QuestionVModels
+@using braingainspa.Models;
+@{
+                /**/
+
+                /**/
+
+                ViewBag.Title = "Questions";
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+    QuestionViewModels QueVModels = new QuestionViewModels();
+    AnswerViewModels QueAnswers = new AnswerViewModels();
+    int TopID = 0;
+
+}
+<style>
+    /*.btn-primary {
+        text-transform: uppercase;
+        border: none;
+        color: white;
+        background-color: #50b948; /*Green*
+        font-family: 'Quicksand', sans-serif;
+    }*/
+    .btn-primary {
+        background: #50b948;
+        border-color: #33912c;
+    }
+
+        .btn-primary a {
+            color: #fafafa;
+        }
+
+        .btn-primary:hover {
+            background: #33912c;
+        }
+</style>
+
+<div class="container">
+    <div class="row">
+        <fieldset>
+            <legend>QUESTIONS</legend>
+            <br />
+            <div class="row">
+                <div class="col-md-8">
+                    @using (Html.BeginForm("Questions", "Quiz", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @if (@Html.ViewBag.Msg != null)
+                            {
+                                <div class="alert alert-success alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    @Html.ViewBag.Msg
+                                </div>
+                            }
+                            @if (@Html.ViewBag.Err != null)
+                            {
+                                <div class="alert alert-danger alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    @Html.ViewBag.Err
+                                </div>
+                            }
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.QuestionID)
+                            @Html.HiddenFor(model => model.ImagePath)
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TopicID, "Topic", htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @if (TempData.ContainsKey("TopicID"))
+                                    {
+                                        TopID = int.Parse(TempData["TopicID"].ToString());
+                                        @Html.DropDownList("TopicID", new SelectList(ViewBag.TopicList, "TopicID", "TopicName", TopID.ToString()), "--Select Topic--", htmlAttributes: new { @class = "form-control", @placeholder = "Topic", @style = "height:40px", @onchange = "this.form.submit();" })
+                                    }
+                                    else
+                                    {
+                                        @Html.DropDownList("TopicID", new SelectList(ViewBag.TopicList, "TopicID", "TopicName"), "--Select Topic--", htmlAttributes: new { @class = "form-control", @placeholder = "Topic", @style = "height:40px", @onchange = "this.form.submit();" })
+                                    }
+
+                                    @Html.ValidationMessageFor(model => model.TopicID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.QuestionString, "Question Text", htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.TextAreaFor(model => model.QuestionString, new {
+                                    @value = "Enter Name",
+                                    @class = "red",
+                                    cols="55",
+                                    rows="4",
+                                    @title= "Enter The Question Text",
+                                    @align="left",
+                                    @minlength="5"})
+                                    @*@Html.TextAreaFor(model => model.QuestionString, new { htmlAttributes = new { @class = "form-control", @placeholder = "Question Text", @style = "width: 100%;max-width: 100%;" } })*@
+                                    @Html.ValidationMessageFor(model => model.QuestionString, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @*<div class="col-md-8">
+                                    @Html.TextAreaFor(model => model.QuestionString, 2, 50, new { htmlAttributes = new { @class = "form-control", @placeholder = "Question Text", @style = "width: 100%;max-width: 100%;" } })
+                                    @Html.ValidationMessageFor(model => model.QuestionString, "", new { @class = "text-danger" })
+                                </div>*@
+                            @*</div>*@
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.AnswerExplanation, "Answer Explanation", htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.TextAreaFor(model => model.AnswerExplanation, new {
+                                    @value = "Enter Name",
+                                    @class = "red",
+                                    cols="55",
+                                    rows="4",
+                                    @title= "Enter The Answer Explanation",
+                                    @align="left",
+                                    @minlength="5"})
+                                    @*@Html.TextAreaFor(model => model.AnswerExplanation, new { htmlAttributes = new { @class = "form-control", @placeholder = "Answer Explanation", @style = "width: 100%;max-width: 100%;" } })*@
+                                    @Html.ValidationMessageFor(model => model.AnswerExplanation, "", new { @class = "text-danger" })
+                                </div>
+                                @*<div class="col-md-8">
+                                        @Html.TextAreaFor(model => model.AnswerExplanation, 2, 80, new { htmlAttributes = new { @class = "form-control", @placeholder = "Answer Explanation", @style = "width: 100%;max-width: 100%;" } })
+                                        @Html.ValidationMessageFor(model => model.AnswerExplanation, "", new { @class = "text-danger" })
+                                    </div>*@
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Instruction, "Instruction", htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Instruction, new { htmlAttributes = new { @class = "form-control", @placeholder = "Instruction" } })
+                                    @Html.ValidationMessageFor(model => model.Instruction, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IsVerified, "Verify", htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8 text-left">
+                                    @Html.CheckBoxFor(model => model.IsVerified)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <a href="@Url.Action("NewQuestion", "Quiz")" class="btn btn-primary btn-lg" data-toggle="tooltip" title="Reset"><i class="glyphicon glyphicon-plus"></i>&nbsp;New&nbsp;</a>
+                                </div>
+                                <div class="col-md-6">
+                                    @*<button value="Submit" class="btn btn-primary btn-md pull-right">  Save  </button>*@
+                                    <button value="Submit" class="btn btn-primary btn-lg pull-right" title="Save">
+                                        <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Save&nbsp;&nbsp;
+                                    </button>
+                                </div>
+                                @*<div class="col-md-3">
+                                    <button value="Submit" style="visibility:hidden;" class="btn btn-primary btn-md pull-right" title="Save">
+                                        <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;Answers&nbsp;&nbsp;
+                                    </button>
+                                                            </div>*@
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-4">
+                    @*<div class="row">
+                        <div class="col-md-12 pull-left">
+                            @if (Session["img"].ToString() == "1")
+                            {
+                                @*if (Model.ImagePath != null)
+                                {
+                                    <img src="@Url.Content(Model.ImagePath)" alt="User Picture" height="100" width="100" />
+                                }
+                                else
+                                {
+                                    <img class="img-responsive img-rounded" src="~/Content/images/Units.jpg" alt="Item Picture" height="100" width="100">
+                                }*@
+                    @*}
+
+                            </div>
+                        </div>*@
+                    @*<a href="#" id="myBtn" title="">Button click </a>
+
+
+                        <div id="ctlClick" class="" style="display:none;">
+
+                        </div>*@
+                    <div id="imgmsg" class="alert alert-info" style="display:none;">
+                        <span id="imgMsgDetails"></span>
+                    </div>
+                    <div>
+                        @if (Session["img"].ToString() == "1")
+                        {
+                            <img class="img-responsive" id="targetImg2" src="@Model.ImagePath" alt="Que Pix" />
+
+                        }
+                        else
+                        {
+                            <div id="imgPreview" class="thumbnail" style="display:none">
+                                <img class="img-responsive" id="targetImg" />
+                                <div class="caption">
+                                    <a href="#" onclick="ClearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
+                                    <span id="description"></span>
+                                </div>
+                                <a href="#" class="btn btn-primary" onclick="UploadImage()">Upload</a>
+                            </div>
+
+                        }
+                        <br />
+                        <div class="btn btn-primary">
+                            <div class="caption">
+                                <span style="font-weight:bold;" id="">Pix</span><input type="file" id="imgBrowse" />
+
+                            </div>
+
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    @*<div>
+
+                            @using (Html.BeginForm("ImportFromExcel", "Quiz", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.ValidationSummary();
+                                <input type="file" name="postedFile" /><br />
+                                <div style="text-align:left;">
+                                    <input type="submit" button id="upload" value="Excel Import" class="btn-primary btn-md" />
+                                </div>
+                            }
+                        </div>*@
+                    @*<a href="@Url.Action("ExcelQues", "Quiz" , new { id = ViewBag.QueID })" class="btn btn-primary btn-md pull-left" data-toggle="tooltip" title="Add Answers">&nbsp;Add Excel&nbsp;<i class="glyphicon glyphicon-align-justify"></i></a>*@
+
+                </div>
+                <div class="col-md-6">
+                    <a href="@Url.Action("Answers", "Quiz" , new { id = ViewBag.QueID })" class="btn btn-primary btn-lg pull-right" data-toggle="tooltip" title="Add Answers">&nbsp;Add Answers&nbsp;<i class="glyphicon glyphicon-align-justify"></i></a>
+
+                    @*<button value="Submit" name="btnAns" class="btn btn-primary btn-md pull-right" title="Add Answers">
+                            <span class="glyphicon glyphicon-align-justify"></span>&nbsp;&nbsp;Add Answers&nbsp;&nbsp;
+                        </button>*@
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.Partial("~/Views/Quiz/_Questions.cshtml", QueVModels)
+                    @*@Html.RenderPartial("_Questions")*@
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    @if (ViewBag.AnswerList != null)
+                    {
+                        @Html.Partial("~/Views/Quiz/_AnswersQue.cshtml", QueAnswers);
+                    }
+                </div>
+            </div>
+            <br />
+        </fieldset>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    $(document).ready(function () {
+        $("#imgPreview").hide();
+        $("#imgmsg").hide();
+        $("#imgBrowse").change(function () {
+            debugger;
+            var File = this.files;
+
+            if (File && File[0]) {
+                ReadImage(File[0]);
+
+            }
+        })
+
+        RetrieveImage();
+    })
+
+    var ReadImage = function (file) {
+        var reader = new FileReader;
+        var image = new Image;
+        //debugger;
+        reader.readAsDataURL(file);
+        reader.onload = function (_file) {
+            image.src = _file.target.result;
+            image.onload = function () {
+                var height = this.height;
+                var width = this.width;
+                var type = file.type;
+                var size = ~~(file.size / 1024) + "KB";
+
+                $("#targetImg").attr('src', _file.target.result);
+                $("#description").text("Size:" + size + ", " + height + " X " + width + "");
+                $("#imgPreview").show();
+
+            }
+        }
+    }
+    var ClearPreview = function () {
+        $("#imgBrowse").val('');
+        $("#description").text('');
+        $("#imgPreview").hide();
+    }
+
+    var UploadImage = function () {
+        var msg = null;
+        var file = $("#imgBrowse").get(0).files;
+        debugger;
+        var data = new FormData;
+        data.append("Image_File", file[0]);
+        //data.append("QuestionID", 0);
+
+        $.ajax({
+            type: "Post",
+            url: "/Quiz/UploadQuestionPix",
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                debugger;
+                //if (response.success) {
+                //alert(response.responseText)
+                msg = response.responseText
+                $("#imgMsgDetails").text(msg);
+                $("#imgmsg").show();
+                //}
+                //else {
+
+                //}
+                //$("#imgPreview").append('<img src="/Quiz/RetrieveImage?QueID=' + queid + '"class="img-responsive thumbnail"/>');
+            }
+        })
+    }
+
+    var RetrieveImage = function () {
+
+    }
+    function trigger() {
+        document.getElementById("myBtn").click();
+    }
+</script>
+
+@*@section scripts{
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    <script>
+
+        $("#upload").click(function () {
+            debugger;
+            if (window.FormData == undefined)
+                alert("Error: FormData is undefined");
+
+            else {
+                var fileUpload = $("#postedFile").get(0);
+                var files = fileUpload.files;
+
+                var fileData = new FormData();
+
+                fileData.append(files[0].name, files[0]);
+
+                $.ajax({
+                    url: '/Quiz/ImportFromExcel',
+                    type: 'post',
+                    datatype: 'json',
+                    contentType: false,
+                    processData: false,
+                    async: false,
+                    data: fileData,
+                    success: function (response) {
+                        alert(response);
+                    }
+                });
+            }
+
+        });
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")*@
+

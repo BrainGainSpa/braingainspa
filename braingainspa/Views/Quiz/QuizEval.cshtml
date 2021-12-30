@@ -1,0 +1,475 @@
+﻿@model braingainspa.Models.QuestionXModels
+@{
+
+
+    ViewBag.Title = "Quiz";
+    Layout = "~/Views/Shared/_LayoutQuiz.cshtml";
+}
+
+@{
+    string nDirection = string.Empty;
+    int queCount = int.Parse(Session["QueCount"].ToString());
+
+}
+
+<style>
+
+    .containerPadding {
+        padding: 170px 0px 170px 0px;
+    }
+
+    .textWhite {
+        color: white;
+    }
+
+    .fontSizeLarge {
+        font-size: 20px;
+    }
+
+    .fontXLarge {
+        font-size: 35px;
+    }
+
+    .darkBackground {
+        background-color: #222126;
+    }
+
+    .darkBackgroundBtn {
+        background-color: #948cad;
+        color: black;
+    }
+    /*Override default boostrap 3*/
+    .row {
+        margin-left: 0px; /*default -15px*/
+        margin-right: 0px; /*default -15px*/
+    }
+
+    .centerBlock {
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+    }
+
+    @@media (max-width:360px) {
+        .containerPadding {
+            padding: 10px 0px 10px 0px;
+        }
+    }
+
+    #seconds {
+        font-size: 5em;
+    }
+
+    #minutes {
+        font-size: 5em;
+    }
+
+    #colon {
+        font-size: 5em;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        if (TempData["QuizExpired"] != null)
+        {
+        <div class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            @TempData["ExcelERR"]
+        </div>
+        }
+        
+
+        @Html.Partial("_SuccessDarkModal")
+    </div>
+    <div class="clearfix"></div>
+    <br />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    @using (Html.BeginForm("PostAnswers", "Quiz", FormMethod.Post, new { @id = "form", enctype = "multipart/form-data" }))
+    {
+
+    <input type="hidden" id="Direction" name="Direction" value="forward" />
+    <input type="hidden" name="Token" value="@(Model.Token)" />
+    <input type="hidden" name="TestID" value="@(Model.QuestionID)" />
+    <input type="hidden" name="QuestionID" value="@(Model.QuestionNumber)" />
+    <input type="hidden" name="AnswerSelection" value='true' />
+    <!--<input type="hidden" id="SpeechText" name="SpeechText" value="Q.@(Model.QuestionNumber) &nbsp; @(Model.QuestionString)" />
+    <select name="voiceList" id="voiceList" hidden="hidden"></select>-->
+  
+    <div class="row">
+        <h2 style="color:green;">
+            @Session["QzTitle"].ToString()
+        </h2>
+        <div class="col-md-8" style="text-align:left;">
+
+            <div class="card">
+                <div class="card-header text-white bg-success">
+                    <span style="text-align:left; font-weight:bold; font-size:large;color:white;">Q.@Model.QuestionNumber &nbsp; @Model.QuestionString </span>
+                </div>
+                <div class="card-body bg-white">
+                    <div class="row">
+                        <div class="col-md-9" style="text-align:left;">
+                            <div class="prelude" style="text-align:left; font-style:italic; font-weight:bold; ">@Model.Instruction</div>
+                        </div>
+                        <div class="">
+                            @if (Session["img"].ToString() == "1")
+                            {
+                            <img class="img-responsive" id="targetImg2" src="@Model.ImagePath" alt="Que Pix" height="300" />
+                            <br />
+                            }
+                        </div>
+                        @*<div class="col-md-3" style="text-align:right;">
+                            @if (Session["img"].ToString() == "1")
+                            {
+                            <img class="img-responsive" id="targetImg2" src="@Model.ImagePath" alt="Que Pix" height="00" width="100" />
+                            <br />
+                            }
+                        </div>*@
+                    </div>
+                    <br />
+                    <div oncontextmenu="return(false);">
+
+                        @if (Model.Options != null)
+                        {
+                        foreach (var item in Model.Options)
+                        {
+                        <label style="font-weight:bold;color:darkviolet;">
+                            @if (Model.AnswerID == item.AnswerID)
+                            {
+                            <input type="radio" name="rdoAnswer" id="@string.Format(" {0}{1}", "rdoAnswer" , item.AnswerID)" checked="checked" value="@item.AnswerID" /><span> &nbsp; &nbsp; @item.OptionLetter &nbsp; &nbsp; @item.AnswerString</span>
+                            }
+                            else
+                            {
+                            if (Model.Answered == true)
+                            {
+                            <input type="radio" name="rdoAnswer" id="@string.Format(" {0}{1}", "rdoAnswer" , item.AnswerID)" value="@item.AnswerID" disabled="disabled" /><span> &nbsp; &nbsp; @item.OptionLetter &nbsp; &nbsp; @item.AnswerString</span>
+                            }
+                            else
+                            {
+                            <input type="radio" name="rdoAnswer" id="@string.Format(" {0}{1}", "rdoAnswer" , item.AnswerID)" value="@item.AnswerID" /><span> &nbsp; &nbsp; @item.OptionLetter &nbsp; &nbsp; @item.AnswerString</span>
+                            }
+
+                            }
+                        </label>
+
+                        <br />
+                        }
+                        }
+                        else
+                        {
+                        foreach (var item in Model.Options)
+                        {
+                        <label style="font-weight:bold;color:darkviolet;">
+                            @*@if (Model.AnswerID == item.AnswerID)
+                            {
+                            <input type="radio" name="rdoAnswer" id="@string.Format(" {0}{1}", "rdoAnswer" , item.AnswerID)" checked="checked" value="@item.AnswerID" /><span> &nbsp; &nbsp; @item.OptionLetter &nbsp; &nbsp; @item.AnswerString</span>
+                            }
+                            else
+                            {*@
+                            @*if (Model.Answered == true)
+                            {
+                            <input type="radio" name="rdoAnswer" id="@string.Format(" {0}{1}", "rdoAnswer" , item.AnswerID)" value="@item.AnswerID" disabled="disabled" /><span> &nbsp; &nbsp; @item.OptionLetter &nbsp; &nbsp; @item.AnswerString</span>
+                            }
+                            else
+                            {*@
+                            <input type="text" name="txtAnswer" id="@string.Format(" {0}{1}", "txtAnswer" , item.AnswerID)" value="@item.AnswerID" />&nbsp;&nbsp;  @*<span> &nbsp; &nbsp; @item.OptionLetter &nbsp; &nbsp; @item.AnswerString</span>*@
+                            @*}*@
+
+                            @*}*@
+                        </label>
+
+                        <br />
+                        }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <br />
+            <div class="row">
+                <div class="" style="border: 1px solid green; padding: 4px 2px 4px 2px;">
+                    <table>
+                        <tr>
+
+                            <td><strong style="color:blue;">@TempData["QuePosition"].ToString()</strong></td>
+                            <td></td>
+                            <!--<td>
+                                <button value="Submit" class="btn btn-primary btn-md">
+                                    <span class="glyphicon glyphicon-save"></span><strong>Submit</strong>
+                                </button>
+                            </td>-->
+                            <td><a href="javascript:void(0);" id="SF" class="btn btn-primary btn-md" onclick="saveForward(this);"><strong>Submit</strong></a></td>
+                            <td></td>
+
+                            <td>
+                                @if (TempData["QueEnd"] != null)
+                                {
+                                <a href="javascript:void(0);" id="FN" class="btn btn-primary btn-md" onclick="pauseAudio()"><strong>Finish</strong></a>
+                                }
+                                else
+                                {
+                                <a href="javascript:void(0);" id="SB" class="btn btn-primary btn-md" onclick="saveBackward(this);"><strong>Next >></strong></a>
+                                }
+                            </td>
+                            <td></td>
+                            <td></td>
+                            
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <br />
+            @if (Session["skipQue"] != null)
+            {
+            <div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @Session["skipQueText"];
+            </div>
+
+            }
+            @if (TempData["negQue"] != null)
+            {
+            <div style="text-align:center; border: 1px solid green; padding: 4px 2px 4px 2px; width:100%;">
+                <span style="color:red;font-size:medium;font-weight:bold;">Your selection: [ @TempData["AnsIncorrect"] ] is incorrect</span><br />
+                <span style="color:blue;font-size:medium;font-weight:bold;">The Correct Answer Is [ @TempData["AnsCorrect"] ]</span><br />
+                <strong>----------------------------------------EXPLANATION-----------------------------------------</strong><br />
+                <span style="color:green;font-size:medium;font-weight:bold;">@TempData["AnsExplanation"]</span>
+            </div>
+            }
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header text-white bg-success" style="text-align:center;">
+                    <h5 style="color:white;">Time Left</h5>
+                </div>
+                <div class="card-body md-white" style="text-align:center;">
+                    <label id="minutes">00</label>
+                    <label id="colon">:</label>
+                    <label id="seconds">00</label>
+                    <!--<h5><span id="timecountdownMin"></span>:<span id="timecountdownSec"></span></h5>
+                    <h5 id="timecountdown"></h5>-->
+                </div>
+            </div>
+            <br />
+            <div class="clearfix"></div>
+            <div class="card">
+                <div class="card-header text-white bg-success" style="text-align:center;">
+                    <h5>Score</h5>
+                </div>
+                <div class="card-body bg-white" style="text-align:center;">
+                    @if (@TempData["Marks"] == null)
+                    {
+                    <h4>
+                        <span>0</span>
+                    </h4>
+                    }
+                    else
+                    {
+                    <h4>
+                        @TempData["Marks"]
+                    </h4>
+                    }
+                </div>
+            </div>
+            <br />
+            <div class="clearfix"></div>
+            <div class="card">
+                <div class="card-header text-white bg-success" style="text-align:center;">
+                    <h5>Alert</h5>
+                </div>
+                <div class="card-body bg-white" style="text-align:center;">
+                    <div>
+                        @if (TempData["posQue"] != null)
+                        {
+                        <img src="../Content/images/ThumbsUp.jpg" height="40" width="40" /><br />
+                        <span style="color:blue;font-size:medium;font-weight:bold;">@TempData["Expletive"]</span>
+                        }
+                        @if (TempData["negQue"] != null)
+                        {
+                        <img src="../Content/images/ThumbsDown.png" height="40" width="40" /><br />
+                        <span style="color:red;font-size:medium;font-weight:bold;">@TempData["Expletive"]</span>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    }
+    <!--Modal Popup-->
+    <div id="modalPopup" class="btn darkBackgroundBtn smallPaddingAround" data-toggle="modal" data-target="#successDarkModal" style="display:none">
+    </div>
+</div>
+<!--Audio-->
+<audio id="timesupAudio">
+    <!--credit: audio from http://www.orangefreesounds.com/wecker-sound/ artist:Alexander-->
+    <source src="~/Audio/Wecker-sound.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<script>
+    var quiztime = '@TempData["Rem_Time"]';
+    var minutesLabel = document.getElementById("minutes");
+    var secondsLabel = document.getElementById("seconds");
+    var totalSeconds = 0;
+    setInterval(setTime, 1000);
+
+    //--------------Start Modification--------------------------//
+    $('#SB').Attr('disabled');
+    //var timer;
+    //timer = setInterval(setTime, 1000);
+
+    var timesupAudio = document.getElementById("timesupAudio");
+    //--------------End Modification---------------------------//
+
+    function setTime() {
+        ++totalSeconds;
+        secondsLabel.innerHTML = pad(totalSeconds % 60);
+        minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+
+        debugger;
+        //--------------Start Modification--------------------------//
+        if (quiztime >= minutesLabel) {
+            //clearInterval(timer)
+
+            $('#modalPopup').click();
+            timesupAudio.volume = 0.5;
+            timesupAudio.play();
+
+            //secondsLabel.innerHTML = '00';
+            //minutesLabel.innerHTML = '00';
+
+            return;
+        }
+        //--------------End Modification--------------------------//
+    }
+
+    function pad(val) {
+        var valString = val + "";
+        if (valString.length < 2) {
+            return "0" + valString;
+        }
+        else {
+            return valString;
+        }
+    }
+
+    function pauseAudio() {
+        timesupAudio.pause();
+        //debugger;
+        $.ajax({
+            url: '@Url.Action("StopTimer", "Quiz")',
+            type: "GET",
+            success: function (result) {
+                if (result.success) {
+                    //clearInterval(timer);
+                    //debugger;
+                    window.location.href = "/Quiz/QuizResult";
+                }
+                else {
+
+                }
+
+            }
+        });
+    }
+
+    function saveForward(sender) {
+
+        $('#SF').Attr('disabled');
+        $('#SB').removeAttr('disabled');
+        $('#FN').removeAttr('disabled');
+        $('#Direction').val('forward').change();
+        document.getElementById('form').submit();
+    }
+
+    function saveBackward(sender) {
+        $('#FN').Attr('disabled');
+        $('#SF').removeAttr('disabled');
+        $('#SB').Attr('disabled');
+        $('#Direction').val('backward').change();
+        document.getElementById('form').submit();
+    }
+
+    function Submit(sender) {
+        //debugger;
+        $(this).closest("form").submit();
+    }
+
+</script>
+
+
+<script>
+        //$("input[name='rdoAnswer']").change(function () {
+        //    $("#SF").removeAttr("disabled");
+        //    //$('#Direction').val('forward').change();
+        //    //$('#AnswerSelection').val('true').change();
+        //    //$(this).closest("form").submit();
+        //});
+
+        //$("input[name='rdoAnswer']").change(function () {
+        //    $('#Direction').val('forward').change();
+        //    $('#AnswerSelection').val('true').change();
+        //    $(this).closest("form").submit();
+        //});
+
+        //--------------------------------------Start Speech Setup----------------------------------------------------------
+
+        //var voiceList = document.querySelector('#voiceList');
+        //var txtInput = document.querySelector('#SpeechText');
+        //var btnSpeak = document.querySelector('#btnSpeak');
+
+        //var tts = window.speechSynthesis;
+        //var voices = [];
+
+        //GetVoices();
+
+        //if (speechSynthesis !== undefined) {
+        //    speechSynthesis.onvoiceschanged = GetVoices;
+        //}
+
+        //btnSpeak.addEventListener('click', () => {
+        //    var toSpeak = new SpeechSynthesisUtterance(txtInput.value);
+        //    var selectedVoiceName = voiceList.selectedOptions[0].getAttribute('data-name');
+        //    voices.forEach((voice) => {
+        //        if (voice.name === selectedVoiceName) {
+        //            toSpeak.voice = voice;
+        //        }
+        //    });
+        //    tts.speak(toSpeak);
+        //});
+
+        //function GetVoices() {
+        //    //voiced = tts.name85;
+        //    voices = tts.getVoices();
+        //    voiceList.innerHTML = '';
+        //    voices.forEach((voice) => {
+        //        var listItem = document.createElement('option');
+        //        listItem.textContent = voice.name;
+        //        listItem.setAttribute('data-lang', voice.lang);
+        //        listItem.setAttribute('data-name', voice.name);
+        //        voiceList.appendChild(listItem);
+        //    });
+
+        //    voiceList.selectedIndex = 0;
+
+
+         //--------------------------------------End Speech Setup----------------------------------------------------------
+
+        //var successans = '@TempData["posQue"]';
+        //if (successans != null)
+        //{
+        //    function greet()
+        //    {
+        //        $('#Direction').val('forward').change();
+        //        $(this).closest("form").submit();
+        //    }
+        //    setTimeout(greet, 30000);
+        //}
+
+</script>
+
+

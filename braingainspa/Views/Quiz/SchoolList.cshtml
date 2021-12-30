@@ -1,0 +1,130 @@
+﻿@model braingainspa.Models.School
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add School</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @*<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('[id*=btnSend]').on('click', function () {
+                    var id = $(this).closest('tr').find('td').eq(0).html().trim();
+                    $.post("/Home/MenuLibroMayor", { id: id }, function (r) {
+                    });
+                });
+            });
+        </script>*@
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <div class="row">
+        @Html.Partial("~/Views/Shared/_Header.cshtml")
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <fieldset>
+                <legend>Schools</legend>
+
+                @using (Html.BeginForm("Schools", "Quiz", FormMethod.Post))
+            {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <p style="color:blue">@Html.ViewBag.Msg</p>
+                        <p style="color:red">@Html.ViewBag.Err</p>
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <span>
+                                @Html.LabelFor(model => model.SchoolName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            </span>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.SchoolName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SchoolName, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            @Html.LabelFor(model => model.Website, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @*<input type="submit" value="  Save  " class="btn btn-sm btn-primary" />*@
+                                <button value="Submit" class="btn btn-primary btn-lg pull-right">  Save  </button>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+                <div>
+                    @Html.ActionLink("View List", "SchoolList")
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+    <div class="row">
+        @Html.Partial("~/Views/Shared/_Footer.cshtml")
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+</body>
+</html>

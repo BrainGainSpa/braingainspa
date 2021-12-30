@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    @*@Styles.Render("~/Content")
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+
+
+
+    <script>document.getElementsByTagName("html")[0].className += " js";</script>
+    @*<link rel="stylesheet" href="../../Content/assets/css/style.css">
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+        <link rel="stylesheet" href="../../Content/assets/css/sidebar-themes.css">
+        <link rel="shortcut icon" type="image/png" href="../../Content/asset/images/favicon.png" />
+        <link rel="stylesheet" href="../../Content/asset/css/style.css">
+        @*<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+            <link rel="stylesheet" href="../../Content/asset/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../../Content/asset/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../../Content/asset/css/bootstrap-theme.css" media="screen">
+
+            <link rel='stylesheet' id='camera-css' href='../../Content/asset/css/camera.css' type='text/css' media='all'>*@
+</head>
+<body oncontextmenu="return(false);">
+    @*<header>
+            @Html.Partial("~/Views/Shared/_Header.cshtml")
+        </header>*@
+    <header class="cd-main-header js-cd-main-header">
+        <div class="cd-logo-wrapper">
+            <a href="#0" class="cd-logo">
+
+                <img src="../../Content/assets/img/cd-logo.svg" alt="Logo">
+            </a>
+        </div>
+
+        <div class="cd-search js-cd-search">
+            <form>
+                <input class="reset" type="search" placeholder="Search...">
+            </form>
+        </div>
+
+        <button class="reset cd-nav-trigger js-cd-nav-trigger" aria-label="Toggle menu"><span></span></button>
+
+        <ul class="cd-nav__list js-cd-nav__list">
+            <li class="cd-nav__item"><a href="#0">Tour</a></li>
+            <li class="cd-nav__item"><a href="#0">Support</a></li>
+            <li class="cd-nav__item cd-nav__item--has-children cd-nav__item--account js-cd-item--has-children">
+                <a href="#0">
+                    <img src="../../Content/assets/img/cd-avatar.svg" alt="avatar">
+                    <span>@TempData["FN"]</span>
+                    @*<span>Account</span>*@
+
+                </a>
+
+                <ul class="cd-nav__sub-list">
+
+                    <li class="cd-nav__sub-item"><a href="@Url.Action("Profile", "Account")">My Account</a></li>
+                    @*<li class="cd-nav__sub-item"><a href="#0">Edit Account</a></li>*@
+                    <li class="cd-nav__sub-item"><a href="@Url.Action("Signin", "Account")">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </header> <!-- .cd-main-header -->
+    <main class="cd-main-content">
+        <nav class="cd-side-nav js-cd-side-nav">
+            <!-- sidebar-header  -->
+            <div class="sidebar-item sidebar-header d-flex flex-nowrap">
+                <div class="user-pic">
+                    <img class="img-responsive img-rounded" id="imgPix" src="../../Content/images/user.jpg" alt="User picture">
+                </div>
+                <div class="user-info">
+                    <span class="user-name">
+                        @Session["FN"].ToString() <br />
+                        <strong>
+                            @Session["LN"].ToString() <br />
+                        </strong>
+                    </span>
+                    <span class="user-role">
+                        @*<asp:Label ID="lblUserType" runat="server" Text="Administrator"></asp:Label>*@
+                        @Session["EntityType"].ToString() <br />
+                    </span>
+                    <span class="user-role">
+                        Referree Code:
+                        @Session["ReferreeCode"].ToString() <br />
+                        @*<asp:Label ID="lblReferralCode" runat="server" Text="N/A"></asp:Label>*@
+                    </span>
+                    <span class="user-status">
+                        <i class="fa fa-circle"></i>
+                        <span>Online</span>
+                    </span>
+                </div>
+            </div>
+            <ul class="cd-side__list js-cd-side__list">
+                <li class="cd-side__label"><span>Accounts</span></li>
+                <li class="cd-side__item cd-side__item--has-children cd-side__item--overview js-cd-item--has-children">
+                    <a href="#0">Accounts</a>
+                    <ul class="cd-side__sub-list">
+                        <li class="cd-side__sub-item"><a href="@Url.Action("Subscriptions", "Account")">&nbsp;New Subscription&nbsp;</a></li>
+                        <li class="cd-side__sub-item"><a href="@Url.Action("Subscriptions", "Account")">&nbsp;Active Subscriptions&nbsp;</a></li>
+                        <li class="cd-side__sub-item"><a href="@Url.Action("Subscriptions", "Account")">&nbsp;All Subscriptions&nbsp;</a></li>
+                        <li class="cd-side__sub-item"><a href="#0">Earnings</a></li>
+                        <li class="cd-side__sub-item"><a href="@Url.Action("Downlines", "Account")">Downline Tree(Genealogy)</a></li>
+                    </ul>
+
+                </li>
+                <li class="cd-side__item cd-side__item--has-children cd-side__item--comments js-cd-item--has-children">
+                    <a href="#0">Academics</a>
+                    <ul class="cd-side__sub-list">
+                        <li class="cd-side__sub-item"><a href="@Url.Action("CurrentClass", "Quiz", new { id = 1 })">&nbsp;Quiz&nbsp;</a></li>
+                        <li class="cd-side__sub-item"><a href="@Url.Action("CurrentClass", "Quiz", new { id = 2 })">&nbsp;Past Questions&nbsp;</a></li>
+                        <li class="cd-side__sub-item"><a href="#0">E-Library</a></li>
+                    </ul>
+                </li>
+                <li class="cd-side__item cd-side__item--has-children cd-side__item--comments js-cd-item--has-children">
+                    <a href="#0">Archives</a>
+                    <ul class="cd-side__sub-list">
+                        <li class="cd-side__sub-item"><a href="#0">&nbsp;Quiz&nbsp;</a></li>
+                        <li class="cd-side__sub-item"><a href="#0">&nbsp;Past Questions&nbsp;</a></li>
+                        <li class="cd-side__sub-item"><a href="#0">E-Library</a></li>
+                    </ul>
+                </li>
+                <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
+                    <a href="#0">Personal<span class="cd-count">3</span></a>
+                    <ul class="cd-side__sub-list">
+                        <li class="cd-side__sub-item"><a aria-current="page" href="@Url.Action("MyCodes", "Account")">My Codes</a></li>
+                        <li class="cd-side__sub-item"><a href="@Url.Action("ChangePassword", "Account")">Change Password</a></li>
+                        <li class="cd-side__sub-item"><a href="@Url.Action("Downlines", "Account")">Downlines</a></li>
+                        <li class="cd-side__sub-item"><a href="@Url.Action("QuestionArchives", "Quiz")">Archives</a></li>
+
+                    </ul>
+                </li>
+
+
+            </ul>
+
+            @*<ul class="cd-side__list js-cd-side__list">
+                    <li class="cd-side__label"><span>Secondary</span></li>
+                    <li class="cd-side__item cd-side__item--has-children cd-side__item--bookmarks js-cd-item--has-children">
+                        <a href="#0">Bookmarks</a>
+
+                        <ul class="cd-side__sub-list">
+                            <li class="cd-side__sub-item"><a href="@Url.Action("Subscriptions", "Account")">Subscription</a></li>
+                            <li class="cd-side__sub-item"><a href="#0">Edit Bookmark</a></li>
+                            <li class="cd-side__sub-item"><a href="#0">Import Bookmark</a></li>
+                        </ul>
+                    </li>
+                    <li class="cd-side__item cd-side__item--has-children cd-side__item--images js-cd-item--has-children">
+                        <a href="#0">Images</a>
+
+                        <ul class="cd-side__sub-list">
+                            <li class="cd-side__sub-item"><a href="#0">All Images</a></li>
+                            <li class="cd-side__sub-item"><a href="#0">Edit Image</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="cd-side__item cd-side__item--has-children cd-side__item--users js-cd-item--has-children">
+                        <a href="#0">Users</a>
+
+                        <ul class="cd-side__sub-list">
+                            <li class="cd-side__sub-item"><a href="#0">All Users</a></li>
+                            <li class="cd-side__sub-item"><a href="#0">Edit User</a></li>
+                            <li class="cd-side__sub-item"><a href="#0">Add User</a></li>
+                        </ul>
+                    </li>
+                </ul>*@
+
+            <ul class="cd-side__list js-cd-side__list">
+                <li class="cd-side__label"><span>Action</span></li>
+                <li class="cd-side__btn"><button class="reset" href="#0">+ Button</button></li>
+            </ul>
+        </nav>
+        <div class="cd-content-wrapper">
+            <div class="text-component text-center">
+                <div class="container body-content">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="" style="background-color:cornflowerblue; border:1px solid red;border-radius:3px;">
+                                @if (@TempData["Withdrawals"] != null)
+                                {
+                                    <span style="color:green; font-weight:bold; font-size:x-large">₦@TempData["Withdrawals"]</span>
+                                }
+                                else
+                                {
+                                    <span style="color:green;font-weight:bold; font-size:x-large">₦0.00</span>
+                                }
+                                <br />
+                                <span><strong>Withdrawals</strong></span>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="" style="background-color:cornflowerblue; border:1px solid red;border-radius:3px;">
+                                @if (@TempData["Earnings"] != null)
+                                {
+                                    <span style="color:gold; font-weight:bold; font-size:x-large">₦@TempData["Earnings"]</span>
+                                }
+                                else
+                                {
+                                    <span style="color:gold;font-weight:bold; font-size:x-large;">₦0.00</span>
+                                }
+                                <br />
+                                <span><strong>Earnings</strong></span>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="" style="background-color:cornflowerblue; border:1px solid red;border-radius:3px;">
+                                @if (@TempData["Purse"] != null)
+                                {
+                                    <span style="color:goldenrod;font-weight:bold; font-size:x-large">₦@TempData["Purse"]</span>
+                                }
+                                else
+                                {
+                                    <span style="color:goldenrod;font-weight:bold; font-size:x-large">₦0.00</span>
+                                }
+                                <br />
+                                <span><strong>e-Purse</strong></span>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+
+                        </div>
+                    </div>
+
+                    @if (bool.Parse(Session["Subscription"].ToString()) == false)
+                    {
+                        <br />
+                        <div class="row">
+
+                            <div class="alert alert-warning alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Warning!</strong> No Subscription was detected. Please, subscribe to a resource to enjoy our services.
+                                &nbsp;&nbsp;&nbsp;
+                                <a href="@Url.Action("Subscriptions", "Account")" class="btn btn-primary btn-md" data-toggle="tooltip" title="Subscribe"><i class="glyphicon glyphicon-briefcase"></i>&nbsp;Subscribe Now&nbsp;</a>
+                            </div>
+                        </div>
+                    }
+                    @RenderBody()
+
+                </div>
+            </div>
+        </div> <!-- .content-wrapper -->
+    </main> <!-- .cd-main-content -->
+    <script src="../../Content/assets/js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
+    <script src="../../Content/assets/js/menu-aim.js"></script>
+    <script src="../../Content/assets/js/main.js"></script>
+    @*<footer>
+            @Html.Partial("../../Views/Shared/_Footer.cshtml")
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>*@
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="../../Scripts/jquery.validate.min.js"></script>
+    <script src="../../Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

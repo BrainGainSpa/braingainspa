@@ -1,0 +1,79 @@
+﻿@model braingainspa.Models.Exam
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>QuizTimer</title>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        var start = Date.now(),
+            diff,
+            minutes,
+            seconds;
+        function startTimer(duration) {
+            function timer() {
+                // get the number of seconds that have elapsed since
+                // startTimer() was called
+                diff = duration - (((Date.now() - start) / 1000) | 0);
+
+                // does the same job as parseInt truncates the float
+                minutes = (diff / 60) | 0;
+                seconds = (diff % 60) | 0;
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                $("#time").text(minutes + ":" + seconds);
+                $("#timehidden").val(minutes + ":" + seconds);
+                if (diff <= 0) {
+                    // add one second so that the count down starts at the full duration
+                    // example 05:00 not 04:59
+                    start = Date.now() + 1000;
+                }
+            };
+            // we don't want to wait a full second before the timer starts
+            timer();
+            setInterval(timer, 1000);
+        }
+
+        window.onload = function () {
+            var fiveMinutes = 60 * @Model.ReaminTime.Minutes + @Model.ReaminTime.Seconds;
+                startTimer(fiveMinutes);
+            $("#time").val("start");
+        };
+    </script>
+</head>
+<body>
+    <div> 
+
+        @using (Html.BeginForm("CreateExam", "Timer", FormMethod.Post, null))
+        {
+
+            <table>
+                <tr>
+                    <td>Id:</td>
+                    <td>@Html.TextBoxFor(a => a.Id, new { htmlAttributes = new { @class = "form-control" } })</td>
+                </tr>
+                <tr>
+                    <td>Details:</td>
+                    <td>@Html.TextBoxFor(a => a.Details, new { htmlAttributes = new { @class = "form-control" } })</td>
+                </tr>
+                <tr>
+                    <td>ReaminTime:</td>
+                    <td>
+                        @Html.LabelFor(a => a.ReaminTime, new { id = "time" })
+                    @Html.HiddenFor(a => a.ReaminTime, new { id = "timehidden" })
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Click" />
+        }
+    </div>
+</body>
+</html>

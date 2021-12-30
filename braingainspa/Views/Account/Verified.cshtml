@@ -1,0 +1,112 @@
+﻿
+@model braingainspa.Models.VerifyPhoneEmailViewModel
+@{
+    ViewBag.Title = "Verified";
+    Layout = "~/Views/Shared/_LayoutSigned.cshtml";
+}
+
+<div class="container">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-10">
+                <br />
+                @if (@Html.ViewBag.Msg != null)
+                {
+                    <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @Html.ViewBag.Msg
+                    </div>
+                }
+                @if (@Html.ViewBag.Err != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @Html.ViewBag.Err
+                    </div>
+                }
+                <br />
+                <div class="card ">
+                    <div class="card-header text-white bg-primary" style="text-align:center; height:40px; font-size:14px;">
+                        <strong>Registration Success</strong>
+                    </div>
+                    <div class="card-body bg-white" style="text-align:center;">
+                        <p>
+                            <img src="../../Content/images/Successful01.jpg" alt="Successful Registration" height="80" width="80" />
+                            <hr />
+                            <h5>Your Registration was successful. You are almost done.</h5>
+                        </p>
+                        @if (bool.Parse(Session["ConfirmEmail"].ToString()) == false)
+                        {
+                            <p id="dvConfirmEmail" runat="server">
+
+                                A Mail was sent to your registered Email address. You must log in to your email to verify the Email account.
+
+                            </p>
+                        }
+                        @if (bool.Parse(Session["ConfirmPhone"].ToString()) == false)
+                        {
+                            <div id="dvConfirmPhone" runat="server">
+
+
+                                @*<h6>A Verification Code has been sent to you on your registered Phone and Email respectively. Enter the the codes to Verify the Phone or Email to complete your registration.</h6>*@
+                                <p>A Verification Code has been sent to you on your registered Phone Number. Enter the the code below to Verify the Phone Number.</p>
+                                <hr />
+
+                                @using (Html.BeginForm("Verified", "Account", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-horizontal">
+                                        <header style="text-align:left;">
+                                            <h5>Verify Phone Number</h5>
+                                            <asp:HiddenField ID="hdID" runat="server" />
+                                        </header>
+                                        <div class="form-group" style="text-align:left;">
+                                            <div class="col-md-12">
+                                                I didn't receive the Code, Please <a href="@Url.Action("ResendPhoneCode", "Account", new { @key = @Session["PhoneDetails"] })" data-toggle="tooltip" title="Code Resend"><strong>Resend it</strong></a>
+                                            </div>
+                                            <p style="font-style:italic; color:blueviolet;">(You may check if your number is under DND restriction by your network platform.)</p>
+                                        </div>
+                                        <div class="row">
+                                            @Html.LabelFor(model => model.PhoneCode, "*Phone Code: ", htmlAttributes: new { @class = "control-label col-md-3" })
+                                            <div class="col-md-3">
+                                                @Html.EditorFor(model => model.PhoneCode, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.PhoneCode, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-md-3 pull-left">
+                                                @if (bool.Parse(Session["ConfirmPhone"].ToString()) == false)
+                                                {
+                                                    <img src="../../Content/images/Delete.png" class="center" Height="40" Width="40" alt="Sign Up">
+                                                }
+                                                else
+                                                {
+                                                    <img src="../../Content/images/Verified.png" class="center" Height="40" Width="40" alt="Sign Up">
+                                                }
+                                            </div>
+                                            <div class="col-md-3 pull-left">
+                                                <button value="Submit" class="btn btn-primary btn-md pull-left" title="Verify">
+                                                    &nbsp;&nbsp;Verify&nbsp;&nbsp;<span class="glyphicon glyphicon-align-justify"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+                            </div>
+                        }
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

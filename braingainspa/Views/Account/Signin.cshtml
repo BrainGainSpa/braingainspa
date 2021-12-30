@@ -1,0 +1,122 @@
+﻿@model braingainspa.Models.SigninViewModel
+
+@{
+    ViewBag.Title = "Sign In";
+    Layout = "~/Views/Shared/_LayoutOut.cshtml";
+}
+
+<div class="container">
+    <style>
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            height: 50px;
+            width: 40px;
+        }
+
+        hr {
+            color: blue;
+        }
+    </style>
+    <div id="dvskl" class="row">
+        <div class="col-md-6">
+            <img src="../../Content/images/44083113-set-of-education-and-learning.jpg" alt="Library" style="height:auto; width:auto; margin-top:20px;text-align:left;" />
+        </div>
+        <div class="col-md-6">
+            <fieldset>
+                <legend>SIGN IN</legend>
+                <div class="form-group">
+                    <img src="../../Content/images/secure-login-icon.jpg" class="center" alt="Sign Up">
+                    @*</div>*@
+                </div>
+                <hr />
+                @using (Html.BeginForm("Signin", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @if (@Html.ViewBag.Msg != null)
+                    {
+                        <div class="alert alert-success alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            @Html.ViewBag.Msg
+                        </div>
+                    }
+                    @if (@Html.ViewBag.Err != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            @Html.ViewBag.Err
+                        </div>
+                    }
+                    @*<p style="color:blue; font-style:italic;">@Html.ViewBag.Msg</p>
+        <p style="color:red; font-style:italic;">@Html.ViewBag.Err</p>*@
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <div class="col-md-12 ">
+                            @Html.LabelFor(model => model.Email, "Login ID")
+
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "angel@hayoo.com or 08033660000", @style = "width: 100%;max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Password, "Password")
+
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "******", @style = "width: 100%;max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <i>
+                                @Html.CheckBoxFor(model => model.TOS) By checking this box, and your continued use of your account, you acknowledge that you have read and agree to our @Html.ActionLink("Terms of Service", "TOS", "Account", new { target = "_blank" })
+                                and @Html.ActionLink("Privacy Policy", "Privacy", "Account", new { target = "_blank" })
+                            </i>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 text-left">
+                            <i>Don't remember your Password? @Html.ActionLink("get it", "ForgotPassword", "Account", null)</i>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            @Html.CheckBoxFor(model => model.RememberMe)
+                            <i>@Html.LabelFor(model => model.RememberMe, "Remember Me")</i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <button value="Submit" class="btn btn-success btn-lg pull-right">
+                                <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Sign in &nbsp;&nbsp;
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-12 text-right">
+                            <strong><i>You do not have an account yet? @Html.ActionLink("Sign Up Here", "Signup", "Account", null)</i></strong>
+                        </div>
+                    </div>
+                </div>
+                }
+            </fieldset>
+        </div>
+        @*<div class="col-md-3">
+
+        </div>*@
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

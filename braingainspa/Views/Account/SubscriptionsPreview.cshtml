@@ -1,0 +1,182 @@
+﻿@model braingainspa.Models.SubscriptionPreviewViewModel
+@{
+    ViewBag.Title = "Subscription Preview";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+
+    decimal _totalAmount = 0;
+
+}
+
+<div class="container">
+    <style>
+        /*.center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            height: 50px;
+            width: 40px;
+        }*/
+
+        th {
+            color: blue;
+            background-color: azure;
+            font-weight: bold;
+            text-align: center;
+            width: auto;
+        }
+
+        td {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+            width: auto;
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-md-10">           
+            <fieldset>
+                <legend style="color:white;">Subscription Preview</legend>
+                <br />
+
+                @*@using (Html.BeginForm("InitializePayment", "Account", FormMethod.Post))
+        {*@
+                @Html.AntiForgeryToken()
+
+                @*<div class="form-horizontal">*@
+                @if (@Html.ViewBag.Msg != null)
+                {
+                    <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @Html.ViewBag.Msg
+                    </div>
+                }
+                @if (@Html.ViewBag.Err != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        @Html.ViewBag.Err
+                    </div>
+                }
+
+                <table class="table table-hover table-responsive">
+
+                    <tr>
+                        <th>Resource</th>
+                        <th>Class</th>
+                        <th>Duration</th>
+                        <th>Amount</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        @*<th align="center">Actions</th>*@
+                    </tr>
+                    <tbody>
+                        @if (ViewBag.PreviewList != null)
+                        {
+                            foreach (var item in ViewBag.PreviewList)
+                            {
+                                <tr id="row_@item.SubscriptionID">
+                                    <td>
+                                        <strong>@item.ResourceType</strong>
+                                    </td>
+                                    <td>
+                                        <strong>@item.Class</strong>
+                                    </td>
+                                    <td>
+                                        <strong>@item.Duration</strong>
+                                    </td>
+                                    <td>
+                                        <strong>@item.Amount.ToString("#,##.00")</strong>
+                                    </td>
+                                    <td>
+                                        <strong>@item.StartDate.ToString("dd MMM yyyy")</strong>
+                                    </td>
+                                    <td>
+                                        <strong>@item.EndDate.ToString("dd MMM yyyy")</strong>
+                                    </td>
+                                </tr>
+                                <tr></tr>
+
+                                _totalAmount += item.Amount;
+                            }
+
+                            if (ViewBag.RegFees != null)
+                            {
+                                <tr>
+                                    <td>  </td>
+                                    <td>  </td>
+                                    <td>  </td>
+                                    <td>  </td>
+                                    <td class="text-right"><h4>Registration:</h4></td>
+                                    <td class="text-left" style="color:gold;"><h4><strong>₦@ViewBag.RegFees.ToString("#,##0.00")</strong></h4></td>
+                                </tr>
+
+                                _totalAmount += ViewBag.RegFees;
+                            }
+
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td class="text-right"><h4>Total:</h4></td>
+                                <td class="text-left" style="color:gold;"><h4><strong>₦@_totalAmount.ToString("#,##0.00")</strong></h4></td>
+                            </tr>
+                            Session["PayAmt"] = _totalAmount;
+                        }
+
+                    </tbody>
+                </table>
+                @*</div>*@
+
+                <h4 style="color:rebeccapurple;">Payment Options</h4>
+                <hr />
+                @*<div class="clearfix"></div>*@
+                <row>
+                    <div class="col-md-6" style="text-align:left;">
+                        <a href="@Url.Action("InitializePayment","Account")">
+                            <img src="@Url.Content("~/Content/images/PaystackLogo1.png")" alt="Paystack" width="100" height="50" />
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <i>Paystack allows you to make payment with your card.</i>
+                    </div>
+
+                </row>
+                @*<div class="clearfix"></div>*@
+                <row>
+                    <div class="col-md-6" style="text-align:left;">
+                        <a href="@Url.Action("PayByEPurse","Account")">
+                            <img src="@Url.Content("~/Content/images/ePurse1.jpg")" alt="E-Purse" width="100" height="50" />
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <i>You can make payments with balances on your E-Purse</i>
+                    </div>
+                </row>
+
+                <br /><br />
+                <div class="row">
+                    <div class="col-md-12" style="padding-left:50px;">
+                        <img src="~/Content/images/Paystack.png" width="300" />
+                    </div>
+                </div>
+                @*}*@
+            </fieldset>
+            @*</div>*@
+        </div>
+        @*<div class="col-md-2">
+
+        </div>*@
+
+    </div>
+
+
+</div>
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+
+

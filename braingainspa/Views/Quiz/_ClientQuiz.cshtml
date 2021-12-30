@@ -1,0 +1,19 @@
+﻿@model IEnumerable<braingainspa.Models.ClientAnswerViewModel>
+
+<div class="row">
+    <div class="col-md-12" style="padding-left:70px;">
+
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <label class="radio-inline">
+                    <input type="radio" name="rdoAnswer" id="@string.Format("{0}{1}", "rdoAnswer", item.AnswerID)" value="@item.AnswerID" /> @item.AnswerText
+                    @*<input type="radio" name="@string.Format("{0}{1}", "inlineRadioOptions","rdoAnswer")" id="@string.Format("{0}{1}", "inlineRadio", item.AnswerID)" value="@item.AnswerID" style="margin-left: -16px;"> @item.AnswerText*@
+                </label><br />
+            }
+        }
+    </div>
+
+</div>
+

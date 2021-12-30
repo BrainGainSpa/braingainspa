@@ -1,0 +1,639 @@
+﻿@model braingainspa.Models.QuestionXModels
+@{
+    ViewBag.Title = "Skill Practice Quiz";
+    Layout = "~/Views/Shared/_LayoutQuiz.cshtml";
+}
+
+@{
+    string nDirection = string.Empty;
+    int queCount = int.Parse(Session["QueCount"].ToString());
+
+    //var startTime = 0;
+    //var endTime = int.Parse(Session["quetime"].ToString());
+
+}
+
+<style>
+
+    .containerPadding {
+        padding: 170px 0px 170px 0px;
+    }
+
+    .textWhite {
+        color: white;
+    }
+
+    .fontSizeLarge {
+        font-size: 20px;
+    }
+
+    .fontXLarge {
+        font-size: 35px;
+    }
+
+    .darkBackground {
+        background-color: #222126;
+    }
+
+    .darkBackgroundBtn {
+        background-color: #948cad;
+        color: black;
+    }
+    /*Override default boostrap 3*/
+    .row {
+        margin-left: 0px; /*default -15px*/
+        margin-right: 0px; /*default -15px*/
+    }
+
+    .centerBlock {
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+    }
+
+    @@media (max-width:360px) {
+        .containerPadding {
+            padding: 10px 0px 10px 0px;
+        }
+    }
+
+    #seconds {
+        font-size: 5em;
+        color: forestgreen;
+    }
+
+    #minutes {
+        font-size: 5em;
+        color: forestgreen;
+    }
+
+    #colon {
+        font-size: 5em;
+        color: forestgreen;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        @Html.Partial("_SuccessDarkModal")
+    </div>
+    <div class="clearfix"></div>
+    <br />
+</div>
+
+
+
+@using (Html.BeginForm("PostAnswers", "Quiz", FormMethod.Post, new { @id = "form", enctype = "multipart/form-data" }))
+{
+
+    <input type="hidden" id="Direction" name="Direction" value="forward" />
+    <input type="hidden" name="Token" value="@(Model.Token)" />
+    <input type="hidden" name="TestID" value="@(Model.QuestionID)" />
+    <input type="hidden" name="QuestionID" value="@(Model.QuestionNumber)" />
+    <input type="hidden" name="AnswerSelection" value='true' />
+
+    <div class="row">
+        <h2 style="color:green;">
+            @Session["QzTitle"].ToString()
+        </h2>
+        <div class="col-md-8" style="text-align:left;">
+
+            <div class="card">
+                <div class="card-header text-white bg-success">
+                    <span style="text-align:left; font-weight:bold; font-size:large;color:white;">Q.@Model.QuestionNumber &nbsp; @Model.QuestionString </span>
+                </div>
+                <div class="card-body bg-white">
+                    <div class="row">
+                        <div class="col-md-9" style="text-align:left;">
+                            <div class="prelude" style="text-align:left; font-style:italic; font-weight:bold; ">@Model.Instruction</div>
+                        </div>
+                        <div class="">
+                            @if (Session["img"].ToString() == "1")
+                            {
+                                <img class="img-responsive" id="targetImg2" src="@Model.ImagePath" alt="Que Pix" height="300" />
+                                <br />
+                            }
+                        </div>
+                    </div>
+                    <br />
+                    <div oncontextmenu="return(false);">
+
+                        @if (Model.Options != null)
+                        {
+                            foreach (var item in Model.Options)
+                            {
+                                <label style="font-weight:bold;color:darkviolet;">
+                                    @if (Model.AnswerID == item.AnswerID)
+                                    {
+                                        <input type="radio" name="rdoAnswer" id="@string.Format(" {0}{1}", "rdoAnswer" , item.AnswerID)" checked="checked" value="@item.AnswerID" /><span> &nbsp; &nbsp; @item.OptionLetter &nbsp; &nbsp; @item.AnswerString</span>
+                                    }
+                                    else
+                                    {
+                                        if (Model.Answered == true)
+                                        {
+                                            <input type="radio" name="rdoAnswer" id="@string.Format(" {0}{1}", "rdoAnswer" , item.AnswerID)" value="@item.AnswerID" disabled="disabled" /><span> &nbsp; &nbsp; @item.OptionLetter &nbsp; &nbsp; @item.AnswerString</span>
+                                        }
+                                        else
+                                        {
+                                            <input type="radio" name="rdoAnswer" id="@string.Format(" {0}{1}", "rdoAnswer" , item.AnswerID)" value="@item.AnswerID" /><span> &nbsp; &nbsp; @item.OptionLetter &nbsp; &nbsp; @item.AnswerString</span>
+                                        }
+
+                                    }
+                                </label>
+
+                                <br />
+                            }
+                        }
+                        else
+                        {
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        if (@TempData["FIGSlot1"] == "1")
+                                        {
+                                            @Html.EditorFor(model => model.FIGAnswer1, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter the Answer", @style = "width: 100%;max-width: 100%;" } })
+                                        }
+                                    </div>
+                                    <div class="col-md-3">
+                                        if (@TempData["FIGSlot2"] == "1")
+                                        {
+                                            @Html.EditorFor(model => model.FIGAnswer2, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter the Answer", @style = "width: 100%;max-width: 100%;" } })
+                                        }
+                                    </div>
+                                    <div class="col-md-3">
+
+                                    </div>
+                                    <div class="col-md-3">
+
+                                    </div>
+                                </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <br />
+            <div class="row">
+                <div class="" style="border: 1px solid green; padding: 4px 2px 4px 2px;">
+                    <table>
+                        <tr>
+
+                            <td><strong style="color:blue;">@TempData["QuePosition"].ToString()</strong></td>
+                            <td></td>
+                            <td><input type="button" id="SF" class="btn btn-primary btn-md" onclick="saveForward(this);" value="Submit" /></td>
+                            @*<td><a href="javascript:void(0);" id="SF" class="btn btn-primary btn-md" onclick="saveForward(this);"><strong>Submit</strong></a></td>*@
+                            <td></td>
+
+                            <td>
+                                @if (TempData["QueEnd"] != null)
+                                {
+                                    <input type="button" id="FN" class="btn btn-primary btn-md" disabled="disabled" value="Finish" onclick="pauseAudio();" />
+                                    @*<a href="javascript:void(0);" id="FN" class="btn btn-primary btn-md" onclick="pauseAudio()"><strong>Finish</strong></a>*@
+                                }
+                                else
+                                {
+                                    <input type="button" id="SB" class="btn btn-primary btn-md" disabled="disabled" value="Next" onclick="saveBackward(this);" />
+                                    @*<a href="javascript:void(0);" id="SB" class="btn btn-primary btn-md" onclick="saveBackward(this);"><strong>Next >></strong></a>*@
+                                }
+                            </td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <br />
+            @if (Session["skipQue"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    @Session["skipQueText"];
+                </div>
+
+            }
+            @if (TempData["negQue"] != null)
+            {
+                <div style="text-align:center; border: 1px solid green; padding: 4px 2px 4px 2px; width:100%;">
+                    <span style="color:red;font-size:medium;font-weight:bold;">Your selection: [ @TempData["AnsIncorrect"] ] is incorrect</span><br />
+                    <span style="color:blue;font-size:medium;font-weight:bold;">The Correct Answer Is [ @TempData["AnsCorrect"] ]</span><br />
+                    <strong>----------------------------------------EXPLANATION-----------------------------------------</strong><br />
+                    <span style="color:green;font-size:medium;font-weight:bold;">@TempData["AnsExplanation"]</span>
+                </div>
+            }
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header text-white bg-success" style="text-align:center;">
+                    <h5 style="color:white;">Timer</h5>
+                </div>
+                <div class="card-body md-white" style="text-align:center;">
+                    <h5>
+                        <span id="minutes"></span>:<span id="seconds"></span>
+                    </h5>
+                    @*<h5><span id="timecountdownMin"></span>:<span id="timecountdownSec"></span></h5>
+                    <h5 id="timecountdown"></h5>*@
+                </div>
+            </div>
+            <br />
+            <div class="clearfix"></div>
+            <div class="card">
+                <div class="card-header text-white bg-success" style="text-align:center;">
+                    <h5>Score</h5>
+                </div>
+                <div class="card-body bg-white" style="text-align:center;">
+                    @if (@TempData["Marks"] == null)
+                    {
+                        <h4>
+                            <span>0</span>
+                        </h4>
+                    }
+                    else
+                    {
+                        <h4>
+                            @TempData["Marks"]
+                        </h4>
+                    }
+                </div>
+            </div>
+            <br />
+            <div class="clearfix"></div>
+            <div class="card">
+                <div class="card-header text-white bg-success" style="text-align:center;">
+                    <h5>Alert</h5>
+                </div>
+                <div class="card-body bg-white" style="text-align:center;">
+                    <div>
+                        @if (TempData["posQue"] != null)
+                        {
+                            <img src="../Content/images/ThumbsUp.jpg" height="40" width="40" /><br />
+                            <span style="color:blue;font-size:medium;font-weight:bold;">@TempData["Expletive"]</span>
+                        }
+                        @if (TempData["negQue"] != null)
+                        {
+                            <img src="../Content/images/ThumbsDown.png" height="40" width="40" /><br />
+                            <span style="color:red;font-size:medium;font-weight:bold;">@TempData["Expletive"]</span>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+<!--Modal Popup-->
+<div id="modalPopup" class="btn darkBackgroundBtn smallPaddingAround" data-toggle="modal" data-target="#successDarkModal" style="display:none">
+</div>
+@*</div>*@
+<!--Audio-->
+<audio id="timesupAudio">
+    <!--credit: audio from http://www.orangefreesounds.com/wecker-sound/ artist:Alexander-->
+    <source src="~/Audio/Wecker-sound.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    var secondscount = 0;
+
+    var mCtr = parseInt('@Session["Counter"]');
+    if (mCtr == 0) {
+        secondscount = 0;
+    }
+    else {
+        secondscount = parseInt(mCtr);
+    }
+    const renderTimer = () => {
+        secondscount += 1;
+        var minutes = Math.floor(secondscount / 60).toString().padStart(2, "0");
+        var seconds = (secondscount % 60).toString().padStart(2, "0");
+        document.getElementById('minutes').innerHTML = minutes;
+        document.getElementById('seconds').innerHTML = seconds;
+        setCounter();
+
+        if (minutes > queCount) {
+            clearInterval(timer);
+
+            $('#modalPopup').click();
+            timesupAudio.volume = 0.5;
+            timesupAudio.play();
+
+            return;
+        }
+    }
+
+    const timer = setInterval(renderTimer, 1000)
+
+    function setCounter() {
+        $.ajax({
+            type: "POST",
+            dataType: 'JSON',
+            url: '/Home/CountUpTimer',          
+            data: { TCounter: secondscount },
+            success: function (result) {
+                
+            }
+        });
+    }
+
+    @*debugger;
+    var dt = '@TempData["Rem_Time"]';
+     var dateAr = dt.split('-');
+     var newDate = dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2];
+     var end = new Date(dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2]);
+
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+    debugger;
+    //$('#SB').Attr('disabled');
+    timer = setInterval(showRemaining, 1000);
+
+    var timesupAudio = document.getElementById("timesupAudio");
+
+    function showRemaining() {
+        var now = new Date();
+        var distance = end - now;
+        if (distance < 0) {
+            clearInterval(timer);
+
+            $('#modalPopup').click();
+            timesupAudio.volume = 0.5;
+            timesupAudio.play();
+
+            return;
+        }
+
+        var days = Math.floor(distance / _day);
+        var _hours = Math.floor((distance % _day) / _hour);
+        var _minutes = Math.floor((distance % _hour) / _minute);
+        var _seconds = Math.floor((distance % _minute) / _second);
+
+        document.getElementById('timecountdownMin').innerHTML = _minutes;
+        document.getElementById('timecountdownSec').innerHTML = _seconds;
+    }*@
+
+    function pauseAudio() {
+        timesupAudio.pause();
+        //debugger;
+        $.ajax({
+            url: '@Url.Action("StopTimer", "Quiz")',
+            type: "GET",
+            success: function (result) {
+                if (result.success) {
+                    clearInterval(timer);
+                    //debugger;
+                    window.location.href = "/Quiz/QuizResult";
+                }
+                else {
+
+                }
+
+            }
+        });
+    }
+
+    function saveForward(sender) {
+
+        //$('#FN').removeAttr('disabled');
+        //$('#SF').attr('disabled', 'disabled');
+        //$('#SB').attr('disabled');
+        $('#Direction').val('forward').change();
+        document.getElementById('form').submit();
+    }
+
+    function saveBackward(sender) {
+        //$('#FN').attr('disabled', 'disabled');
+        //$('#SF').removeAttr('disabled');
+        //$('#SB').attr('disabled', 'disabled');
+        $('#Direction').val('backward').change();
+        document.getElementById('form').submit();
+    }
+
+    function Submit(sender) {
+        //debugger;
+        $(this).closest("form").submit();
+    }
+
+</script>
+
+@*<script>
+        var EndTime = @endTime;
+        var StartTime = @startTime;
+
+        //var secondsCounter = StartTime % 60;
+
+        function startTick() {
+            document.getElementById("seconds").innerHTML = pad(StartTime % 60);
+            document.getElementById("minutes").innerHTML = pad(parseInt(StartTime / 60));
+            var mints = parseInt(StartTime / 60);
+            var _tick = setInterval(function ()
+            {
+                if (mints <= EndTime) {
+                    ++StartTime;
+                    document.getElementById("seconds").innerHTML = pad(StartTime % 60);
+                    document.getElementById("minutes").innerHTML = pad(parseInt(StartTime / 60));
+                }
+                else {
+                    $('#modalPopup').click();
+                    timesupAudio.volume = 0.5;
+                    timesupAudio.play();
+                    return;
+                }
+
+            }, 1000)
+        }
+
+        startTick();
+        //document.getElementById("minutes")
+
+
+        function pad(val) {
+            var valString = val + "";
+            if (valString.length < 2) {
+                return "0" + valString;
+            }
+            else {
+                return valString;
+            }
+        }
+    </script>*@
+
+@*<script type="text/javascript">
+    var quiztime = '@TempData["Rem_Time"]';
+    var minutesLabel = document.getElementById("minutes");
+    var secondsLabel = document.getElementById("seconds");
+    var totalSeconds = 0;
+    setInterval(setTime, 1000);
+
+    //--------------Start Modification--------------------------//
+    if (totalSeconds == 0) {
+        $('#SB').attr('disabled', 'disabled');
+    }
+
+    //var timer;
+    //timer = setInterval(setTime, 1000);
+
+    var timesupAudio = document.getElementById("timesupAudio");
+    //--------------End Modification---------------------------//
+
+    function setTime() {
+        //debugger;
+        if (totalSeconds == 0) {
+            if (secondsLabel.innerText != '00') {
+                totalSeconds = '<%= Session["TSeconds"] %>';
+                minutesLabel.innerHTML = '<%= Session["TMinutes"] %>';
+                ++totalSeconds;
+                secondsLabel.innerHTML = pad(totalSeconds % 60);
+                minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+            }
+            else {
+                ++totalSeconds;
+                secondsLabel.innerHTML = pad(totalSeconds % 60);
+                minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+                '<%Session["TSeconds"] = "' + totalSeconds + '"; %>';
+                '<%Session["TMinutes"] = "' + minutesLabel.innerHTML + '"; %>';
+            }
+
+        }
+        else {
+            ++totalSeconds;
+            secondsLabel.innerHTML = pad(totalSeconds % 60);
+            minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+            '<%Session["TSeconds"] = "' + totalSeconds + '"; %>';
+            '<%Session["TMinutes"] = "' + minutesLabel.innerHTML + '"; %>';
+        }
+
+        //debugger;
+        //--------------Start Modification--------------------------//
+        if (quiztime >= minutesLabel) {
+            //clearInterval(timer)
+
+            $('#modalPopup').click();
+            timesupAudio.volume = 0.5;
+            timesupAudio.play();
+
+            //secondsLabel.innerHTML = '00';
+            //minutesLabel.innerHTML = '00';
+
+            return;
+        }
+        //--------------End Modification--------------------------//
+    }
+
+    function pad(val) {
+        var valString = val + "";
+        if (valString.length < 2) {
+            return "0" + valString;
+        }
+        else {
+            return valString;
+        }
+    }*@
+
+@*<script>
+     var dt = '@TempData["Rem_Time"]';
+     var dateAr = dt.split('-');
+     var newDate = dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2];
+     var end = new Date(dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2]);
+
+     var _second = 1000;
+     var _minute = _second * 60;
+     //var _hour = _minute * 60;
+     //var _day = _hour * 24;
+     var timer;
+    $('#SB').Attr('disabled');
+    timer = setInterval(showRemaining, 1000);
+
+    var timesupAudio = document.getElementById("timesupAudio");
+
+     function showRemaining() {
+         var now = new Date();
+         var distance = end - now;
+         if (distance < 0) {
+             clearInterval(timer);
+
+             $('#modalPopup').click();
+             timesupAudio.volume = 0.5;
+             timesupAudio.play();
+
+             return;
+         }
+
+         //var days = Math.floor(distance / _day);
+         //var _hours = Math.floor((distance % _day) / _hour);
+         var _minutes = Math.floor((distance % _hour) / _minute);
+         var _seconds = Math.floor((distance % _minute) / _second);
+
+         document.getElementById('timecountdownMin').innerHTML = _minutes;
+         document.getElementById('timecountdownSec').innerHTML = _seconds;
+     }
+
+
+    function pauseAudio() {
+        timesupAudio.pause();
+        //debugger;
+        $.ajax({
+            url: '@Url.Action("StopTimer", "Quiz")',
+            type: "GET",
+            success: function (result) {
+            if (result.success) {
+            clearInterval(timer);
+            //debugger;
+            window.location.href = "/Quiz/QuizResult";
+            }
+            else {
+
+            }
+
+            }
+            });
+            }
+
+            function pauseAudio() {
+            timesupAudio.pause();
+            //debugger;
+            $.ajax({
+            url: '@Url.Action("StopTimer", "Quiz")',
+            type: "GET",
+            success: function (result) {
+            if (result.success) {
+            //clearInterval(timer);
+            //debugger;
+            window.location.href = "/Quiz/QuizResult";
+            }
+            else {
+
+            }
+
+            }
+            });
+            }
+
+            function saveForward(sender) {
+
+            $('#FN').removeAttr('disabled');
+            $('#SF').attr('disabled', 'disabled');
+            $('#SB').attr('disabled');
+            $('#Direction').val('forward').change();
+            document.getElementById('form').submit();
+            }
+
+            function saveBackward(sender) {
+            $('#FN').attr('disabled', 'disabled');
+            $('#SF').removeAttr('disabled');
+            $('#SB').attr('disabled', 'disabled');
+            $('#Direction').val('backward').change();
+            document.getElementById('form').submit();
+            }
+
+            function Submit(sender) {
+            //debugger;
+            $(this).closest("form").submit();
+            }
+
+            </script>*@

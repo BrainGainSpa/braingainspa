@@ -1,0 +1,51 @@
+﻿@model braingainspa.Models.PastQuestion
+
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>Class</th>
+                <th>Subject</th>
+                <th>Year</th>
+                <th>Description</th>
+                <th text-align="center">Actions</th>
+            </tr>
+            <tbody>
+                @if (ViewBag.PastQuestionList != null)
+                {
+                    foreach (var item in ViewBag.PastQuestionList)
+                    {
+                        <tr id="row_@item.PastQuestionID">
+                            <td>
+                                <strong>@item.FacultyName</strong>
+                            </td>
+                            <td>
+                                <strong>@item.CourseName</strong>
+                            </td>
+                            <td>
+                                <strong>@item.YearName</strong>
+                            </td>
+                            <td>
+                                @item.Description
+                            </td>
+                            <td align="center">
+                                <a href="@Url.Action("EditPastQuestion", "Quiz", new { id = @item.PastQuestionID })" class="btn btn-success" data-toggle="tooltip" title="View Details"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                <a href="@Url.Action("DeletePastQuestion","Quiz", new { id = @item.PastQuestionID })" onclick="return confirm('Are you sure that you want to Delete the specified item?')" class="btn btn-danger" data-toggle="tooltip" title="Delete Item"><i class="glyphicon glyphicon-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr></tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>
+

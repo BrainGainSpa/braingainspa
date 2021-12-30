@@ -1,0 +1,36 @@
+﻿@model braingainspa.Models.ClientQuiz
+
+
+<div class="row">
+    <table class="table table-bordered table-responsive">
+        <tr>
+            <th>Link</th>
+            <th>Description</th>
+            <th>Topics</th>
+            <th>Dates</th>
+        </tr>
+        <tbody>
+            @if (ViewBag.ArchiveList != null)
+            {
+                foreach (var item in ViewBag.ArchiveList)
+                {
+                    <tr id="row_@item.ClientQuizID">
+                        <td>
+                            <a href="@Url.Action("QuizResult", "Quiz", new { id = @item.ClientQuizID })"><strong>@item.Token</strong></a>
+                        </td>
+                        <td>
+                            <strong>@item.ResourceTypeName</strong>
+                        </td>
+                        <td>
+                            <strong>@item.TopicName</strong>
+                        </td>
+                        <td>
+                            <strong>@item.Created.ToString("dd-MM-yyyy")</strong>
+                        </td>
+                    </tr>
+                    @*<tr></tr>*@
+                }
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Payment Response";
+    Layout = "~/Views/Shared/_LayoutSigned.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <fieldset>
+                <legend>Payment Response</legend>
+                <br />
+
+                @*<div class="col-md-12">*@
+                @if (ViewBag.Msg != null)
+                {
+                    <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Congratulations!</strong> @ViewBag.Msg
+                    </div>
+                }
+
+                @if (ViewBag.Err != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>ERROR!</strong> @ViewBag.Err
+                    </div>
+                }
+                @*</div>*@
+                <br />
+
+                @if (ViewBag.Msg != null)
+                {
+                    <div style="text-align:center;">
+                        <img src="../../Content/images/Successful01.jpg" alt="Successful Registration" width="80" />
+                    </div>
+
+                    <p>
+                        Your payment transaction was successful. You can now setup your Resources <strong>[Skill Practice, Past Questions, E-Library]</strong>
+                    </p>
+                }
+
+                @if (ViewBag.Err != null)
+                {
+                    <div style="text-align:center;">
+                        <img src="../../Content/images/Delete.png" alt="Unsuccessful Registration" width="80" />
+                    </div>
+
+                    <p>
+                        Your payment transaction was not successful. Please, try again.
+                    </p>
+                }
+
+            </fieldset>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+        
+    </div>
+
+
+</div>
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+

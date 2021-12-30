@@ -1,0 +1,650 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    @*<meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>*@
+
+    <meta charset="utf-8">
+    <title>BrainGainSpa …We bring eLearning and Earning together.</title>
+    <!-- Stylesheets -->
+    <link href="../../Content/cssb/bootstrap.css" rel="stylesheet">
+    <link href="../../Content/pluginsb/revolution/css/settings.css" rel="stylesheet" type="text/css"><!-- REVOLUTION SETTINGS STYLES -->
+    <link href="../../Content/pluginsb/revolution/css/layers.css" rel="stylesheet" type="text/css"><!-- REVOLUTION LAYERS STYLES -->
+    <link href="../../Content/pluginsb/revolution/css/navigation.css" rel="stylesheet" type="text/css"><!-- REVOLUTION NAVIGATION STYLES -->
+
+    <link href="../../Content/cssb/style.css" rel="stylesheet">
+    <link href="../../Content/cssb/responsive.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../../Content/imagesb/favicon.png" type="image/x-icon">
+    <link rel="icon" href="../../Content/imagesb/favicon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
+
+    <link href="~/Content/css/main.css" rel="stylesheet" />
+    <link href="~/Content/css/sidebar-themes.css" rel="stylesheet" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style type="text/css">
+        fieldset {
+            border: 2px solid blue !important;
+            /*border: 1px solid #ddd !important;*/
+            margin: 0;
+            min-width: 0;
+            margin-top: 20px;
+            /*xmin-width: 0;*/
+            padding: 20px;
+            position: relative;
+            border-radius: 4px;
+            background-color: aliceblue;
+            /*background-color: #f5f5f5;*/
+            /*padding-left: 20px !important;
+        padding-right: 20px !important;*/
+        }
+
+        legend {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 0px;
+            vertical-align: middle;
+            width: 100%;
+            /*width: 35%;*/
+            /*align-content: center;*/
+            border: 1px solid #ddd;
+            /*border-radius: 4px;*/
+            padding: 2px 2px 2px 2px;
+            /*padding: 5px 5px 5px 10px;*/
+            height: 30px;
+            text-align: center;
+            /*background-color: #ffffff;*/
+            background-color: #009966;
+        }
+    </style>
+
+    <!-- Responsive -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+</head>
+<body style="padding-top:unset; padding-bottom:unset">
+
+    <div class="page-wrapper">
+        <!-- Preloader -->
+        <div class="preloader"></div>
+
+        <header class="main-header header-style-two">
+            <!-- Header Top -->
+            <div class="header-top">
+                <div class="auto-container">
+                    <div class="clearfix">
+                        <div class="top-left">
+                            <ul class="info-list clearfix">
+                                <li><a href="tel:+2349139082761"><span class="fa fa-phone-square"></span> +234 913 908 2761</a></li>
+                                <li><a href="mailto:cs@braingainspa.org"><span class="fa fa-envelope"></span>cs@BrainGainSpa.org</a></li>
+                                <li><a href="#"><span class="fab fa-facebook-f"></span></a></li>
+                                <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                                <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                                <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                                <li><a href="#"><span class="fab fa-linkedin"></span></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="top-right">
+                            @*<div class="link-box search-box-btn"><a href="@Url.Action("Default", "Home")">| <b><font color="#FFFFFF">HOME</font></b> |</a></div>
+                                <div class="link-box search-box-btn"><a href="@Url.Action("Signup", "Account")">| <b><font color="#FFFFFF">SIGN UP</font></b> |</a> </div>*@
+                            <div class="link-box search-box-btn"><a href="@Url.Action("Signin", "Account")">| <b><font color="#FFFFFF">SIGN OUT</font></b> |</a> </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Header Top -->
+            <!-- Header Upper -->
+            <!-- Header Upper -->
+        </header>
+        <!-- End Main Header -->
+        @*<div style="margin-top:0px">
+                @RenderBody()
+                <br />
+            </div>*@
+        <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
+            <nav id="sidebar" class="sidebar-wrapper">
+                <div class="sidebar-content">
+                    <!-- sidebar-brand  -->
+                    <br />
+                    <div class="sidebar-item sidebar-brand">
+                        <a href="#">Home</a>
+                    </div>
+                    <!-- sidebar-header  -->
+                    <div class="sidebar-item sidebar-header d-flex flex-nowrap">
+                        <div class="user-pic">
+                            @if (Session["ImagePath"] != null)
+                            {
+                                <img src="@Url.Content(@Session["ImagePath"].ToString())" alt="User Picture" height="200" width="200" />
+                            }
+                            else
+                            {
+                                <img class="img-responsive img-rounded" src="~/Content/images/user.jpg" alt="User Picture" height="200" width="200">
+                            }
+                            @*<img class="img-responsive img-rounded" src="~/Content/images/user.jpg" alt="User picture">*@
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">
+                                @Session["FN"].ToString() <strong>@Session["LN"].ToString() </strong>
+                            </span>
+                            <span class="user-role"><strong>[@Session["EntityType"].ToString()]</strong> </span>
+                            <span>Referree Code: <strong>@Session["ReferreeCode"].ToString()</strong></span>
+                            <span class="user-status">
+                                <i class="fa fa-circle"></i>
+                                <span><strong>Online</strong></span>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- sidebar-search  -->
+                    <div class="sidebar-item sidebar-search">
+                        <div>
+                            <div class="input-group">
+                                <input type="text" class="form-control search-menu" placeholder="Search...">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- sidebar-menu  -->
+                    <div class=" sidebar-item sidebar-menu">
+                        <ul>
+                            <li class="header-menu">
+                                <span>General</span>
+                            </li>
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="fa fa-tachometer-alt"></i>
+                                    <span class="menu-text">Dashboard</span>
+                                    <span class="badge badge-pill badge-warning">New</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        <li>
+                                            <a href="@Url.Action("ClientDashboard", "Quiz")">
+                                                My Dashboard
+                                                <span class="badge badge-pill badge-success">Pro</span>
+                                            </a>
+                                        </li>
+                                        @*<li>
+                                                <a href="#">Dashboard 2</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Dashboard 3</a>
+                                            </li>*@
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span class="menu-text">Academics</span>
+                                    <span class="badge badge-pill badge-danger">3</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        <li>
+                                            <a href="@Url.Action("CurrentClass", "Quiz", new { id = 1 })">
+                                                Skill Practice
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("CurrentClass", "Quiz", new { id = 2 })">Past Questions</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("CurrentClass", "Quiz", new { id = 3 })">E-Library</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="far fa-cc-mastercard"></i>
+                                    <span class="menu-text">Accounts</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        <li>
+                                            <a href="@Url.Action("Subscriptions", "Account")">Subscription</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Income", "Account")">Income</a>
+                                        </li>
+                                        <li>
+                                            @*<a href="@Url.Action("Withdrawals", "Account")">Withdrawals</a>*@
+                                            <a href="#">Withdrawals</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("AdminAccounts", "AdminAccount")">Payments</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="fa fa-user"></i>
+                                    @*<i class="fa fa-chart-line"></i>*@
+                                    <span class="menu-text">Personal</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        <li>
+                                            <a href="@Url.Action("Profiles", "Account")">Profile</a>
+                                        </li>
+                                        @*<li>
+                                                <a href="@Url.Action("MyCodes", "Account")">My Codes</a>
+                                            </li>*@
+                                        <li>
+                                            <a href="@Url.Action("ChangePassword", "Account")">Change Password</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Downlines", "Account")">Affiliates/Referrals</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("QuestionArchives", "Quiz")">Question Archives</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Bank_Info", "Utility")">Bank Details</a>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- sidebar-menu  -->
+                </div>
+                <!-- sidebar-footer  -->
+                <div class="sidebar-footer">
+                    <div class="dropdown">
+                        <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bell"></i>
+                            <span class="badge badge-pill badge-warning notification">3</span>
+                        </a>
+                        <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
+                            <div class="notifications-header">
+                                <i class="fa fa-bell"></i>
+                                Notifications
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                <div class="notification-content">
+                                    <div class="icon">
+                                        <i class="fas fa-check text-success border border-success"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="notification-detail">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing
+                                            elit. In totam explicabo
+                                        </div>
+                                        <div class="notification-time">
+                                            6 minutes ago
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="notification-content">
+                                    <div class="icon">
+                                        <i class="fas fa-exclamation text-info border border-info"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="notification-detail">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing
+                                            elit. In totam explicabo
+                                        </div>
+                                        <div class="notification-time">
+                                            Today
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="notification-content">
+                                    <div class="icon">
+                                        <i class="fas fa-exclamation-triangle text-warning border border-warning"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="notification-detail">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing
+                                            elit. In totam explicabo
+                                        </div>
+                                        <div class="notification-time">
+                                            Yesterday
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-center" href="#">View all notifications</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-envelope"></i>
+                            <span class="badge badge-pill badge-success notification">7</span>
+                        </a>
+                        <div class="dropdown-menu messages" aria-labelledby="dropdownMenuMessage">
+                            <div class="messages-header">
+                                <i class="fa fa-envelope"></i>
+                                Messages
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                <div class="message-content">
+                                    <div class="pic">
+                                        <img src="~/Content/images/user.jpg" alt="">
+                                    </div>
+                                    <div class="content">
+                                        <div class="message-title">
+                                            <strong> Jhon doe</strong>
+                                        </div>
+                                        <div class="message-detail">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing
+                                            elit. In totam explicabo
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="message-content">
+                                    <div class="pic">
+                                        <img src="~/Content/images/user.jpg" alt="">
+                                    </div>
+                                    <div class="content">
+                                        <div class="message-title">
+                                            <strong> Jhon doe</strong>
+                                        </div>
+                                        <div class="message-detail">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing
+                                            elit. In totam explicabo
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="message-content">
+                                    <div class="pic">
+                                        <img src="~/Content/images/user.jpg" alt="">
+                                    </div>
+                                    <div class="content">
+                                        <div class="message-title">
+                                            <strong> Jhon doe</strong>
+                                        </div>
+                                        <div class="message-detail">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing
+                                            elit. In totam explicabo
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-center" href="#">View all messages</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-cog"></i>
+                            <span class="badge-sonar"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
+                            <a class="dropdown-item" href="#">My profile</a>
+                            <a class="dropdown-item" href="#">Help</a>
+                            <a class="dropdown-item" href="#">Setting</a>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="@Url.Action("Signin", "Account")">
+                            <i class="fa fa-power-off" title="Log out"></i>
+                        </a>
+                    </div>
+                    <div class="pinned-footer">
+                        <a href="#">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+            <!-- page-content  -->
+            <main class="page-content pt-2">
+                <div id="overlay" class="overlay"></div>
+                <div class="container-fluid p-5">
+                    @*<div class="col-md-12" style="text-align:right">
+                            <a class="" href="@Url.Action("Default", "Home")">
+                                <img src="../../Content/asset/images/logox.png" alt="braingainspa">
+                            </a>
+                        </div>
+                        <br />*@
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="" style="background-color:cornflowerblue; text-align:center; border:1px solid red;border-radius:3px;">
+                                @if (@Session["Withdrawals"] != null)
+                                {
+                                    <span style="color:green; font-weight:bold; font-size:x-large">₦@Session["Withdrawals"]</span>
+                                }
+                                else
+                                {
+                                    <span style="color:green;font-weight:bold; font-size:x-large">₦0.00</span>
+                                }
+                                <br />
+                                <span><strong>Withdrawals</strong></span>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="" style="background-color:cornflowerblue; text-align:center; border:1px solid red;border-radius:3px;">
+                                @if (@Session["Earnings"] != null)
+                                {
+                                    <span style="color:gold; font-weight:bold; font-size:x-large">₦@Session["Earnings"]</span>
+                                }
+                                else
+                                {
+                                    <span style="color:gold;font-weight:bold; font-size:x-large;">₦0.00</span>
+                                }
+                                <br />
+                                <span><strong>Earnings</strong></span>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="" style="background-color:cornflowerblue; text-align:center; border:1px solid red;border-radius:3px;">
+                                @if (@Session["Purse"] != null)
+                                {
+                                    <span style="color:goldenrod;font-weight:bold; font-size:x-large">₦@Session["Purse"]</span>
+                                }
+                                else
+                                {
+                                    <span style="color:goldenrod;font-weight:bold; font-size:x-large">₦0.00</span>
+                                }
+                                <br />
+                                <span><strong>e-Purse</strong></span>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        @if (bool.Parse(Session["Subscription"].ToString()) == false)
+                        {
+                            <div class="row">
+                                <div class="alert alert-warning alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Attention!</strong> No Subscription was detected. Please, subscribe to a resource to enjoy our services.
+                                    &nbsp;&nbsp;&nbsp;
+                                    <a href="@Url.Action("Subscriptions", "Account")" class="btn btn-primary btn-md" data-toggle="tooltip" title="Subscribe"><i class="glyphicon glyphicon-briefcase"></i>&nbsp;Subscribe Now&nbsp;</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+
+                    @RenderBody()
+
+                </div>
+            </main>
+            <!-- page-content" -->
+            <!--Main Footer-->
+            <footer class="main-footer">
+                <div class="anim-icons">
+                    <span class="icon icon-sparrow wow zoomIn" data-wow-delay="400ms"></span>
+                    <span class="icon icon-rainbow-2 wow zoomIn" data-wow-delay="800ms"></span>
+                    <span class="icon icon-star-3"></span>
+                    <span class="icon icon-star-3 two"></span>
+                    <span class="icon icon-sun"></span>
+                    <span class="icon icon-plane wow zoomIn" data-wow-delay="1200ms"></span>
+                </div>
+
+                <!--Scroll to top-->
+                <div class="scroll-to-top scroll-to-target" data-target="html"><span class="icon icon-arrow-up"></span></div>
+
+                <!--footer upper-->
+                <div class="footer-upper">
+                    <div class="auto-container">
+                        <div class="row clearfix">
+                            <!--Big Column-->
+                            <div class="big-column col-xl-5 col-lg-12 col-md-12 col-sm-12">
+                                <div class="row clearfix">
+
+                                    <!--Footer Column-->
+                                    <div class="footer-column col-lg-12 col-md-12 col-sm-12">
+                                        <div class="footer-widget logo-widget">
+                                            <div class="logo">
+                                                <a href="index.html"><img src="../../Content/imagesb/footer-logo.png" alt="" /></a>
+                                            </div>
+                                            <div class="text" style="color:#ffffff;">BrainGainSpa brings together the best of learning methods to meet the educational challenges of every learner. With 24/7 access to a wide variety of reliable fun resources and a unique referral reward plan, everyone gets to earn while learning anytime and anywhere.</div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <!--Big Column-->
+                            <div class="big-column col-xl-7 col-lg-12 col-md-12 col-sm-12">
+                                <div class="row clearfix">
+                                    <!--Footer Column-->
+                                    <div class="footer-column col-xl-3 col-lg-3 col-md-6 col-sm-4">
+                                        <div class="footer-widget links-widget">
+                                            <h4 class="widget-title">Explore</h4>
+                                            <div class="widget-content">
+                                                <ul class="list">
+                                                    <li><a href="resources.html" style="color:#ffffff;">Resources</a></li>
+                                                    <li><a href="sitemap.html" style="color:#ffffff;">Sitemap</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!--Footer Column-->
+                                    <div class="footer-column col-xl-3 col-lg-3 col-md-6 col-sm-4">
+                                        <div class="footer-widget links-widget">
+                                            <h4 class="widget-title">Resources</h4>
+                                            <div class="widget-content">
+                                                <ul class="list">
+                                                    <li><a href="privacy.html" style="color:#ffffff;">Privacy & Policy</a></li>
+                                                    <li><a href="terms.html" style="color:#ffffff;">Terms & Conditions</a></li>
+                                                    <li><a href="support.html" style="color:#ffffff;">Support</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Footer Column-->
+                                    <div class="footer-column col-xl-4 col-lg-3 col-md-6 col-sm-12">
+                                        <div class="footer-widget activites-widget">
+                                            <h4 class="widget-title">Community</h4>
+                                            <div class="widget-content">
+                                                <ul class="list">
+                                                    <li><a href="referafriend.html" style="color:#ffffff;">Refer a Friend</a></li>
+                                                    <li><a href="scholarships.html" style="color:#ffffff;">Scholarships</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Footer Column-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Footer Bottom-->
+                <div class="footer-bottom">
+                    <div class="auto-container">
+                        <ul class="social-icon-colored">
+                            <li><a href="#"><span class="fab fa-facebook-f"></span></a></li>
+                            <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                            <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                            <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                            <li><a href="#"><span class="fab fa-linkedin"></span></a></li>
+                        </ul>
+                        <div class="copyright" style="color:#ffffff;"> Copyrights &copy; 2021 BrainGainSpa</div>
+                    </div>
+                </div>
+            </footer>
+            <!--End Main Footer-->
+
+        </div>
+    </div>
+    <script src="../../Content/bgspa/js/jquery.js"></script>
+    <script src="../../Content/bgspa/js/popper.min.js"></script>
+    <script src="../../Content/bgspa/js/bootstrap.min.js"></script>
+    <!--Revolution Slider-->
+    <script src="../../Content/pluginsb/revolution/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="../../Content/pluginsb/revolution/js/jquery.themepunch.tools.min.js"></script>
+    <script src="../../Content/pluginsb/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+    <script src="../../Content/pluginsb/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+    <script src="../../Content/pluginsb/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+    <script src="../../Content/pluginsb/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script src="../../Content/pluginsb/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+    <script src="../../Content/pluginsb/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script src="../../Content/pluginsb/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+    <script src="../../Content/pluginsb/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script src="../../Content/pluginsb/revolution/js/extensions/revolution.extension.video.min.js"></script>
+    <script src="../../Content/bgspa/js/main-slider-script.js"></script>
+    <!--Revolution Slider-->
+    <script src="../../Content/bgspa/js/jquery-ui.js"></script>
+    <script src="../../Content/bgspa/js/jquery.fancybox.js"></script>
+    <script src="../../Content/bgspa/js/owl.js"></script>
+    <script src="../../Content/bgspa/js/jquery.countdown.js"></script>
+    <script src="../../Content/bgspa/js/wow.js"></script>
+    <script src="../../Content/bgspa/js/appear.js"></script>
+    <script src="../../Content/bgspa/js/parallax.min.js"></script>
+    <script src="../../Content/bgspa/js/script.js"></script>
+    <!--Google Map APi Key-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcaOOcFcQ0hoTqANKZYz-0ii-J0aUoHjk"></script>
+    <script src="../../Content/bgspa/js/map-script.js"></script>
+    <!--End Google Map APi-->
+
+    <script src="../../Content/assets/js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
+    <script src="../../Content/assets/js/menu-aim.js"></script>
+    <script src="../../Content/assets/js/main.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

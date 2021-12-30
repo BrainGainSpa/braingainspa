@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="96868f562b8649b89c6711717669a5f6" Name="Diagram1">
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Account" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Address" Width="1.5" PointX="2.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Answer" Width="1.5" PointX="4.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.AppSetting" Width="1.5" PointX="6.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.BankInfo" Width="1.5" PointX="8.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.ClientPayment" Width="1.5" PointX="9.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.ClientQuestion" Width="1.5" PointX="10.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.ClientQuiz" Width="1.5" PointX="10.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.ClientSetting" Width="1.5" PointX="11.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Contact" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Cours" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Department" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Downline" Width="1.5" PointX="2.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.DurationInMonth" Width="1.5" PointX="12.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.EntityType" Width="1.5" PointX="12.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Faculty" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.PastQuestion" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.PaymentMode" Width="1.5" PointX="12.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.PaymentTransaction" Width="1.5" PointX="12.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Percentage" Width="1.5" PointX="14.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Person" Width="1.5" PointX="14.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Pricing" Width="1.5" PointX="14.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.QuestionMark" Width="1.5" PointX="0.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Question" Width="1.5" PointX="2.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.QuestionType" Width="1.5" PointX="4.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.ResourceType" Width="1.5" PointX="6.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Role" Width="1.5" PointX="8.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.School" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.SiteMenu" Width="1.5" PointX="14.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Subscription" Width="1.5" PointX="16.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Topic" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.TransactionType" Width="1.5" PointX="16.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.User" Width="1.5" PointX="16.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Year" Width="1.5" PointX="16.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.AcademicClass" Width="1.5" PointX="10.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.BankPayment" Width="1.5" PointX="18.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.BANK" Width="1.5" PointX="18.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Commission" Width="1.5" PointX="4.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Country" Width="1.5" PointX="6.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.CourseDepartment" Width="1.5" PointX="18.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.CoursePlu" Width="1.5" PointX="18.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.FailedRegistration" Width="1.5" PointX="12.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Gender" Width="1.5" PointX="18.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Item" Width="1.5" PointX="14.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.MDetail" Width="1.5" PointX="16.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Module" Width="1.5" PointX="18.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Month" Width="1.5" PointX="20.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Payment" Width="1.5" PointX="20.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Purchase" Width="1.5" PointX="20.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Sale" Width="1.5" PointX="20.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Section" Width="1.5" PointX="20.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Semester" Width="1.5" PointX="20.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.State" Width="1.5" PointX="4.75" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Student_Details" Width="1.5" PointX="6.75" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.StudentCours" Width="1.5" PointX="8.75" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.StudentPayment" Width="1.5" PointX="18.75" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Title" Width="1.5" PointX="20.75" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Transaction" Width="1.5" PointX="22.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.Unit" Width="1.5" PointX="0.75" PointY="24.25" IsExpanded="true" />
+        <AssociationConnector Association="CArumala_edquizModel1.FK_Courses_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="CArumala_edquizModel1.FK_Courses_Faculties" ManuallyRouted="false" />
+        <AssociationConnector Association="CArumala_edquizModel1.FK_PastQuestions_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="CArumala_edquizModel1.FK_Topics_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="CArumala_edquizModel1.FK_Faculties_Schools" ManuallyRouted="false" />
+        <AssociationConnector Association="CArumala_edquizModel1.FK_Answers_Questions" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.FreeTrial" Width="1.5" PointX="23.375" PointY="5.75" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.FreeTrialQuiz" Width="1.5" PointX="23.375" PointY="8.75" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.FreeTrialQuestion" Width="1.5" PointX="11.375" PointY="23.75" />
+        <EntityTypeShape EntityType="CArumala_edquizModel1.ContactU" Width="1.5" PointX="23.375" PointY="13.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

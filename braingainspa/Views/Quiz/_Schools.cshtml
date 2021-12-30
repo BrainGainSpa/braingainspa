@@ -1,0 +1,50 @@
+﻿@model braingainspa.Models.School
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-responsive">
+                <tr>
+                    <th align="center">School Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Website</th>
+                    <th>Actions</th>
+                </tr>
+                <tbody>
+                    @if (ViewBag.sklList != null)
+                    {
+                        foreach (var item in ViewBag.SklList)
+                        {
+                            <tr id="row_@item.SchoolID">
+                                <td>
+                                    <strong>@item.SchoolName</strong>
+                                </td>
+                                <td>
+                                    @item.Address
+                                </td>
+                                <td>
+                                    @item.Phone
+                                </td>
+                                <td>
+                                    @item.Email
+                                </td>
+                                <td>
+                                    @item.Website
+                                </td>
+                                <td align="center">
+                                    <a href="@Url.Action("EditSchool", "Quiz", new { id = @item.SchoolID })" class="btn btn-success" data-toggle="tooltip" title="View Details"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                    <a href="@Url.Action("DeleteSchool","Quiz", new { id = @item.SchoolID })" onclick="return confirm('Are you sure that you want to Delete the specified item?')" class="btn btn-danger" data-toggle="tooltip" title="Delete Item"><i class="glyphicon glyphicon-trash"></i></a>
+                                </td>
+                            </tr>
+                                <tr></tr>
+                        }
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>
